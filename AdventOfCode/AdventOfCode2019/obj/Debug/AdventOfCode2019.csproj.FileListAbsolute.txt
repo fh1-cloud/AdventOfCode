@@ -5,3 +5,7 @@ C:\Users\fredr_000\Desktop\fh1-cloud\AdventOfCode\AdventOfCode\AdventOfCode2019\
 C:\Users\fredr_000\Desktop\fh1-cloud\AdventOfCode\AdventOfCode\AdventOfCode2019\obj\Debug\AdventOfCode2019.csproj.CoreCompileInputs.cache
 C:\Users\fredr_000\Desktop\fh1-cloud\AdventOfCode\AdventOfCode\AdventOfCode2019\obj\Debug\AdventOfCode2019.exe
 C:\Users\fredr_000\Desktop\fh1-cloud\AdventOfCode\AdventOfCode\AdventOfCode2019\obj\Debug\AdventOfCode2019.pdb
+C:\Users\fredr_000\Desktop\fh1-cloud\AdventOfCode\AdventOfCode\AdventOfCode2019\bin\Debug\Inputs\Dec01.txt
+C:\Users\fredr_000\Desktop\fh1-cloud\AdventOfCode\AdventOfCode\AdventOfCode2019\bin\Debug\Inputs\Temp01.txt
+C:\Users\fredr_000\Desktop\fh1-cloud\AdventOfCode\AdventOfCode\AdventOfCode2019\bin\Debug\Inputs\Temp02.txt
+C:\Users\fredr_000\Desktop\fh1-cloud\AdventOfCode\AdventOfCode\AdventOfCode2019\bin\Debug\Inputs\Dec02.txt

@@ -31,6 +31,29 @@ namespace AdventOfCode2019
 
 
       /// <summary>
+      /// A method that gets a list of ints from the input. Use this if the input is an list of integers
+      /// </summary>
+      /// <param name="fileName"></param>
+      /// <returns></returns>
+      public static long[] GetInputIntegerArray( string fileName )
+      {
+      //Validation
+         if( fileName == null )
+            return null;
+
+      //Read text file..
+         string[] lines = System.IO.File.ReadAllLines( fileName );
+
+         long[] parsedLines = new long[lines.Length];
+         for( int i = 0; i < lines.Length; i++ )
+            parsedLines[i] = long.Parse( lines[i] );
+
+      //Return the int array;
+         return parsedLines;
+      }
+
+
+      /// <summary>
       /// Gets a nice header for each day.
       /// </summary>
       /// <param name="decemberDate"></param>
