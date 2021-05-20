@@ -1,0 +1,5 @@
+F:\AdventOfCode\AdventOfCode\AdventOfCodeLib\bin\Debug\AdventOfCodeLib.dll
+F:\AdventOfCode\AdventOfCode\AdventOfCodeLib\bin\Debug\AdventOfCodeLib.pdb
+F:\AdventOfCode\AdventOfCode\AdventOfCodeLib\obj\Debug\AdventOfCodeLib.csproj.CoreCompileInputs.cache
+F:\AdventOfCode\AdventOfCode\AdventOfCodeLib\obj\Debug\AdventOfCodeLib.dll
+F:\AdventOfCode\AdventOfCode\AdventOfCodeLib\obj\Debug\AdventOfCodeLib.pdb

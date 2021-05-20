@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AdventOfCode2019.Classes;
+using AdventOfCodeLib.Numerics;
 
 namespace AdventOfCode2019
 {
@@ -22,9 +23,35 @@ namespace AdventOfCode2019
       public static void Dec03()
       {
          string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Dec03.txt" );
+         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Temp02.txt" );
 
+      //Create the two wires.
+         Wire a = new Wire( inp[0] );
+         Wire b = new Wire( inp[1] );
 
+      //Try to calculate the intersection points..
+         List<UVector2D> intPoints = a.GetIntersectionPoints( b, out List<double> signalDelays );
 
+      //Find the one with the minimum manhattan distance.
+         double minManhattan = 1.0e12;
+         UVector2D minPoint = null;
+         foreach( var v in intPoints )
+         {
+            if( v.GetManhattanLength( ) < minManhattan )
+            {
+               minPoint = v;
+               minManhattan = v.GetManhattanLength( );
+            }
+         }
+
+      //Print the minimum value.
+         Console.WriteLine( minManhattan );
+
+      //PART 2
+         double minInterference = signalDelays.Min( );
+
+      //Print the minimum interference
+         Console.WriteLine( minInterference );
 
       }
 

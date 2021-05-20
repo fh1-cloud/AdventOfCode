@@ -6,6 +6,11 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode2020", "AdventOfCode2020\AdventOfCode2020.csproj", "{9BEEA9F4-9D4B-4B25-806D-2D38BD58E589}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode2019", "AdventOfCode2019\AdventOfCode2019.csproj", "{F708C786-F177-4CB9-88C1-AB08DC832782}"
+	ProjectSection(ProjectDependencies) = postProject
+		{01114F59-07A5-4BE1-874F-C6D582CB80ED} = {01114F59-07A5-4BE1-874F-C6D582CB80ED}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCodeLib", "AdventOfCodeLib\AdventOfCodeLib.csproj", "{01114F59-07A5-4BE1-874F-C6D582CB80ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,10 @@ Global
 		{F708C786-F177-4CB9-88C1-AB08DC832782}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F708C786-F177-4CB9-88C1-AB08DC832782}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F708C786-F177-4CB9-88C1-AB08DC832782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01114F59-07A5-4BE1-874F-C6D582CB80ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01114F59-07A5-4BE1-874F-C6D582CB80ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01114F59-07A5-4BE1-874F-C6D582CB80ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01114F59-07A5-4BE1-874F-C6D582CB80ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
