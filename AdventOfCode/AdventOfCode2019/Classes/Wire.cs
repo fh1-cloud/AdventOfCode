@@ -211,6 +211,7 @@ namespace AdventOfCode2019.Classes
          UVector2D dispVec = dispVal * dir;
          UVector2D retVec = start + dispVec;
          return retVec;
+
       }
 
 
