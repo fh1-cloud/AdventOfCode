@@ -18,12 +18,158 @@ namespace AdventOfCode2019
    #region
 
 
+      public static void Dec10( )
+      {
+         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Dec10.txt" );
+
+
+
+
+
+
+      }
+
+
+      public static void Dec09( )
+      {
+         string inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Dec09.txt" )[0];
+         IntcodeComputer ic = new IntcodeComputer( inp );
+         ic.RunIntCode( );
+      }
+
+      public static void Dec08( )
+      {
+         string inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Dec08.txt" )[0];
+
+         //string inp = "123456789012";
+         //Image img = new Image( 2, 3, inp );
+         //Create image consisting of layers from the input string.
+         Image img = new Image( 6, 25, inp );
+
+      //Count the number of zero occurences in the layer..
+         long layNum = -1;
+         long minZeros = 999999;
+         foreach( KeyValuePair<long, ImageLayer> lay in img.Layers )
+         {
+            int nOfZeros = lay.Value.CountNumberOfOccurencesOfDigitInLayer( 0 );
+            if( nOfZeros < minZeros )
+            {
+               layNum = lay.Key;
+               minZeros = nOfZeros;
+            }
+         }
+         ImageLayer minZeroLayer = img.Layers[(int) layNum];
+         long nOf1 = minZeroLayer.CountNumberOfOccurencesOfDigitInLayer( 1 );
+         long nOf2 = minZeroLayer.CountNumberOfOccurencesOfDigitInLayer( 2 );
+         long ans = nOf1*nOf2;
+
+      //Print the number..
+         //Console.WriteLine( "Part 1: " + ans );
+
+         img.PrintImage( null );
+      }
+
+
+      public static void Dec07( )
+      {
+
+      //Parse input
+         string inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Dec07.txt" )[0];
+
+
+      //Get a list of phase setting arrays.
+         List<long[]> phaseSettings = IntcodeComputer.GetPhaseSettings( false );
+
+         IntcodeComputer ic = null;
+
+         long highSignal = 0;
+         long[] highPhaseSet = null;
+         foreach( long[] loopPhase in phaseSettings )
+         {
+
+            long prevSignal = 0;
+            for( int i = 0; i<loopPhase.Length; i ++ )
+            {
+               long[] thisIntcodeComputerInput = new long[2] { loopPhase[i], prevSignal };
+               ic = new IntcodeComputer( inp, thisIntcodeComputerInput, true );
+               ic.RunIntCode( );
+               prevSignal = ic.Output;
+            }
+            if( ic.Output > highSignal )
+            {
+               highPhaseSet = loopPhase;
+               highSignal = ic.Output;
+            }
+         }
+         Console.WriteLine( "Part 1: " + highSignal );
+
+
+      //Part two
+         phaseSettings = IntcodeComputer.GetPhaseSettings( true );
+         highSignal = 0;
+         highPhaseSet = null;
+
+         //string programme = "3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5";
+         //string programme = "3,52,1001,52,-5,52,3,53,1,52,56,54,1007,54,5,55,1005,55,26,1001,54,-5,54,1105,1,12,1,53,54,53,1008,54,0,55,1001,55,1,55,2,53,55,53,4,53,1001,56,-1,56,1005,56,6,99,0,0,0,0,10";
+
+         foreach( long[] phase in phaseSettings )
+         {
+         //Create the thrusters with correct phase for first looop.
+            List<IntcodeComputer> thrusters = new List<IntcodeComputer>( );
+
+            long lastOutput = 0;
+            IntcodeComputer currentThruster = null;
+            for( int i = 0; i < 5; i++ )
+            {
+               currentThruster = new IntcodeComputer( inp, new long[2] { phase[i], lastOutput }, true );
+               thrusters.Add( currentThruster );
+               currentThruster.RunIntCode( true );
+               lastOutput = currentThruster.Output;
+            }
+
+            currentThruster = thrusters[0];
+            long finalOutput = -1;
+            while( true )
+            {
+
+            //Run the thruster with new input..
+               currentThruster.RunIntCode( new long[]{ lastOutput } );
+               lastOutput = currentThruster.Output;
+
+            //Check if the current thruster is E and if it reached state 99.
+               if( thrusters.IndexOf( currentThruster ) == 4 && currentThruster.ReachedEnd )
+               {
+                  finalOutput = currentThruster.Output;
+                  break;
+               }
+
+            //Find the next current thruster.
+               if( thrusters.IndexOf( currentThruster ) == 4 )
+                  currentThruster = thrusters[0];
+               else
+                  currentThruster = thrusters[thrusters.IndexOf( currentThruster ) + 1];
+
+            }
+
+         //When the code reached this point, it has produced a final output.
+            if( finalOutput > highSignal )
+            {
+               highSignal = finalOutput;
+               highPhaseSet = phase;
+            }
+
+         }
+         Console.WriteLine( "Part 2: " + highSignal + " for phase combination {" + highPhaseSet[0] + "," + highPhaseSet[1] + "," + highPhaseSet[2] + "," + highPhaseSet[3] + "," + highPhaseSet[4] + "}" );
+
+      }
+
 
       public static void Dec06( )
       {
       //Parse input
-         string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Dec06.txt" );
+         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Dec06.txt" );
          //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Temp01.txt" );
+         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Temp02.txt" );
 
       //Declare a dictionary with the name of the object as the key and the object itself as the value
          Dictionary<string,OrbitObject> objectsInOrbit = new Dictionary<string,OrbitObject>( );
@@ -60,6 +206,44 @@ namespace AdventOfCode2019
       //Write output..
          Console.WriteLine( nOfOrbits );
 
+
+      //Calculate the distance between YOU and SAN
+         List<OrbitObject> aboveYou = new List<OrbitObject>( );
+         List<OrbitObject> aboveSan = new List<OrbitObject>( );
+
+         OrbitObject you = objectsInOrbit["YOU"];
+         OrbitObject san = objectsInOrbit["SAN"];
+
+         you.GetChainAbove( ref aboveYou );
+         san.GetChainAbove( ref aboveSan );
+
+
+      //Find the first common orbitable object between the two.
+         OrbitObject leastCommon = null;
+         bool foundIt = false;
+         for( int i = 1; i < aboveYou.Count; i++ )
+         {
+            var thisYou = aboveYou[i];
+            for( int j = 1; j < aboveSan.Count; j++ )
+            {
+               var thisSan = aboveSan[j];
+               if( thisYou.Name == thisSan.Name )
+               {
+                  leastCommon = thisYou;
+                  foundIt = true;
+                  break;
+               }
+            }
+            if( foundIt )
+               break;
+         }
+
+         long nAboveYouToLeastCommon = you.CountOrbitsAbove( leastCommon ) - 2;
+         long nAboveSanToLeastCommon = san.CountOrbitsAbove( leastCommon ) - 2;
+
+         long ans = nAboveSanToLeastCommon + nAboveYouToLeastCommon;
+         Console.WriteLine( ans );
+
       }
 
 
@@ -79,7 +263,7 @@ namespace AdventOfCode2019
          //string inp = "3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31, 1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104, 999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99";
 
          IntcodeComputer ic = new IntcodeComputer( inp );
-         ic.RunIntcode( );
+         ic.RunIntCode( );
       }
 
 
@@ -148,7 +332,7 @@ namespace AdventOfCode2019
          IntcodeComputer c = new IntcodeComputer( inp );
          c[1] = 12;
          c[2] = 2;
-         c.RunIntcode( );
+         c.RunIntCode( );
 
          long ans1 = c[0];
          Console.WriteLine( "Part 1: " + ans1 );
@@ -167,7 +351,7 @@ namespace AdventOfCode2019
                thisComputer[2] = j;
 
             //Run the intcode computer
-               thisComputer.RunIntcode( );
+               thisComputer.RunIntCode( );
 
             //Chech the output in position zero. If it matches, break the loop
                if( thisComputer[0] == target )

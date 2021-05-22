@@ -13,8 +13,8 @@ namespace AdventOfCode2019
       static void Main( string[] args )
       {
 
-         Console.Write( GlobalMethods.GetConsoleHeader( 6 ) );
-         Days.Dec06( );
+         Console.Write( GlobalMethods.GetConsoleHeader( 10 ) );
+         Days.Dec10( );
          Console.ReadKey( );
 
       }

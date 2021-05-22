@@ -27,3 +27,4 @@ F:\AdventOfCode\AdventOfCode\AdventOfCode2019\obj\Debug\AdventOfCode2019.csproj.
 F:\AdventOfCode\AdventOfCode\AdventOfCode2019\bin\Debug\Inputs\Dec04.txt
 F:\AdventOfCode\AdventOfCode\AdventOfCode2019\bin\Debug\Inputs\Dec05.txt
 F:\AdventOfCode\AdventOfCode\AdventOfCode2019\bin\Debug\Inputs\Dec06.txt
+F:\AdventOfCode\AdventOfCode\AdventOfCode2019\bin\Debug\Inputs\Dec07.txt
