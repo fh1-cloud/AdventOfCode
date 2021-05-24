@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Astroid.cs" />
     <Compile Include="Classes\FuelCalculator.cs" />
     <Compile Include="Classes\Image.cs" />
     <Compile Include="Classes\ImageLayer.cs" />
@@ -86,6 +87,7 @@
     <Content Include="Inputs\Dec08.txt" />
     <Content Include="Inputs\Dec09.txt" />
     <Content Include="Inputs\Dec10.txt" />
+    <Content Include="Inputs\Dec11.txt" />
     <Content Include="Inputs\Temp01.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

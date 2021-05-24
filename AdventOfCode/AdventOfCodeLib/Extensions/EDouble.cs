@@ -30,6 +30,32 @@ namespace AdventOfCodeLib.Extensions
             return false;
       }
 
+
+      /// <summary>
+      /// COnverte the number to radians from degrees
+      /// </summary>
+      /// <param name="d"></param>
+      /// <returns></returns>
+      public static double ToRad( this double d )
+      {
+         return d*2.0*Math.PI/360.0;
+      }
+
+      /// <summary>
+      /// Converte the number to degrees from radians
+      /// </summary>
+      /// <param name="d"></param>
+      /// <returns></returns>
+      public static double ToDeg( this double d )
+      {
+         return d*360.0/(2.0*Math.PI );
+      }
+
+      public static bool IsNaN( this double d )
+      {
+         return double.IsNaN( d );
+      }
+
    #endregion
 
 

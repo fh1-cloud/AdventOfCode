@@ -200,6 +200,16 @@ namespace AdventOfCodeLib.Numerics
          return Math.Pow( Math.Pow( m_X, 2.0 ) + Math.Pow( m_Y, 2.0 ), 0.5 );
       }
 
+
+      /// <summary>
+      /// Normalizes this vector.
+      /// </summary>
+      public UVector2D Normalize( )
+      {
+         double l = this.GetLength( );
+         return new UVector2D( m_X/l, m_Y/l );
+      }
+
    #endregion
 
    /*STATIC METHODS*/
@@ -295,8 +305,6 @@ namespace AdventOfCodeLib.Numerics
          }
 
       }
-
-
 
    #endregion
 

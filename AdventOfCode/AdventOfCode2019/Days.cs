@@ -18,14 +18,124 @@ namespace AdventOfCode2019
    #region
 
 
+      public static void Dec11( )
+      {
+
+
+
+      }
+
+
       public static void Dec10( )
       {
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Dec10.txt" );
+         //string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Temp01.txt" );
+         //string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Temp02.txt" );
+
+         //List of all the astroids.
+         List<Astroid> allAstroids = new List<Astroid>( );
+
+      //Create all the astroids.
+         for( int rowIdx = 0; rowIdx<inp.Length; rowIdx++ )
+         {
+            string thisLine = inp[rowIdx];
+            for( int colIdx = 0; colIdx<inp[0].Length; colIdx++ )
+            {
+               if( thisLine[colIdx] == '#' )
+                  allAstroids.Add( new Astroid( rowIdx, colIdx ) );
+            }
+         }
+
+      //Get the dictionary..
+         Astroid maxAstroid = null;
+         long maxNum = 0;
+         foreach( Astroid astroid in allAstroids )
+         {
+            long thisNum = astroid.NumberOfAstroidsICanSee( allAstroids );
+            if( maxAstroid == null )
+            {
+               maxAstroid = astroid;
+               maxNum = thisNum;
+            }
+            else
+            {
+               if( thisNum > maxNum )
+               {
+                  maxAstroid = astroid;
+                  maxNum = thisNum;
+               }
+            }
+         }
+
+      //Write answer for part 1..
+         Console.WriteLine( maxNum + " astroids seen from astroid (" + maxAstroid.ColIdx + "," + maxAstroid.RowIdx + ")" );
+
+      //PART TWO
+
+      //Get the angled dictionary from the max astroid.
+         Dictionary<double, List<Astroid>> dict = Astroid.GetAngleDictionaryForAstroid( maxAstroid, allAstroids );
+
+      //Sort the dictionary by key..
+         SortedDictionary<double, List<Astroid>> sortedDict = new SortedDictionary<double, List<Astroid>>( dict );
 
 
+         double prevValue = 90;
+
+         int nOfRemovedAstroids = 0;
+         Astroid n200th = null;
+         while( sortedDict.Count > 0 )
+         {
+            List<Astroid> astroidList = sortedDict[prevValue];
 
 
+         //Find the closest astroid in this list.
+            if( astroidList.Count == 0 )
+               throw new Exception( );
 
+         //Find the closest astroid and remove.
+            Astroid closest = null;
+            if( astroidList.Count == 1 )
+            {
+               closest = astroidList[0];
+               sortedDict.Remove( prevValue );
+               nOfRemovedAstroids++;
+            }
+            else
+            {
+               closest = astroidList[0];
+               double dist = Astroid.GetDistance( maxAstroid, closest );
+
+            //Find the closest astroid.
+               for( int i = 1; i < astroidList.Count; i++ )
+               {
+                  Astroid thisAstroid = astroidList[i];
+                  double thisDist = Astroid.GetDistance( maxAstroid, thisAstroid );
+                  if( thisDist < dist )
+                  {
+                     closest = thisAstroid;
+                     dist = thisDist;
+                  }
+               }
+
+            //Only remove the entry from the list.. and not from the dictionary
+               astroidList.Remove( closest );
+               nOfRemovedAstroids++;
+            }
+
+         //Print the vaporized astroid list..
+            Console.WriteLine( "The " + nOfRemovedAstroids + " to remove is at ( " + closest.ColIdx + "," + closest.RowIdx + " )" );
+
+         //Find angle..
+            prevValue = Astroid.GetNextAngleInDictionary( sortedDict, prevValue );
+
+         //Save the 200th astroid..
+            if( nOfRemovedAstroids == 200 )
+               n200th = closest;
+         }
+
+      //Print the 200th astroid
+         long ans = n200th.ColIdx * 100 + n200th.RowIdx;
+         Console.WriteLine( "Answer: " + ans );
 
       }
 
