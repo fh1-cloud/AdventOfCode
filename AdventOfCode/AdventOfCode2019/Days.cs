@@ -19,12 +19,44 @@ namespace AdventOfCode2019
    #region
 
 
+      public static void Dec14( )
+      {
+         //string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Dec14.txt" );
+         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Temp01.txt" );
+
+
+         List<FuelComponentRecipe> recipes = new List<FuelComponentRecipe>( );
+
+      }
+
+
+
 
       public static void Dec13( )
       {
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Dec13.txt" );
+         string inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Dec13.txt" )[0];
 
+      //Create the intcode computer..
+         ArcadeGame game = new ArcadeGame( 22, 40 );
+         IntcodeComputer ic = new IntcodeComputer( inp, true );
+         bool singleScreen = false;
+         while( !singleScreen )
+         {
+            ic.RunIntCode( true, false );
+            long horIdx = ic.Output;
+            ic.RunIntCode( true, false );
+            long vertIdx = ic.Output; 
+            ic.RunIntCode( true, false );
+            long blockType = ic.Output;
 
+            if( horIdx == -1 && vertIdx == 0 )
+               game.Score = blockType;
+            else
+               game[vertIdx,horIdx] = ArcadeGame.GetSymbol( blockType );
+
+            game.RenderScreen( );
+            singleScreen = ic.ReachedEnd;
+         }
       }
 
       public static void Dec12( )
