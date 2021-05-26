@@ -48,16 +48,16 @@ namespace AdventOfCode2019.Classes
 
       protected long m_NumberOfOperations = 0;        //A counter that tracks how many operations that have been carried out.
 
-      #endregion
+   #endregion
 
-      /*CONSTRUCTORS*/
-      #region
+   /*CONSTRUCTORS*/
+   #region
 
       /// <summary>
       /// Initializes an intcode computer with a comma seperated instruction line
       /// </summary>
       /// <param name="inp"></param>
-      public IntcodeComputer( string inp )
+      public IntcodeComputer( string inp, bool shouldSaveOutput = false )
       {
       //Split string by comma
          string[] split = inp.Split( new char[] { ',' } );
@@ -66,6 +66,9 @@ namespace AdventOfCode2019.Classes
       //Add the instruction to the array of instructions
          for( int i = 0; i < split.Length; i++ )
             m_Values[i] = long.Parse( split[i] );
+
+      //Set the save parameter..
+         m_ShouldSaveOutput = shouldSaveOutput;
       }
 
       /// <summary>
@@ -132,7 +135,8 @@ namespace AdventOfCode2019.Classes
       public void RunIntCode( int startIdx = 0, bool haltAtOutput = false )
       {
       //Sets the starting position for this intcode computer
-         m_CurrentPosition = startIdx;
+         if( startIdx != -1 )
+            m_CurrentPosition = startIdx;
 
       //Runs the intcode computer until it reaches an halting point
          bool keepRunning = true;
@@ -144,10 +148,23 @@ namespace AdventOfCode2019.Classes
 
       }
 
-      public void RunIntCode( bool haltAtOutput )
+
+      /// <summary>
+      /// Runs the intcode computer without an input parameter. Resets the input parameter. If the "restartPosition" is true, the intcode current position is reset.
+      /// </summary>
+      /// <param name="haltAtOutput"></param>
+      /// <param name="restartPosition"></param>
+      public void RunIntCode( bool haltAtOutput, bool restartPosition )
       {
-         RunIntCode( 0, haltAtOutput );
+         m_Input = null;
+         m_InputIdx = 0;
+
+         if( restartPosition )
+            RunIntCode( 0, haltAtOutput );
+         else
+            RunIntCode( -1, haltAtOutput ); 
       }
+
 
       /// <summary>
       /// Run the intcode computer with the chosen inputs.

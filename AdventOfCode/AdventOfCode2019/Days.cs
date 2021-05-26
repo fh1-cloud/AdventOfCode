@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AdventOfCode2019.Classes;
+using AdventOfCodeLib;
 using AdventOfCodeLib.Numerics;
 
 namespace AdventOfCode2019
@@ -18,10 +19,248 @@ namespace AdventOfCode2019
    #region
 
 
+
+      public static void Dec13( )
+      {
+         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Dec13.txt" );
+
+
+      }
+
+      public static void Dec12( )
+      {
+         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Dec12.txt" );
+         //string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Temp01.txt" );
+
+      //Create moons..
+         List<Moon> moons = new List<Moon>( );
+         foreach( string s in inp )
+            moons.Add( new Moon( s ) );
+
+      //Create all the moon pairs for applying acceleration..
+         List<KeyValuePair<Moon,Moon>> moonPairs = new List<KeyValuePair<Moon, Moon>>( );
+         moonPairs.Add( new KeyValuePair<Moon, Moon>( moons[0], moons[1] ) );
+         moonPairs.Add( new KeyValuePair<Moon, Moon>( moons[0], moons[2] ) );
+         moonPairs.Add( new KeyValuePair<Moon, Moon>( moons[0], moons[3] ) );
+
+         moonPairs.Add( new KeyValuePair<Moon, Moon>( moons[1], moons[2] ) );
+         moonPairs.Add( new KeyValuePair<Moon, Moon>( moons[1], moons[3] ) );
+
+         moonPairs.Add( new KeyValuePair<Moon, Moon>( moons[2], moons[3] ) );
+
+      //Create simulating loop.
+
+         long nOfSteps = 0;
+         long maxSteps = 500000;
+
+      ////Print first state.
+      //   Console.WriteLine( );
+      //   Console.WriteLine( "After " + nOfSteps + " steps: " );
+
+      //   foreach( Moon m in moons )
+      //      Console.WriteLine( m.PrintState( ) );
+
+         double[] XZeroPos = new double[4];
+         double[] YZeroPos = new double[4];
+         double[] ZZeroPos = new double[4];
+         for( int i = 0; i<4; i++ )
+         {
+            XZeroPos[i] = moons[i].XCoor;
+            YZeroPos[i] = moons[i].YCoor;
+            ZZeroPos[i] = moons[i].ZCoor;
+         }
+
+
+      //Simulate..
+         List<long> cyclicX = new List<long>();
+         List<long> cyclicY = new List<long>();
+         List<long> cyclicZ = new List<long>();
+         while( true )
+         {
+            
+         //Apply gravity
+            foreach( KeyValuePair<Moon, Moon> p in moonPairs )
+               Moon.ApplyGravityOnPair( p );
+
+         //Apply velocity
+            foreach( Moon m in moons )
+               m.ApplyVelocity( );
+
+            nOfSteps++;
+
+         ////Print state..
+         //   Console.WriteLine( );
+         //   Console.WriteLine( "After " + nOfSteps + " steps: " );
+         //   foreach( Moon m in moons )
+         //      Console.WriteLine( m.PrintState( ) );
+
+            
+         //Check X
+            bool vZeroX = true;
+            for( int i = 0; i<4; i++ )
+            {
+               if( !vZeroX )
+                  break;
+               vZeroX &= moons[i].XVel == 0;
+            }
+            if( vZeroX )
+            {
+               bool pZeroX = true;
+               for( int i = 0; i<4; i++ )
+                  pZeroX &= moons[i].XCoor == XZeroPos[i];
+               if( pZeroX )
+                  cyclicX.Add( nOfSteps );
+            }
+
+         //Check Y
+            bool vZeroY = true;
+            for( int i = 0; i<4; i++ )
+            {
+               if( !vZeroY )
+                  break;
+               vZeroY &= moons[i].YVel == 0;
+            }
+            if( vZeroY )
+            {
+               bool pZeroY = true;
+               for( int i = 0; i<4; i++ )
+                  pZeroY &= moons[i].YCoor == YZeroPos[i];
+               if( pZeroY )
+                  cyclicY.Add( nOfSteps );
+            }
+            
+         //Check Z
+            bool vZeroZ = true;
+            for( int i = 0; i<4; i++ )
+            {
+               if( !vZeroZ )
+                  break;
+               vZeroZ &= moons[i].ZVel == 0;
+            }
+            if( vZeroZ )
+            {
+               bool pZeroZ = true;
+               for( int i = 0; i<4; i++ )
+                  pZeroZ &= moons[i].ZCoor == ZZeroPos[i];
+               if( pZeroZ )
+                  cyclicZ.Add( nOfSteps );
+            }
+
+
+            if( nOfSteps == maxSteps )
+               break;
+         }
+
+      //Calculate total energy
+         double totEnergy = 0.0;
+         foreach( Moon m in moons )
+            totEnergy += m.GetPotentialEnergy( ) * m.GetKineticEnergy( );
+
+         Console.WriteLine( totEnergy );
+
+      //Find the repeating state.
+
+         //Each direction can be simulated independently. 
+         //Store the state where all the velocities are zero in the x direction by simulating forward as candidates. Only check position if this is true.
+         //Save the cycle length for the x direction
+         //Repeat for Y and Z direction.
+         //Find the LCM (Least common multiple) of the three numbers.
+
+         long interM = UMath.LCM( cyclicY[0], cyclicX[0] );
+         long ans = UMath.LCM( cyclicZ[0], interM );
+
+         Console.WriteLine( ans );
+      }
+
+
+
       public static void Dec11( )
       {
+         string inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Dec11.txt" )[0];
+         //string inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Temp01.txt" )[0];
+         //string inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Temp02.txt" )[0];
 
+      //Set the canvas size
+         long canvasHeight = 50;
+         long canvasWidth = 90;
 
+      //Create an intcode computer and the hull painting robot
+         IntcodeComputer ic = new IntcodeComputer( inp, true );
+         HullPaintingRobot rob = new HullPaintingRobot( ( long ) ( canvasWidth*0.5 ), ( long ) ( canvasHeight*0.5 ) );
+
+      //Declare the loop variable..
+         bool didReachEnd = false;
+
+      //Declare the canvas..
+         HullPaintingRobot.COLOR[,] canvas = new HullPaintingRobot.COLOR[canvasWidth,canvasHeight];
+
+      //Run the intcode computer with the input zero..
+         ic.RunIntCode( new long[1]{ 1 } );
+
+      //First output should be the color that this hex should be painted to.
+         long colorToPaint = ic.Output;
+
+      //Run the intcode computer with no input until next output. This output should be the turn signal.
+         ic.RunIntCode( true, false );
+         long turnSignal = ic.Output;
+
+      //Get the new color of this position by asking the robot to paint it.
+         rob.PaintPosition( colorToPaint, canvas );
+
+      //Turn the robot and go forward.
+         rob.Turn( turnSignal );
+         HullPaintingRobot.COLOR newPositionColor = rob.GoForward( canvas );
+
+      //Check if the intcode reached its end..
+         didReachEnd = ic.ReachedEnd;
+
+      //Declare the minimum and maximum x and y.
+         long minX = rob.X;
+         long maxX = rob.X;
+         long minY = rob.Y;
+         long maxY = rob.Y;
+
+      //Update the minmax..
+         rob.UpdateMinMaxPosition( minX, maxX, minY, maxY, out minX, out maxX, out minY, out maxY );
+
+      //Do it all over again until the intcode reached point 99.
+         while( !didReachEnd )
+         {
+
+            ic.RunIntCode( new long[1]{ (long) newPositionColor } );
+            colorToPaint = ic.Output;
+            ic.RunIntCode( true, false );
+            turnSignal = ic.Output;
+
+            rob.PaintPosition( colorToPaint, canvas );
+            rob.Turn( turnSignal );
+            newPositionColor = rob.GoForward( canvas );
+
+         //Update the minmax..
+            rob.UpdateMinMaxPosition( minX, maxX, minY, maxY, out minX, out maxX, out minY, out maxY );
+
+            didReachEnd = ic.ReachedEnd;
+
+         }
+
+         long placesPainted = rob.PlacesPainted.Count;
+         long xDim = maxX - minX;
+         long yDim = maxY - minY;
+         Console.WriteLine( placesPainted );
+
+      //Create the canvas and paint.
+         for( int rowIdx = (int) ( canvasHeight-1 ); rowIdx>= 0; rowIdx-- )
+         {
+            StringBuilder line = new StringBuilder( );
+            for( int colIdx = 0; colIdx<canvasWidth; colIdx++ )
+            {
+               if( canvas[colIdx,rowIdx] == HullPaintingRobot.COLOR.BLACK )
+                  line.Append( ' ' );
+               else
+                  line.Append( '@' );
+            }
+            Console.WriteLine( line.ToString( ) );
+         }
 
       }
 
@@ -233,7 +472,7 @@ namespace AdventOfCode2019
             {
                currentThruster = new IntcodeComputer( inp, new long[2] { phase[i], lastOutput }, true );
                thrusters.Add( currentThruster );
-               currentThruster.RunIntCode( true );
+               currentThruster.RunIntCode( true, true);
                lastOutput = currentThruster.Output;
             }
 

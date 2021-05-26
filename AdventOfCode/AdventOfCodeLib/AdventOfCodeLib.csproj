@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\EDouble.cs" />
+    <Compile Include="Math\UMath.cs" />
     <Compile Include="Numerics\UVector2D.cs" />
+    <Compile Include="Numerics\UVector3D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

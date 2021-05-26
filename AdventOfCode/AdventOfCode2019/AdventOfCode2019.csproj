@@ -50,9 +50,11 @@
   <ItemGroup>
     <Compile Include="Classes\Astroid.cs" />
     <Compile Include="Classes\FuelCalculator.cs" />
+    <Compile Include="Classes\HullPaintingRobot.cs" />
     <Compile Include="Classes\Image.cs" />
     <Compile Include="Classes\ImageLayer.cs" />
     <Compile Include="Classes\IntcodeComputer.cs" />
+    <Compile Include="Classes\Moon.cs" />
     <Compile Include="Classes\OrbitObject.cs" />
     <Compile Include="Classes\PasswordValidater.cs" />
     <Compile Include="Classes\Wire.cs" />
@@ -88,6 +90,7 @@
     <Content Include="Inputs\Dec09.txt" />
     <Content Include="Inputs\Dec10.txt" />
     <Content Include="Inputs\Dec11.txt" />
+    <Content Include="Inputs\Dec12.txt" />
     <Content Include="Inputs\Temp01.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -97,6 +100,7 @@
     <Content Include="Inputs\Dec07.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Inputs\Dec13.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
