@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AdventOfCode2020.Extensions;
 using AdventOfCode2020.Numerics;
+using AdventOfCodeLib.Extensions;
+
 
 namespace AdventOfCode2020
 {

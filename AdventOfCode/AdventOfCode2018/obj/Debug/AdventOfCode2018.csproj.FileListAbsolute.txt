@@ -1,0 +1,10 @@
+F:\AdventOfCode\AdventOfCode\AdventOfCode2018\bin\Debug\AdventOfCode2018.exe.config
+F:\AdventOfCode\AdventOfCode\AdventOfCode2018\bin\Debug\AdventOfCode2018.exe
+F:\AdventOfCode\AdventOfCode\AdventOfCode2018\bin\Debug\AdventOfCode2018.pdb
+F:\AdventOfCode\AdventOfCode\AdventOfCode2018\obj\Debug\AdventOfCode2018.csprojAssemblyReference.cache
+F:\AdventOfCode\AdventOfCode\AdventOfCode2018\obj\Debug\AdventOfCode2018.csproj.CoreCompileInputs.cache
+F:\AdventOfCode\AdventOfCode\AdventOfCode2018\obj\Debug\AdventOfCode2018.exe
+F:\AdventOfCode\AdventOfCode\AdventOfCode2018\obj\Debug\AdventOfCode2018.pdb
+F:\AdventOfCode\AdventOfCode\AdventOfCode2018\bin\Debug\AdventOfCodeLib.dll
+F:\AdventOfCode\AdventOfCode\AdventOfCode2018\bin\Debug\AdventOfCodeLib.pdb
+F:\AdventOfCode\AdventOfCode\AdventOfCode2018\obj\Debug\AdventOfCode2018.csproj.CopyComplete

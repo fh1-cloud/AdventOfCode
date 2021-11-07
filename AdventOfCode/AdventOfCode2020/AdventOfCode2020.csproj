@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdventOfCodeLib">
+      <HintPath>..\AdventOfCodeLib\bin\Debug\AdventOfCodeLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
@@ -79,7 +82,6 @@
     <Compile Include="Classes\ShipInstruction.cs" />
     <Compile Include="Numerics\Vector2D.cs" />
     <Compile Include="Days.cs" />
-    <Compile Include="Extensions\EDouble.cs" />
     <Compile Include="Methods.cs" />
     <Compile Include="Classes\Passport.cs" />
     <Compile Include="Program.cs" />

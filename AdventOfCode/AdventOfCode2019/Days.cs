@@ -36,9 +36,9 @@ namespace AdventOfCode2019
 
 
 
-         long test = fuelRecipe.GetOreCountForRecipe( recipes, out long oreCount );
+         //long test = fuelRecipe.GetOreCountForRecipe( recipes, out long oreCount );
 
-         Console.WriteLine( oreCount );
+         //Console.WriteLine( oreCount );
 
       }
 
