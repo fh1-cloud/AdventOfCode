@@ -24,8 +24,21 @@ namespace AdventOfCode2019
          //string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Dec14.txt" );
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Temp01.txt" );
 
+      //Create all the recipes..
+         HashSet<FuelReaction> recipes = new HashSet<FuelReaction>();
+         foreach( string s in inp )
+            recipes.Add( new FuelReaction( s ) );
 
-         List<FuelComponentRecipe> recipes = new List<FuelComponentRecipe>( );
+      //Find the recipe where FUEL is created..
+         FuelReaction mainReaction = recipes.Where( x => x.Name == "C" ).FirstOrDefault( );
+
+         Dictionary<string,long> availableReagents = new Dictionary<string, long>( );
+
+
+
+         long test = fuelRecipe.GetOreCountForRecipe( recipes, out long oreCount );
+
+         Console.WriteLine( oreCount );
 
       }
 

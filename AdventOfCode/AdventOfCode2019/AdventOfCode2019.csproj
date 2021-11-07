@@ -51,7 +51,7 @@
     <Compile Include="Classes\ArcadeGame.cs" />
     <Compile Include="Classes\Astroid.cs" />
     <Compile Include="Classes\FuelCalculator.cs" />
-    <Compile Include="Classes\FuelComponentRecipe.cs" />
+    <Compile Include="Classes\FuelReaction.cs" />
     <Compile Include="Classes\HullPaintingRobot.cs" />
     <Compile Include="Classes\Image.cs" />
     <Compile Include="Classes\ImageLayer.cs" />
