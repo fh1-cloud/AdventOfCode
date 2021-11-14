@@ -59,7 +59,32 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Inputs\Dec01.txt" />
+    <Content Include="Inputs\Dec02.txt" />
+    <Content Include="Inputs\Dec03.txt" />
+    <Content Include="Inputs\Dec04.txt" />
+    <Content Include="Inputs\Dec05.txt" />
+    <Content Include="Inputs\Dec06.txt" />
+    <Content Include="Inputs\Dec07.txt" />
+    <Content Include="Inputs\Dec08.txt" />
+    <Content Include="Inputs\Dec09.txt" />
+    <Content Include="Inputs\Dec10.txt" />
+    <Content Include="Inputs\Dec11.txt" />
+    <Content Include="Inputs\Dec12.txt" />
+    <Content Include="Inputs\Dec13.txt" />
+    <Content Include="Inputs\Dec14.txt" />
+    <Content Include="Inputs\Dec15.txt" />
+    <Content Include="Inputs\Dec16.txt" />
+    <Content Include="Inputs\Dec17.txt" />
+    <Content Include="Inputs\Dec18.txt" />
+    <Content Include="Inputs\Dec19.txt" />
+    <Content Include="Inputs\Dec20.txt" />
+    <Content Include="Inputs\Dec21.txt" />
+    <Content Include="Inputs\Dec22.txt" />
+    <Content Include="Inputs\Dec23.txt" />
+    <Content Include="Inputs\Dec24.txt" />
+    <Content Include="Inputs\Dec25.txt" />
     <Content Include="Inputs\Temp1.txt" />
+    <Content Include="Inputs\Temp2.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
