@@ -13,20 +13,68 @@ namespace AdventOfCode2018
 
 
 
+      public static void Dec04( )
+      {
+
+         string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Dec04.txt" );
+         //string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Temp1.txt" );
+
+
+         Console.WriteLine( "Part 1: " );
+         Console.WriteLine( "Part 2: " );
+
+
+      }
+
+
       public static void Dec03( )
       {
 
       //Part1
          string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Dec03.txt" );
+         int areaWidth = 1099;
+         int areaHeight = 1099;
+
          //string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Temp1.txt" );
-         //string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Temp2.txt" );
+         //int areaWidth = 11;
+         //int areaHeight = 11;
 
+         //Create the whole area.
+         int[,] wholeArea = new int[areaHeight,areaWidth];
+         for( int i = 0; i < areaHeight; i++ )
+            for( int j = 0; j < areaWidth; j++ )
+               wholeArea[i,j] = 0;
 
+      //Create all the patches..
+         Dictionary<int, FabricPatch> patches = new Dictionary<int, FabricPatch>( );
+         for( int i = 0; i < inp.Length; i++ )
+         {
+            FabricPatch thisPatch = new FabricPatch( inp[i], wholeArea );
+            patches.Add( thisPatch.ID, thisPatch );
+         }
 
+      //Count number of positions that have more than one entry..
+         int nOfIndicesWithMultiple = 0;
+         for( int i = 0; i < areaHeight; i++ )
+            for( int j = 0; j < areaWidth; j++ )
+               if( wholeArea[i,j] >= 2 )
+                  nOfIndicesWithMultiple++;
 
-         Console.WriteLine( "Part 1: " );
-         //Clipboard.SetText( checksum.ToString( ) );
+      ////Print the whole thing..
+      //   for( int i = 0; i < areaHeight; i++ )
+      //   {
+      //      StringBuilder sb = new StringBuilder( );
+      //      for( int j = 0; j < areaWidth; j++ )
+      //         sb.Append( wholeArea[i,j] );
 
+      //      Console.WriteLine( sb.ToString( ) );
+      //   }
+
+         Console.WriteLine( "Part 1: " + nOfIndicesWithMultiple );
+
+         int id = patches.Where( x => x.Value.MyPatchOverlap( wholeArea ) == false ).ToList( ).FirstOrDefault( ).Key;
+         Console.WriteLine( "Part 2: " + id );
+         
 
       }
 
