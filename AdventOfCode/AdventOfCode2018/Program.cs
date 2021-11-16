@@ -11,8 +11,8 @@ namespace AdventOfCode2018
       [STAThread]          //Add this to get access to the clipboard for copying results..
       static void Main( string[] args )
       {
-         Console.Write( GetConsoleHeader( 04 ) );
-         Days.Dec04( );
+         Console.Write( GetConsoleHeader( 05 ) );
+         Days.Dec05( );
          Console.ReadKey( );
       }
 

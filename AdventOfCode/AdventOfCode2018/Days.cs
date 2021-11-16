@@ -11,6 +11,21 @@ namespace AdventOfCode2018
    public class Days
    {
 
+      public static void Dec05( )
+      {
+
+         string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Dec05.txt" );
+         //string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Temp1.txt" );
+
+      //PART1
+         long ans1 = 0;
+         Console.WriteLine( "Part 1: " + ans1 );
+
+
+      //PART 2
+         long ans2 = 0;
+         Console.WriteLine( "Part 2: " + ans2 );
+      }
 
 
       public static void Dec04( )
@@ -19,9 +34,84 @@ namespace AdventOfCode2018
          string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Dec04.txt" );
          //string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Temp1.txt" );
 
+      //Parse the input strings and put them in a dictionary..
+         SortedDictionary<DateTime, string> sortedInputs = new SortedDictionary<DateTime, string>( );
 
-         Console.WriteLine( "Part 1: " );
-         Console.WriteLine( "Part 2: " );
+         for( int i = 0; i < inp.Length; i++ )
+         {
+         //DateTimeString
+            string dateString = inp[i].Substring( 1, 16 );
+            int year = int.Parse( dateString.Substring( 0, 4 ) );
+            int month = int.Parse( dateString.Substring( 5,2 ) );
+            int day = int.Parse( dateString.Substring( 8, 2 ) );
+            int hour = int.Parse( dateString.Substring( 11, 2 ) );
+            int minute = int.Parse( dateString.Substring( 14,2 ) );
+
+         //Create the datetime..
+            DateTime thisTime = new DateTime( year, month, day, hour, minute, 0 );
+
+         //Rest of this string..
+            string restOfString = inp[i].Substring( 19 );
+
+         //Add to the sorted inputs..
+            sortedInputs.Add( thisTime, restOfString );
+         }
+
+      //The dates are stored from early to last. Now, create all the guards..
+         Dictionary<int, Guard> guards = new Dictionary<int, Guard>( );
+         Guard currentGuard = null;
+         foreach( KeyValuePair<DateTime, string> kvp in sortedInputs )
+         {
+            string[] splitArr = kvp.Value.Split( new char[]{ ' ' } );
+            if( kvp.Value[0] == 'G' )
+            {
+               int id = int.Parse( ( splitArr[1] ).Substring( 1 ) );
+               if( !guards.ContainsKey( id ) )
+               {
+                  Guard newGuard = new Guard( id );
+                  guards.Add( newGuard.ID, newGuard );
+                  currentGuard = newGuard;
+               }
+               else
+                  currentGuard = guards[id];
+
+               currentGuard.SetStatus( kvp.Key, Guard.STATUS.AWAKE );
+            }
+            else if( kvp.Value[0] == 'w' )
+               currentGuard.SetStatus( kvp.Key, Guard.STATUS.AWAKE );
+            else if( kvp.Value[0] == 'f' )
+               currentGuard.SetStatus( kvp.Key, Guard.STATUS.SLEEP );
+         }
+
+      //Get the answers..
+         long maxTotalMinutes = guards.Select( x => x.Value.GetNumberOfMinutesSleeping( ) ).ToList( ).Max( );
+         int guardID = guards.Where( x => x.Value.GetNumberOfMinutesSleeping( ) == maxTotalMinutes ).FirstOrDefault( ).Value.ID;
+         int maxMinute = guards[guardID].GetMinuteWithMostSleep( );
+         int ans1 = maxMinute*guardID;
+
+      //Write the answer..
+         Console.WriteLine( "Part 1: " + ans1 );
+
+      //PART TWO
+      //Find the minute where any given guard is asleep the most
+
+         int maxGuardID = -1;
+         int maxCount = -1;
+         foreach( var kvp in guards )
+         {
+            int[] thisSleepArray = kvp.Value.GetSleepMinuteArray( );
+            int thisMaxCount = thisSleepArray.Max( );
+            if( maxCount < thisMaxCount )
+            {
+               maxGuardID = kvp.Key;
+               maxCount = thisMaxCount;
+            }
+         }
+
+      //Get the minute array for the max guard.
+         int maxSleepMinute = guards[ maxGuardID ].GetMinuteWithMostSleep( );
+         int ans2 = maxGuardID * maxSleepMinute;
+         Console.WriteLine( "Part 2: " + ans2 );
 
 
       }

@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Guard.cs" />
     <Compile Include="Days.cs" />
     <Compile Include="Classes\FabricPatch.cs" />
     <Compile Include="Program.cs" />
