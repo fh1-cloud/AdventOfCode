@@ -46,7 +46,7 @@ namespace AdventOfCodeLib
       /// <returns></returns>
       public static long GCD(long a, long b )
       {
-         while (b != 0)
+         while( b != 0 )
          {
             long temp = b;
             b = a % b;

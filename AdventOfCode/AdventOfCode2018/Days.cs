@@ -4,12 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AdventOfCode2018.Classes;
 using AdventOfCodeLib.Extensions;
 
 namespace AdventOfCode2018
 {
    public class Days
    {
+
+
+      public static void Dec06( )
+      {
+         string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Dec06.txt" );
+         //string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Temp1.txt" );
+
+
+      //PART1
+
+         long ans1 = 0;
+         Console.WriteLine( "Part 1: " + ans1 );
+
+
+
+
+      //PART 2
+
+         long ans2 = 0;
+         Console.WriteLine( "Part 2: " + ans2 );
+
+
+      }
+
+
+
+
+
+
 
       public static void Dec05( )
       {
@@ -18,12 +48,115 @@ namespace AdventOfCode2018
          //string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Temp1.txt" );
 
       //PART1
-         long ans1 = 0;
-         Console.WriteLine( "Part 1: " + ans1 );
 
+
+      //Declare the list of candidates. Probably the whole alphabet
+         string alphabet = "abcdefghijklmnopqrstuvwxyz";
+         char[] candidates = alphabet.ToCharArray( );
+         Dictionary<char,int> polymerLengths = new Dictionary<char, int>( );
+
+      //Loop over all the candidates in the char array and calculate the polymer length after they have been removed
+         for( int k = 0; k < candidates.Length; k++ )
+         {
+         //Create all the polymer atoms..
+            string polymer = inp[0];
+            List<PolymerAtom> atoms = new List<PolymerAtom>( );
+
+         //Check the char before creating the polymer..
+            
+            PolymerAtom prev = null;
+            for( int i = 0; i < polymer.Length; i++ )
+            {
+            //Check if the polymer should be skipped..
+               if( polymer[i] == candidates[k] || polymer[i].ToString( ).ToLower( ) == candidates[k].ToString( ) )
+                  continue;
+
+            //Create the new polymer atom..
+               PolymerAtom thisAtom = new PolymerAtom( polymer[i] );
+
+            //Set this atom as the next in chain after last one
+               if( prev != null )
+                  prev.NextAtom = thisAtom;
+
+            //Add to list
+               atoms.Add( thisAtom );
+
+            //Update the previous atom so that it is linked..
+               prev = thisAtom;
+            }
+
+         //Start the reactions..
+            bool reacting = true;
+            while( reacting )
+            {
+               bool somethingReacted = false;
+
+            //Find the first polymer in the list that is not anihilated..
+               PolymerAtom firstAtom = null;
+               for( int i = 0; i<atoms.Count; i++ )
+               {
+                  if( atoms[i].Status )
+                  {
+                     firstAtom = atoms[i];
+                     break;
+                  }
+               }
+
+            //Now we just need to loop through the linked list and remove stuff..
+               PolymerAtom previousAtom = null;
+               PolymerAtom currentAtom = firstAtom;
+               while( currentAtom != null )
+               {
+               //Throw if the current atom is dead. Should not happen
+                  if( currentAtom.Status == false )
+                     throw new Exception( );
+
+               //Check for anihilation
+                  bool anihilation = false;
+                  if( currentAtom.NextAtom != null )
+                     anihilation = currentAtom.DoesAnihilateEachother( currentAtom.NextAtom );
+
+               //If the anihilate. set status to dead and update the linked list..
+                  if( anihilation )
+                  {
+                     currentAtom.Status = false;
+                     currentAtom.NextAtom.Status = false;
+                     PolymerAtom leftSide = previousAtom;
+                     PolymerAtom rightSide = currentAtom.NextAtom.NextAtom;
+
+                     if( leftSide != null )
+                        leftSide.NextAtom = rightSide;
+
+                  //If something reacted, we need to break out of the current while looop and start the reactions all over..
+                     somethingReacted = true;
+
+                     break;
+                  }
+                  else
+                  {
+                  //Get the next current atom..
+                     previousAtom = currentAtom;
+                     currentAtom = currentAtom.NextAtom;
+                  }
+
+               }
+            //Check if something reacted..
+               if( !somethingReacted )
+                  reacting = false;
+            }
+
+         //Find the number of atoms left when the calculation is complete..
+            int nOfAtomsLeft = atoms.Where( x => x.Status == true ).ToList( ).Count;
+            polymerLengths.Add( candidates[k], nOfAtomsLeft );
+
+         //Write status to window for debug purposes..
+            Console.WriteLine( "Candidate: " + candidates[k].ToString( ) + "  Number of atoms in chain: " + nOfAtomsLeft );
+
+         }
 
       //PART 2
-         long ans2 = 0;
+         //Find the shortest polymer in the list..
+         int ans2 = polymerLengths.Select( x => x.Value ).ToList( ).Min( );
          Console.WriteLine( "Part 2: " + ans2 );
       }
 
