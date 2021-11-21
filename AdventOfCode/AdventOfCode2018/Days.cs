@@ -17,7 +17,7 @@ namespace AdventOfCode2018
       public static void Dec07( )
       {
 
-         string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Dec06.txt" );
+         string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Dec07.txt" );
          //string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Temp1.txt" );
 
 
