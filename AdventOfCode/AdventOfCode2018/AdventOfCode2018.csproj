@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\ChronalArea.cs" />
     <Compile Include="Classes\Guard.cs" />
     <Compile Include="Classes\PolymerAtom.cs" />
     <Compile Include="Days.cs" />
