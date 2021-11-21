@@ -13,34 +13,67 @@ namespace AdventOfCode2018
    {
 
 
-      public static void Dec06( )
-      {
-         //string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Dec06.txt" );
-         string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Temp1.txt" );
 
-         ChronalArea area = new ChronalArea(inp);
+      public static void Dec07( )
+      {
+
+         string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Dec06.txt" );
+         //string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Temp1.txt" );
 
 
 
 
 
       //PART1
-
          long ans1 = 0;
          Console.WriteLine( "Part 1: " + ans1 );
 
-
-
-
       //PART 2
-
          long ans2 = 0;
          Console.WriteLine( "Part 2: " + ans2 );
-
 
       }
 
 
+      public static void Dec06( )
+      {
+         string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Dec06.txt" );
+         //string[] inp = Program.GetInputStringArray( @"..\\..\\Inputs\\Temp1.txt" );
+
+
+         ChronalArea originalArea = new ChronalArea( inp, 0, 0 );
+         HashSet<char> allCharacters = originalArea.UniqueCharacters;
+         Dictionary<char, long> originalSizes = originalArea.AreaSizes;
+
+         ChronalArea newArea = new ChronalArea( inp, 1, 1 );
+         Dictionary<char, long> newSizes = newArea.AreaSizes;
+
+      //Collect all the characters that are not infinite
+         HashSet<char> nonInfinite = new HashSet<char>( );
+         foreach( char c in allCharacters )
+            if( originalSizes[c] == newSizes[c] )
+               nonInfinite.Add( c );
+
+      //Get the largest area in among these in the newSizes dict..
+         char maxChar = nonInfinite.FirstOrDefault( );
+         long maxVal = -1;
+         foreach( char c in nonInfinite )
+         {
+            if( newSizes[c] > maxVal )
+            {
+               maxChar = c;
+               maxVal = newSizes[c];
+            }
+
+         }
+      //PART1
+         Console.WriteLine( "Part 1: " + maxVal );
+
+      //PART 2
+         ChronalArea p2Area = new ChronalArea( inp, 20, 20, true, 10000 );
+         long ans2 = p2Area.Part2Size;
+         Console.WriteLine( "Part 2: " + ans2 );
+      }
 
 
 
