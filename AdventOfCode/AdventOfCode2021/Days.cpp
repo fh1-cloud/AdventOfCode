@@ -7,6 +7,20 @@
 using namespace std;
 using namespace GlobalMethods;
 
+
+
+void Days::Dec02( )
+{
+   vector<int> inp = Utilities::CreateInputVectorInt( "Dec02.txt" );
+   //vector<int> inp = Utilities::CreateInputVectorInt( "Temp01.txt" );
+
+
+//Print answer..
+   cout << 0;
+
+}
+
+
 /// <summary>
 /// Function definition of Dec01. 
 /// </summary>
@@ -26,7 +40,8 @@ void Days::Dec01( )
       prevSum = thisSum;
    }
 
+//Print answer..
    cout << nOfIncreases;
 
-
 }
+

@@ -151,6 +151,30 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Dec01.txt" />
+    <Text Include="Dec02.txt" />
+    <Text Include="Dec03.txt" />
+    <Text Include="Dec04.txt" />
+    <Text Include="Dec05.txt" />
+    <Text Include="Dec06.txt" />
+    <Text Include="Dec07.txt" />
+    <Text Include="Dec08.txt" />
+    <Text Include="Dec09.txt" />
+    <Text Include="Dec10.txt" />
+    <Text Include="Dec11.txt" />
+    <Text Include="Dec12.txt" />
+    <Text Include="Dec13.txt" />
+    <Text Include="Dec14.txt" />
+    <Text Include="Dec15.txt" />
+    <Text Include="Dec16.txt" />
+    <Text Include="Dec17.txt" />
+    <Text Include="Dec18.txt" />
+    <Text Include="Dec19.txt" />
+    <Text Include="Dec20.txt" />
+    <Text Include="Dec21.txt" />
+    <Text Include="Dec22.txt" />
+    <Text Include="Dec23.txt" />
+    <Text Include="Dec24.txt" />
+    <Text Include="Dec25.txt" />
     <Text Include="Temp01.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -43,5 +43,77 @@
     <Text Include="Temp01.txt">
       <Filter>Inputs</Filter>
     </Text>
+    <Text Include="Dec02.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec03.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec04.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec05.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec06.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec07.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec08.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec09.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec10.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec11.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec12.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec13.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec14.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec15.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec16.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec17.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec18.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec19.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec20.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec21.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec22.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec23.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec24.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Dec25.txt">
+      <Filter>Inputs</Filter>
+    </Text>
   </ItemGroup>
 </Project>

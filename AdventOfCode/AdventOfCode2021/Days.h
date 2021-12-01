@@ -30,5 +30,4 @@ public:
    static void Dec23( );
    static void Dec24( );
    static void Dec25( );
-   static std::vector<std::string> CreateInputVector( std::string const& filePath );    //Creates the string input as a vector
 };
