@@ -113,7 +113,7 @@ std::vector<std::vector<std::string>> GlobalMethods::Utilities::CreateInputVecto
             end = thisLine.find( del, start );
          
          //Add last part of line after no new delimiters was found.
-            if( end == -1 && start != thisLine.length( ) - 1 )
+            if( end == -1 && start != thisLine.length( ) - 2 )
                thisVec.push_back( thisLine.substr( start, thisLine.length( ) - 1 ) );
          }
       }
