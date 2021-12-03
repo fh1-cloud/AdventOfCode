@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <sstream>
 #include "Days.h"
 #include "Utilities.h"
 #include "Submarine.h"
@@ -9,19 +10,148 @@ using namespace std;
 using namespace GlobalMethods;
 
 
-
 void Days::Dec03( )
 {
 //Get the string array..
-   vector<vector<string>> inp = Utilities::CreateInputVectorStringVector( "Dec03.txt" );
+   vector<string> inp = Utilities::CreateInputVectorString( "Dec03.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
 
+   int bitLength = inp[0].size( );
 
+//PART1
+   ostringstream epsilon;
+   ostringstream gamma;
+
+   for( int i = 0; i < bitLength; i++ )
+   {
+      int n0 = 0;
+      int n1 = 0;
+
+      for( int j = 0; j < inp.size( ); j++ )
+      {
+         if( inp[j][i] == '0' )
+            n0++;
+         else if( inp[j][i] == '1' )
+            n1++;
+      }
+      if( n0 == n1 )
+         throw new exception( );
+      if( n0 > n1 )
+      {
+         gamma << '0';
+         epsilon << '1';
+      }
+      else
+      {
+         gamma << '1';
+         epsilon << '0';
+      }
+   }
+
+//Convert from binary to regular numbers..
+   unsigned long gammaNum = Utilities::from_base( gamma.str( ), 2 );
+   unsigned long epsilonNum = Utilities::from_base( epsilon.str( ), 2 );
 
 //Calculate the answer
-   int ans = 0;
+   //unsigned long ans = gammaNum*epsilonNum;
 
 //Print answer..
+   //cout << ans;
+
+//PART2
+   //Oxygen generator rating..
+
+   //Create a copy of the list..
+   vector<string> oxyCandidates = inp;       //Copies by value?
+   for( int i = 0; i < bitLength; i++ )
+   {
+   //First, check how many numbers are left in the list..
+      if( oxyCandidates.size( ) == 1 )
+         break;
+
+   //Reset bit counters..
+      int n0 = 0;
+      int n1 = 0;
+
+      for( int j = 0; j < oxyCandidates.size( ); j++ )
+      {
+         if( oxyCandidates[j][i] == '0' )
+            n0++;
+         else if( oxyCandidates[j][i] == '1' )
+            n1++;
+      }
+
+   //1 larger than 0. Remove all the zeroes.
+      vector<string> newCandidates;
+      if( n1 >= n0 )
+      {
+         for( int j = 0; j < oxyCandidates.size( ); j++ )
+            if( oxyCandidates[j][i] == '1' )
+               newCandidates.push_back( oxyCandidates[j] );
+      }
+      else
+      {
+         for( int j = 0; j < oxyCandidates.size( ); j++ )
+            if( oxyCandidates[j][i] == '0' )
+               newCandidates.push_back( oxyCandidates[j] );
+      }
+
+   //Set new oxy candidates..
+      oxyCandidates = newCandidates;
+   }
+   if( oxyCandidates.size( ) != 1 )
+      throw new exception( );
+
+//Create a copy of the list..
+   vector<string> scrubberCandidates = inp;       //Copies by value?
+   for( int i = 0; i < bitLength; i++ )
+   {
+   //First, check how many numbers are left in the list..
+      if( scrubberCandidates.size( ) == 1 )
+         break;
+
+   //Reset bit counters..
+      int n0 = 0;
+      int n1 = 0;
+
+      for( int j = 0; j < scrubberCandidates.size( ); j++ )
+      {
+         if( scrubberCandidates[j][i] == '0' )
+            n0++;
+         else if( scrubberCandidates[j][i] == '1' )
+            n1++;
+      }
+
+   //1 larger than 0. Remove all the zeroes.
+      vector<string> newCandidates;
+      if( n1 < n0 )
+      {
+         for( int j = 0; j < scrubberCandidates.size( ); j++ )
+            if( scrubberCandidates[j][i] == '1' )
+               newCandidates.push_back( scrubberCandidates[j] );
+      }
+      else
+      {
+         for( int j = 0; j < scrubberCandidates.size( ); j++ )
+            if( scrubberCandidates[j][i] == '0' )
+               newCandidates.push_back( scrubberCandidates[j] );
+      }
+
+   //Set new oxy candidates..
+      scrubberCandidates = newCandidates;
+   }
+   if( scrubberCandidates.size( ) != 1 )
+      throw new exception( );
+
+//Convert from binary to regular numbers..
+   unsigned long oxyNum = Utilities::from_base( oxyCandidates[0], 2 );
+   unsigned long scrubberNum = Utilities::from_base( scrubberCandidates[0], 2 );
+   unsigned long ans = oxyNum*scrubberNum;
    cout << ans;
+
+
+
+
 }
 
 void Days::Dec02( )
