@@ -30,6 +30,9 @@
     <ClCompile Include="Submarine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BingoBoard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Days.h">
@@ -39,6 +42,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Submarine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BingoBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

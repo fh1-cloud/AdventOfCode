@@ -141,12 +141,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BingoBoard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Days.cpp" />
     <ClCompile Include="Submarine.cpp" />
     <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BingoBoard.h" />
     <ClInclude Include="Days.h" />
     <ClInclude Include="Submarine.h" />
     <ClInclude Include="Utilities.h" />

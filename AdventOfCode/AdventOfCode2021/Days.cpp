@@ -6,8 +6,101 @@
 #include "Days.h"
 #include "Utilities.h"
 #include "Submarine.h"
+#include "BingoBoard.h";
 using namespace std;
 using namespace GlobalMethods;
+
+
+
+void Days::Dec05( )
+{
+//Get the string array..
+   vector<string> inp = Utilities::CreateInputVectorString( "Dec05.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+
+   int ans = 0;
+   cout << ans;
+}
+
+
+
+void Days::Dec04 ( )
+{
+//Get the string array..
+   vector<string> inp = Utilities::CreateInputVectorString( "Dec04.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+
+//extract the winning sequence..
+   vector<string> numberString = Utilities::split( inp[0], ',' );
+   vector<int> winningNumbers;
+   for( int i = 0; i < numberString.size( ); i++ )
+      winningNumbers.push_back( stoi( numberString[i] ) );
+
+//Create bingoboards
+   vector<BingoBoard> bingoBoards;
+   for( int i = 2; i < inp.size( ); i=i+6 )
+   {
+   //Extract this row and the 5 next rows.
+      vector<string> thisBoard;
+      thisBoard.push_back( inp[i] );
+      thisBoard.push_back( inp[i+1] );
+      thisBoard.push_back( inp[i+2] );
+      thisBoard.push_back( inp[i+3] );
+      thisBoard.push_back( inp[i+4] );
+
+   //Create the board..
+      BingoBoard b( thisBoard );
+      bingoBoards.push_back( b );
+   }
+
+//Start to draw the winning numbers
+   bool bingo = false;
+   BingoBoard* pWinningBoard = NULL;
+   int winningNumber = -1;
+   int currIdx = 0;
+   int nOfWinningBoards = 0;
+   int nOfBoards = bingoBoards.size( );
+   while( true )
+   {
+      int thisDraw = winningNumbers[currIdx];
+      for( int i = 0; i < bingoBoards.size( ); i++ )
+      {
+      //If this board has already won, continue..
+         if( bingoBoards[i].HasWon( ) )
+            continue;
+
+         bingoBoards[i].MarkNumber( thisDraw );
+         bool thisBingo = bingoBoards[i].CheckForBingo( );
+
+      //Check this for bingo. IF it reached bingo, remove it from the list..
+         if( thisBingo )
+         {
+         //Increment the number of winning boards..
+            nOfWinningBoards++;
+
+         //Check if this is the last bingoboard..
+            if( nOfWinningBoards == nOfBoards )
+            {
+               winningNumber = thisDraw;
+               pWinningBoard = &bingoBoards[i];
+               break;
+            }
+         }
+      }
+      if( pWinningBoard != NULL )
+      {
+         bingo = true;
+         break;
+      }
+   //Increment the current index
+      currIdx++;
+   }
+
+//Print the bingoboard that just won.
+   int boardScore = pWinningBoard->GetScore( );
+   int ans = boardScore * winningNumber;
+   cout << ans;
+}
 
 
 void Days::Dec03( )

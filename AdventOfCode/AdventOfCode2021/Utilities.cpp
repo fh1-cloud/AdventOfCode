@@ -8,6 +8,9 @@
 #include <cstdlib>
 #include <algorithm>
 #include <cassert>
+#include <iterator>
+#include <algorithm>
+
 using namespace std;
 
 /// <summary>
@@ -131,10 +134,17 @@ std::vector<std::vector<std::string>> GlobalMethods::Utilities::CreateInputVecto
 }
 
 std::string const digits = "0123456789abcdefghijklmnopqrstuvwxyz";
+/// <summary>
+/// Converts a number from base 10 to a different base. Returns it as a string
+/// </summary>
+/// <param name="num>The number that should be converted</param>
+/// <param name="base">The new base that should be used</param>
+/// <returns></returns>
 std::string GlobalMethods::Utilities::to_base( unsigned long num, int base )
 {
    if (num == 0)
       return "0";
+
 
    std::string result;
    while (num > 0) 
@@ -147,6 +157,12 @@ std::string GlobalMethods::Utilities::to_base( unsigned long num, int base )
    return result;
 }
 
+/// <summary>
+/// Converts a number from a different base to base 10.
+/// </summary>
+/// <param name="num_str">The number represented as a string</param>
+/// <param name="base">The base it should be converted from</param>
+/// <returns></returns>
 unsigned long GlobalMethods::Utilities::from_base( std::string const& num_str, int base )
 {
    unsigned long result = 0;
@@ -155,4 +171,44 @@ unsigned long GlobalMethods::Utilities::from_base( std::string const& num_str, i
 
    return result;
 }
- 
+
+/// <summary>
+/// Split a string by a chosen delimiter. Returns a vector of strings..
+/// </summary>
+/// <param name="str">The string that is passed</param>
+/// <param name="del">The delimiter the string should be pass ed as.</param>
+/// <returns></returns>
+std::vector<std::string> GlobalMethods::Utilities::split( std::string str, char del )
+{
+   std::string buf;                 // Have a buffer string
+   std::stringstream ss(str);       // Insert the string into a stream
+   std::vector<std::string> tokens; // Create vector to hold our words
+
+//Loop over all the strings
+   while( std::getline( ss, buf, del ) )
+      tokens.push_back( buf );
+
+//Return the tokens for this string.
+   return tokens;
+}
+
+/// <summary>
+/// Splits a string by whitespaces. Regardless of how many spaces there is
+/// </summary>
+/// <param name=""></param>
+/// <returns></returns>
+std::vector<std::string> GlobalMethods::Utilities::splitWhitespace( std::string str)
+{
+   std::string buf;                 // Have a buffer string
+   std::stringstream ss( str );       // Insert the string into a stream
+   std::vector<std::string> tokens; // Create vector to hold our words
+
+   while( ss >> buf )
+      tokens.push_back( buf );
+
+   return tokens;
+}
+
+
+
+
