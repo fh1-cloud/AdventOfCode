@@ -145,13 +145,17 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Days.cpp" />
     <ClCompile Include="Submarine.cpp" />
+    <ClCompile Include="UIntPoint.cpp" />
     <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="UIntVector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BingoBoard.h" />
     <ClInclude Include="Days.h" />
     <ClInclude Include="Submarine.h" />
+    <ClInclude Include="UIntPoint.h" />
     <ClInclude Include="Utilities.h" />
+    <ClInclude Include="UIntVector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Dec01.txt" />
@@ -180,6 +184,7 @@
     <Text Include="Dec24.txt" />
     <Text Include="Dec25.txt" />
     <Text Include="Temp01.txt" />
+    <Text Include="Temp02.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

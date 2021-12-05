@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include <fstream>
 #include <vector>
 #include <sstream>
@@ -7,19 +6,98 @@
 #include "Utilities.h"
 #include "Submarine.h"
 #include "BingoBoard.h";
+#include "UIntVector2D.h"
 using namespace std;
 using namespace GlobalMethods;
 
 
+void Days::Dec06( )
+{
+
+//Get the input and parse.
+   vector<vector<string>> inp = Utilities::CreateInputVectorStringVector( "Dec05.txt", ' ' );
+   //vector<vector<string>> inp = Utilities::CreateInputVectorStringVector( "Temp01.txt", ' ' );
+   //vector<vector<string>> inp = Utilities::CreateInputVectorStringVector( "Temp02.txt", ' ' );
+
+
+   int ans = 0;
+   cout << ans;
+
+}
 
 void Days::Dec05( )
 {
 //Get the string array..
-   vector<string> inp = Utilities::CreateInputVectorString( "Dec05.txt" );
-   //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+   vector<vector<string>> inp = Utilities::CreateInputVectorStringVector( "Dec05.txt", ' ' );
+   //vector<vector<string>> inp = Utilities::CreateInputVectorStringVector( "Temp01.txt", ' ' );
+   //vector<vector<string>> inp = Utilities::CreateInputVectorStringVector( "Temp02.txt", ' ' );
 
-   int ans = 0;
-   cout << ans;
+//Create vectors of all the lines..
+   vector<UIntVector2D*> pLines;
+   for( int i = 0; i < inp.size( ); i++ )
+   {
+   //Unpack parts of string
+      string startPointString = inp[i][0];
+      string endPointString = inp[i][2];
+
+   //Parse to integers..
+      vector<string> startPointSplitString = Utilities::split( startPointString, ',' );
+      int startX = stoi( startPointSplitString[0] );
+      int startY = stoi( startPointSplitString[1] );
+      vector<string> endPointSplitString = Utilities::split( endPointString, ',' );
+      int endX = stoi( endPointSplitString[0] );
+      int endY = stoi( endPointSplitString[1] );
+
+   //Create the UVectors.
+      //if( startX == endX || startY == endY )
+      //{
+         UIntVector2D* v = new UIntVector2D( startX, startY, endX, endY );
+         pLines.push_back( v );
+      //}
+   }
+
+//Try to go with the canvas method first..
+   int dim = 990;
+   //int dim = 10;
+   vector<vector<int>> canvas;
+   for( int i = 0; i < dim; i++ )
+   {
+      vector<int> thisRow;
+      for( int j = 0; j < dim; j++ )
+         thisRow.push_back( 0 );
+      canvas.push_back( thisRow );
+   }
+
+//Fill canvas
+   for( int i = 0; i < pLines.size( ); i++ )
+      pLines[i]->FillCanvas( canvas );
+
+//Print the canvas. Also count the number of multiple crossings.
+   for( int i = 0; i < canvas.size( ); i++ )
+   {
+      stringstream s;
+      for( int j = 0; j < canvas.size( ); j++ )
+      {
+         if( canvas[i][j] == 0 )
+            s << '.';
+         else
+            s << canvas[i][j];
+
+      }
+      cout << s.str( ) + "\n";
+   }
+
+//Count multiples
+   int multiples = 0;
+   for( int i = 0; i < canvas.size( ); i++ )
+      for( int j = 0; j < canvas.size( ); j++ )
+         if( canvas[i][j] > 1 )
+            multiples++;
+
+
+   cout << "\n";
+   cout << multiples;
+
 }
 
 

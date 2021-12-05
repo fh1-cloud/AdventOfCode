@@ -16,6 +16,12 @@
     <Filter Include="Inputs">
       <UniqueIdentifier>{b065263e-cfe7-4956-85be-7e532d962d33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Numerics">
+      <UniqueIdentifier>{a4654ed3-e331-44a8-aa07-fe3b35555e6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DayClasses">
+      <UniqueIdentifier>{39d3955a-11ce-4a07-a1ee-ce6341425886}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -27,11 +33,17 @@
     <ClCompile Include="Utilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Submarine.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="UIntVector2D.cpp">
+      <Filter>Numerics</Filter>
     </ClCompile>
     <ClCompile Include="BingoBoard.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>DayClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Submarine.cpp">
+      <Filter>DayClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="UIntPoint.cpp">
+      <Filter>Numerics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -41,11 +53,17 @@
     <ClInclude Include="Utilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Submarine.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="UIntVector2D.h">
+      <Filter>Numerics</Filter>
     </ClInclude>
     <ClInclude Include="BingoBoard.h">
-      <Filter>Header Files</Filter>
+      <Filter>DayClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Submarine.h">
+      <Filter>DayClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="UIntPoint.h">
+      <Filter>Numerics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +143,9 @@
       <Filter>Inputs</Filter>
     </Text>
     <Text Include="Dec25.txt">
+      <Filter>Inputs</Filter>
+    </Text>
+    <Text Include="Temp02.txt">
       <Filter>Inputs</Filter>
     </Text>
   </ItemGroup>
