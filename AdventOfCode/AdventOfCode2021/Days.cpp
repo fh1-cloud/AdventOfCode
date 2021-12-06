@@ -1,7 +1,8 @@
 #pragma once
 #include <fstream>
 #include <vector>
-#include <sstream>
+#include <iostream>
+#include <unordered_map>
 #include "Days.h"
 #include "Utilities.h"
 #include "Submarine.h"
@@ -13,15 +14,50 @@ using namespace GlobalMethods;
 
 void Days::Dec06( )
 {
-
 //Get the input and parse.
-   vector<vector<string>> inp = Utilities::CreateInputVectorStringVector( "Dec05.txt", ' ' );
-   //vector<vector<string>> inp = Utilities::CreateInputVectorStringVector( "Temp01.txt", ' ' );
-   //vector<vector<string>> inp = Utilities::CreateInputVectorStringVector( "Temp02.txt", ' ' );
+   vector<string> inp = Utilities::CreateInputVectorString( "Dec06.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
 
+//Parse the input string fish
+   vector<string> split = Utilities::split( inp[0], ',' );
+   vector<int> startingFish;
 
-   int ans = 0;
-   cout << ans;
+//Create the vector ofr starting fish
+   for( int i = 0; i < split.size( ); i++ )
+      startingFish.push_back( stoi( split[i] ) );
+
+//Initialize the reproducation table. This is a table that tracks days until as the key, and the number of fish as the value
+   unordered_map<long,int64_t> fishes;
+   for( int j = 0; j < 9; j++ )
+   {
+      int dayCount = 0;
+      for( int i = 0; i < startingFish.size( ); i++ )
+         if( startingFish[i] == j )
+            dayCount++;
+      fishes.insert( { j, dayCount } );
+   }
+
+//Declare the number of days to simulate
+   int days = 256;
+   for( int i = 0; i < days; i++ )
+   {
+      int64_t nOfNewFish = fishes[0];
+      fishes[0] = fishes[1];
+      fishes[1] = fishes[2];
+      fishes[2] = fishes[3];
+      fishes[3] = fishes[4];
+      fishes[4] = fishes[5];
+      fishes[5] = fishes[6];
+      fishes[6] = fishes[7] + nOfNewFish;
+      fishes[7] = fishes[8];
+      fishes[8] = nOfNewFish;
+   }
+
+//Sum up total number of fishes
+   int64_t sum = 0;
+   for( int i = 0; i < 9; i++ )
+      sum += fishes[i];
+   cout << sum;
 
 }
 
