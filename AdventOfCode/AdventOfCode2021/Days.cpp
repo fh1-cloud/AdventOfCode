@@ -2,6 +2,8 @@
 #include <fstream>
 #include <vector>
 #include <iostream>
+#include <algorithm>
+#include <cmath>
 #include <unordered_map>
 #include "Days.h"
 #include "Utilities.h"
@@ -10,6 +12,76 @@
 #include "UIntVector2D.h"
 using namespace std;
 using namespace GlobalMethods;
+
+
+
+void Days::Dec08( )
+{
+
+//Get the input and parse.
+   vector<string> inp = Utilities::CreateInputVectorString( "Dec07.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+
+}
+
+
+
+void Days::Dec07( )
+{
+
+//Get the input and parse.
+   vector<string> inp = Utilities::CreateInputVectorString( "Dec07.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+
+//Parse the input string fish
+   vector<string> split = Utilities::split( inp[0], ',' );
+   vector<int> positions;
+
+//Create the vector ofr starting fish
+   for( int i = 0; i < split.size( ); i++ )
+      positions.push_back( stoi( split[i] ) );
+
+
+   vector<int> sortedPositions = positions;
+   sort( sortedPositions.begin( ), sortedPositions.end( ) );
+
+//Calculate median
+   double median = -1;
+   if( sortedPositions.size( ) % 2 == 1 )
+      median = sortedPositions[sortedPositions.size( ) / 2];
+   else
+      median = (sortedPositions[(int)(sortedPositions.size( )/2)-1]+sortedPositions[(int)(sortedPositions.size( )/2)] )/2;
+
+//Calculate fuel
+   long fuel = 0;
+   for( int i = 0; i < positions.size( ); i++ )
+      fuel += abs( (positions[i]-median ) );
+
+   //cout << fuel;
+
+//Calculate mean. (move all crabs a small amount because fuel increases exponentially
+   long sum = 0;
+   for( int i = 0; i < positions.size( ); i++ )
+      sum += positions[i];
+   double mean = ( double ) ( ( double ) sum / ( double ) positions.size( ) );
+
+//Dont know why it needs to be floored. Depends on the number of values below or above.
+   mean = (int)(mean);
+
+//Loop over all the positions and calculate fueld to the mean..
+   long fuel2 = 0;
+   for( int i = 0; i < positions.size( ); i++ )
+   {
+      double dist = abs( positions[i]-mean);
+      fuel2 += dist*(dist+1.0)/2.0;
+   }
+
+   cout << fuel2;
+
+
+
+}
+
 
 
 void Days::Dec06( )
