@@ -10,6 +10,7 @@
 #include <cassert>
 #include <iterator>
 #include <algorithm>
+#include <unordered_set>
 
 using namespace std;
 
@@ -207,6 +208,81 @@ std::vector<std::string> GlobalMethods::Utilities::splitWhitespace( std::string 
       tokens.push_back( buf );
 
    return tokens;
+}
+
+/// <summary>
+/// Gets the union of characters in the string
+/// </summary>
+/// <param name="s1"></param>
+/// <param name="s2"></param>
+/// <returns></returns>
+std::string GlobalMethods::Utilities::get_union_string( std::string s1, std::string s2 )
+{
+//Get the unordered set
+   unordered_set<char> set = Utilities::get_union_set( s1, s2 );
+   std::stringstream ss;
+   for( const auto& elem : set )
+      ss << elem;
+
+//return string
+   return ss.str( );
+}
+
+
+/// <summary>
+/// Gets the common characters in a string
+/// </summary>
+/// <param name="s1"></param>
+/// <param name="s2"></param>
+/// <returns></returns>
+std::string GlobalMethods::Utilities::get_common_string( std::string s1, std::string s2 )
+{
+//Get the unordered set
+   unordered_set<char> set = Utilities::get_common_set( s1, s2 );
+   std::stringstream ss;
+   for( const auto& elem : set )
+      ss << elem;
+
+//return string
+   return ss.str( );
+}
+
+
+/// <summary>
+/// Gets the union of characters between the two strings.
+/// </summary>
+/// <param name=""></param>
+/// <param name=""></param>
+/// <returns></returns>
+std::unordered_set<char> GlobalMethods::Utilities::get_union_set( std::string s1, std::string s2 )
+{
+   unordered_set<char> set;
+   for( size_t i = 0; i < s1.size( ); i++ )
+      if( set.count( s1[i] ) < 1 )
+         set.insert( s1[i] );
+   for( size_t i = 0; i < s2.size( ); i++ )
+      if( set.count( s2[i] ) < 1 )
+         set.insert( s2[i] );
+
+//Return completed string
+   return set;
+}
+
+/// <summary>
+/// Gets the common characters between the two strings
+/// </summary>
+/// <param name="s1"></param>
+/// <param name="s2"></param>
+/// <returns></returns>
+std::unordered_set<char> GlobalMethods::Utilities::get_common_set( std::string s1, std::string s2 )
+{
+//Create the unordered set of the common characters
+   unordered_set<char> set;
+   for( size_t i = 0; i < s1.size( ); i++ )
+      if( s2.find( s1[i] ) > 0 )
+         set.insert( s1[i] );
+
+   return set;
 }
 
 

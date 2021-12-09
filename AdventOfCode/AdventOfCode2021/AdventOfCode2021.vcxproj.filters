@@ -45,6 +45,9 @@
     <ClCompile Include="UIntPoint.cpp">
       <Filter>Numerics</Filter>
     </ClCompile>
+    <ClCompile Include="DIgitalDisplaySignal.cpp">
+      <Filter>DayClasses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Days.h">
@@ -64,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="UIntPoint.h">
       <Filter>Numerics</Filter>
+    </ClInclude>
+    <ClInclude Include="DIgitalDisplaySignal.h">
+      <Filter>DayClasses</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

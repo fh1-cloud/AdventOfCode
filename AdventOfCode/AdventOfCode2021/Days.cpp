@@ -10,6 +10,7 @@
 #include "Submarine.h"
 #include "BingoBoard.h";
 #include "UIntVector2D.h"
+#include "DIgitalDisplaySignal.h"
 using namespace std;
 using namespace GlobalMethods;
 
@@ -19,8 +20,29 @@ void Days::Dec08( )
 {
 
 //Get the input and parse.
-   vector<string> inp = Utilities::CreateInputVectorString( "Dec07.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Dec08.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+   vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
+
+//Parse into two different strings per line..
+   vector<DigitalDisplaySignal> signals;
+
+   for( int i = 0; i < inp.size( ); i++ )
+      signals.push_back( DigitalDisplaySignal( inp[i] ) );
+
+//Count the number of 1,4,7,8
+   int count = 0;
+   for( size_t i = 0; i < signals.size( ); i++ )
+   {
+      vector<string> digitOutputValue = signals[i].GetDigitOutputValue( );
+      for( size_t j = 0; j < digitOutputValue.size( ); j++ )
+      {
+         if( digitOutputValue[j].size( ) == 2 || digitOutputValue[j].size( ) == 4 || digitOutputValue[j].size( ) == 3 || digitOutputValue[j].size( ) == 7 )
+            count++;
+      }
+   }
+
+   cout << count;
 
 }
 
