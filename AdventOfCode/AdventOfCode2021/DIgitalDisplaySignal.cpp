@@ -134,7 +134,7 @@ int DigitalDisplaySignal::GetIntegerFromString( string s )
    for( int i = 0; i < m_Translator.size( ); i++ )
    {
       string comparer = m_Translator[i];
-      string commonString = Utilities::get_common_string( s, m_Translator[i] );
+      string commonString = Utilities::get_intersection_string( s, m_Translator[i] );
       if( commonString.size( ) == s.size( ) && m_Translator[i].size( ) == s.size( ) )
       {
          return i;

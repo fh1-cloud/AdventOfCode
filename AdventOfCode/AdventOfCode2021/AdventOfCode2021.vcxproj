@@ -146,6 +146,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Days.cpp" />
     <ClCompile Include="Submarine.cpp" />
+    <ClCompile Include="ThermalVentMap.cpp" />
+    <ClCompile Include="ThermalVentMapBasin.cpp" />
     <ClCompile Include="UIntPoint.cpp" />
     <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="UIntVector2D.cpp" />
@@ -155,6 +157,8 @@
     <ClInclude Include="Days.h" />
     <ClInclude Include="DIgitalDisplaySignal.h" />
     <ClInclude Include="Submarine.h" />
+    <ClInclude Include="ThermalVentMap.h" />
+    <ClInclude Include="ThermalVentMapBasin.h" />
     <ClInclude Include="UIntPoint.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="UIntVector2D.h" />

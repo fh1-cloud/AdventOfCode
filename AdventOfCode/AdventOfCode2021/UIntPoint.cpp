@@ -1,5 +1,11 @@
 #include "UIntPoint.h"
 
+UIntPoint::UIntPoint( )
+{
+   m_X = -1;
+   m_Y = -1;
+}
+
 /// <summary>
 /// Default constructor. Initializes a point 
 /// </summary>

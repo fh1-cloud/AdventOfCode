@@ -6,6 +6,7 @@ protected:
    int m_Y;
 
 public:
+   UIntPoint( );
    UIntPoint( int const x, int const y );
    ~UIntPoint( );
 

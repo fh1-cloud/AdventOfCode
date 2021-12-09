@@ -30,9 +30,6 @@
     <ClCompile Include="Days.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Utilities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="UIntVector2D.cpp">
       <Filter>Numerics</Filter>
     </ClCompile>
@@ -48,6 +45,15 @@
     <ClCompile Include="DIgitalDisplaySignal.cpp">
       <Filter>DayClasses</Filter>
     </ClCompile>
+    <ClCompile Include="ThermalVentMap.cpp">
+      <Filter>DayClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities.cpp">
+      <Filter>DayClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="ThermalVentMapBasin.cpp">
+      <Filter>DayClasses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Days.h">
@@ -59,17 +65,23 @@
     <ClInclude Include="UIntVector2D.h">
       <Filter>Numerics</Filter>
     </ClInclude>
-    <ClInclude Include="BingoBoard.h">
-      <Filter>DayClasses</Filter>
-    </ClInclude>
-    <ClInclude Include="Submarine.h">
-      <Filter>DayClasses</Filter>
-    </ClInclude>
     <ClInclude Include="UIntPoint.h">
       <Filter>Numerics</Filter>
     </ClInclude>
+    <ClInclude Include="ThermalVentMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BingoBoard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Submarine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="DIgitalDisplaySignal.h">
-      <Filter>DayClasses</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThermalVentMapBasin.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

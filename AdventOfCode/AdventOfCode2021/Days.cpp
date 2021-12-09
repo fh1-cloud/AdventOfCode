@@ -11,8 +11,22 @@
 #include "BingoBoard.h";
 #include "UIntVector2D.h"
 #include "DIgitalDisplaySignal.h"
+#include "ThermalVentMap.h"
+#include "ThermalVentMapBasin.h"
 using namespace std;
 using namespace GlobalMethods;
+
+
+void Days::Dec10( )
+{
+//Get the input and parse.
+   vector<string> inp = Utilities::CreateInputVectorString( "Dec10.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
+
+}
+
+
 
 void Days::Dec09( )
 {
@@ -21,13 +35,41 @@ void Days::Dec09( )
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
 
+   ThermalVentMap map( inp );
+   vector<UIntPoint> p = map.GetLowPoints( );
+   vector<ThermalVentMapBasin> basins;
+   for( size_t i = 0; i < p.size( ); i++ )
+   {
+      ThermalVentMapBasin bas( map, p[i].Y( ), p[i].X( ) );
+      basins.push_back( bas );
+   }
 
+//Find the three larges basins.
+   vector<ThermalVentMapBasin> threeLargest;
+   for( int i = 0; i < 3; i++ )
+   {
+      int maxSize = 0;
+      ThermalVentMapBasin* pLarge = NULL;
+      int maxSizeIdx = 0;
+      for( size_t j = 0; j < basins.size( ); j++ )
+      {
+         int thisSize = basins[j].GetSize( );
 
+         if( maxSize < thisSize ) 
+         {
+            maxSize = thisSize;
+            pLarge = &basins[j];
+            maxSizeIdx = j;
+         }
+      }
+      threeLargest.push_back( *pLarge );
+      basins.erase( basins.begin( ) + maxSizeIdx );
+   }
+
+//Calculate the product of the sizes..
+   uint64_t ans = threeLargest[0].GetSize( ) * threeLargest[1].GetSize( ) * threeLargest[2].GetSize( );
+   cout << ans;
 }
-
-
-
-
 
 
 void Days::Dec08( )
