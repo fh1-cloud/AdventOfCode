@@ -14,15 +14,29 @@
 using namespace std;
 using namespace GlobalMethods;
 
+void Days::Dec09( )
+{
+//Get the input and parse.
+   vector<string> inp = Utilities::CreateInputVectorString( "Dec09.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
+
+
+
+}
+
+
+
+
 
 
 void Days::Dec08( )
 {
 
 //Get the input and parse.
-   //vector<string> inp = Utilities::CreateInputVectorString( "Dec08.txt" );
+   vector<string> inp = Utilities::CreateInputVectorString( "Dec08.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
-   vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
 
 //Parse into two different strings per line..
    vector<DigitalDisplaySignal> signals;
@@ -42,7 +56,15 @@ void Days::Dec08( )
       }
    }
 
-   cout << count;
+//PART 2
+   int64_t sum = 0;
+   vector<int> ans;
+   for( size_t i = 0; i < signals.size( ); i++ )
+   {
+      ans.push_back( signals[i].GetOutput( ) );
+      sum += signals[i].GetOutput( );
+   }
+   cout << sum;
 
 }
 

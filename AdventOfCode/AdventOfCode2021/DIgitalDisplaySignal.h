@@ -11,18 +11,7 @@ class DigitalDisplaySignal
 public:
    vector<string> m_SignalPatterns;
    vector<string> m_DigitOutputValue;
-   unordered_map<int, char> m_SignalMap;
-
-   /*
-   *     0
-   *   1   2
-   *     3
-   *   4   5
-   *     6
-   */ 
-
-
-
+   unordered_map<int, string> m_Translator;
 
    DigitalDisplaySignal( string );
    ~DigitalDisplaySignal( );
@@ -31,6 +20,6 @@ public:
    vector<string> GetDigitOutputValue( );
    int GetOutput( );
 
-
+   int GetIntegerFromString( string );
 };
 

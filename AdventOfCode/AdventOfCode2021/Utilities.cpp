@@ -235,10 +235,10 @@ std::string GlobalMethods::Utilities::get_union_string( std::string s1, std::str
 /// <param name="s1"></param>
 /// <param name="s2"></param>
 /// <returns></returns>
-std::string GlobalMethods::Utilities::get_common_string( std::string s1, std::string s2 )
+std::string GlobalMethods::Utilities::get_intersection_string( std::string s1, std::string s2 )
 {
 //Get the unordered set
-   unordered_set<char> set = Utilities::get_common_set( s1, s2 );
+   unordered_set<char> set = Utilities::get_intersection_set( s1, s2 );
    std::stringstream ss;
    for( const auto& elem : set )
       ss << elem;
@@ -274,13 +274,24 @@ std::unordered_set<char> GlobalMethods::Utilities::get_union_set( std::string s1
 /// <param name="s1"></param>
 /// <param name="s2"></param>
 /// <returns></returns>
-std::unordered_set<char> GlobalMethods::Utilities::get_common_set( std::string s1, std::string s2 )
+std::unordered_set<char> GlobalMethods::Utilities::get_intersection_set( std::string s1, std::string s2 )
 {
 //Create the unordered set of the common characters
    unordered_set<char> set;
-   for( size_t i = 0; i < s1.size( ); i++ )
-      if( s2.find( s1[i] ) > 0 )
-         set.insert( s1[i] );
+
+//Find the longest string..
+   if( s1.size( ) >= s2.size( ) )
+   {
+      for( size_t i = 0; i < s1.size( ); i++ )
+         if( s2.find( s1[i] ) != std::string::npos )
+            set.insert( s1[i] );
+   }
+   else
+   {
+      for( size_t i = 0; i < s2.size( ); i++ )
+         if( s1.find( s2[i] ) != std::string::npos )
+            set.insert( s2[i] );
+   }
 
    return set;
 }

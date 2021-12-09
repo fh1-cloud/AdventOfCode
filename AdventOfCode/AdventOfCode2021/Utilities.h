@@ -25,9 +25,9 @@ namespace GlobalMethods
       static std::vector<std::string> splitWhitespace( std::string );
 
       static std::unordered_set<char> get_union_set( std::string, std::string );
-      static std::unordered_set<char> get_common_set( std::string, std::string );
+      static std::unordered_set<char> get_intersection_set( std::string, std::string );
       static std::string get_union_string( std::string, std::string );
-      static std::string get_common_string( std::string, std::string );
+      static std::string get_intersection_string( std::string, std::string );
    };
 
 /*TEMPLATE IMPLEMENTATIONS*/

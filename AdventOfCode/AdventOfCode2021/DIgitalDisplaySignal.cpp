@@ -22,20 +22,19 @@ DigitalDisplaySignal::DigitalDisplaySignal( string inp )
 
 
 //First, find the one entry that is in 7, but not in 1. Thats the top part. Only if it contains 1 or 7..
-   unordered_map<int, string> stringMap; //A map of the strings with corresponding number.
 
    for( int i = 0; i < m_SignalPatterns.size( ); i++ )
       if( m_SignalPatterns[i].size( ) == 2 )
-         stringMap.insert( { 1, m_SignalPatterns[i] } );
+         m_Translator.insert( { 1, m_SignalPatterns[i] } );
       else if( m_SignalPatterns[i].size( ) == 3 )
-         stringMap.insert( { 7, m_SignalPatterns[i] } );
+         m_Translator.insert( { 7, m_SignalPatterns[i] } );
       else if( m_SignalPatterns[i].size( ) == 4 )
-         stringMap.insert( { 4, m_SignalPatterns[i] } );
+         m_Translator.insert( { 4, m_SignalPatterns[i] } );
       else if( m_SignalPatterns[i].size( ) == 7 )
-         stringMap.insert( { 8, m_SignalPatterns[i] } );
+         m_Translator.insert( { 8, m_SignalPatterns[i] } );
 
 //The union between 4 and 7. The string with length 5 that has 7 entries after union with 4 and 7 is number 2.
-   string fourSevenUnion = Utilities::get_union_string( stringMap[4], stringMap[7] );
+   string fourSevenUnion = Utilities::get_union_string( m_Translator[4], m_Translator[7] );
    vector<string> candidates5;
    for( size_t i = 0; i < m_SignalPatterns.size( ); i++ )
       if( m_SignalPatterns[i].size( ) == 5 )
@@ -45,7 +44,7 @@ DigitalDisplaySignal::DigitalDisplaySignal( string inp )
    {
       if( Utilities::get_union_string( candidates5[i], fourSevenUnion ).size( ) == 7 )
       {
-         stringMap.insert( { 2, candidates5[i] } );
+         m_Translator.insert( { 2, candidates5[i] } );
          candidates5.erase( candidates5.begin( ) + i );
       }
    }
@@ -53,15 +52,15 @@ DigitalDisplaySignal::DigitalDisplaySignal( string inp )
 //If the union between 7 and the remaining candidates with 5 entries is still 5, it has to be the number 3.
    for( size_t i = 0; i < candidates5.size( ); i++ )
    {
-      if( Utilities::get_union_string( candidates5[i], stringMap[7] ).size( ) == 5 )
+      if( Utilities::get_union_string( candidates5[i], m_Translator[7] ).size( ) == 5 )
       {
-         stringMap.insert( { 3, candidates5[i] } );
+         m_Translator.insert( { 3, candidates5[i] } );
          candidates5.erase( candidates5.begin( ) + i );
       }
    }
 
 //The remaining one with 5 entries have to be 5.
-   stringMap.insert( { 5, candidates5[0] } );
+   m_Translator.insert( { 5, candidates5[0] } );
 
 //Three candidates left with length 6.
    vector<string> candidates6;
@@ -73,9 +72,9 @@ DigitalDisplaySignal::DigitalDisplaySignal( string inp )
 //The union between 1 and 6 should have length 7.
    for( size_t i = 0; i < candidates6.size( ); i++ )
    {
-      if( Utilities::get_union_string( candidates6[i], stringMap[1] ).size( ) == 7 )
+      if( Utilities::get_union_string( candidates6[i], m_Translator[1] ).size( ) == 7 )
       {
-         stringMap.insert( { 6, candidates6[i] } );
+         m_Translator.insert( { 6, candidates6[i] } );
          candidates6.erase( candidates6.begin( ) + i );
       }
    }
@@ -83,35 +82,15 @@ DigitalDisplaySignal::DigitalDisplaySignal( string inp )
 //The union between 5 and 9 should have length 6
    for( size_t i = 0; i < candidates6.size( ); i++ )
    {
-      if( Utilities::get_union_string( candidates6[i], stringMap[5] ).size( ) == 6 )
+      if( Utilities::get_union_string( candidates6[i], m_Translator[5] ).size( ) == 6 )
       {
-         stringMap.insert( { 9, candidates6[i] } );
+         m_Translator.insert( { 9, candidates6[i] } );
          candidates6.erase( candidates6.begin( ) + i );
       }
    }
 
 //The remaining number is 0..
-   stringMap.insert( { 0, candidates6[0] } );
-
-
-   double test1 = 0.0;
-
-//Deduce whats what.. indexes
-   /*
-   *     0
-   *   1   2
-   *     3
-   *   4   5
-   *     6
-   */ 
-
-
-
-
-
-
-
-
+   m_Translator.insert( { 0, candidates6[0] } );
 }
 
 DigitalDisplaySignal::~DigitalDisplaySignal( )
@@ -128,9 +107,39 @@ vector<string> DigitalDisplaySignal::GetDigitOutputValue( )
    return m_DigitOutputValue;
 }
 
+/// <summary>
+/// Uses the translator to return the map
+/// </summary>
+/// <returns></returns>
 int DigitalDisplaySignal::GetOutput( )
 {
-   return 0;
+   stringstream s;
+   for( size_t i = 0; i < m_DigitOutputValue.size( ); i++ )
+   {
+      int ret = GetIntegerFromString( m_DigitOutputValue[i] );
+      s << ret;
+   }
 
+//parse to integer and return.
+   return stoi( s.str( ) );
+}
 
+/// <summary>
+/// Gets the integer value from the passed string
+/// </summary>
+/// <param name=""></param>
+/// <returns></returns>
+int DigitalDisplaySignal::GetIntegerFromString( string s )
+{
+   for( int i = 0; i < m_Translator.size( ); i++ )
+   {
+      string comparer = m_Translator[i];
+      string commonString = Utilities::get_common_string( s, m_Translator[i] );
+      if( commonString.size( ) == s.size( ) && m_Translator[i].size( ) == s.size( ) )
+      {
+         return i;
+      }
+   }
+//If the code reached this point, it should crash
+   throw new exception( );
 }
