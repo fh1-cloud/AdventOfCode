@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <cmath>
 #include <unordered_map>
+#include <stack>
 #include "Days.h"
 #include "Utilities.h"
 #include "Submarine.h"
@@ -13,8 +14,23 @@
 #include "DIgitalDisplaySignal.h"
 #include "ThermalVentMap.h"
 #include "ThermalVentMapBasin.h"
+
 using namespace std;
 using namespace GlobalMethods;
+
+
+
+void Days::Dec11( )
+{
+//Get the input and parse.
+   vector<string> inp = Utilities::CreateInputVectorString( "Dec11.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
+
+
+
+
+}
 
 
 void Days::Dec10( )
@@ -23,6 +39,77 @@ void Days::Dec10( )
    vector<string> inp = Utilities::CreateInputVectorString( "Dec10.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
+
+//DEclare a map over the matchers that have to line up.
+   unordered_map<char, char> matcherp1( { { '}', '{' }, { ')', '(' }, { ']', '[' }, { '>', '<' } } );
+   unordered_map<char, char> matcherp2( { { '{', '}' }, { '(', ')' }, { '[', ']' }, { '<', '>' } } );
+   //unordered_map<char, int> pointMapp1( { { ')', 3 }, { ']', 57 }, { '}', 1197 }, { '>', 25137 } } );
+   unordered_map<char, int> pointMapp2( { { ')', 1 }, { ']', 2 }, { '}', 3 }, { '>', 4 } } );
+
+//Initialize vector of scores for p2
+   vector<uint64_t> scores;
+   for( size_t i = 0; i < inp.size( ); i++ )
+   {
+   //Create a stack for this line. Insert starting elements in to the stack, and when a closing character occurs it has to be the last one inserted in the stack.
+      stack<char> stack;
+      bool isCorrupted = false;
+      for( size_t j = 0; j < inp[i].size( ); j++ )
+      {
+      //Unpack this character
+         char thisChar = inp[i][j];
+
+      //If this character is a starting character, add it to the stack as last inserted
+         if( thisChar == '(' || thisChar == '[' || thisChar == '{' || thisChar == '<' )
+            stack.push( thisChar );
+         else //The character is a closing character. Check if it matches the one previously entered and not popped. If it does not match the opposite, it cannot be a correctly parsed string
+         {
+            char p = stack.top( );
+            stack.pop( );
+
+         //The removed entry has to be a match with the last one pushed. If it does not match, the p is the corrupted value.
+            if( p != matcherp1[thisChar] )
+               isCorrupted = true;
+         }
+      //If it is corrupted, no need to continue parsing this string
+         if( isCorrupted )
+         {
+         //Calculate points for part 1 here.
+            break;
+         }
+
+      } //End line read
+
+   //If the line is not corrupted so far, we have accumulated the characters that didnt have its pair removed in the stack.
+   //loop through the stack and complete and complete with the opposite pair of what is in the stack.
+      if( !isCorrupted )
+      {
+      //Initialize the score for this line.
+         uint64_t thisScore = 0;
+
+      //Calculate the score for the remaining entries in the list.
+         while( stack.size( ) > 0 )
+         {
+         //Find the character that is missing.
+            char opposite = matcherp2[stack.top( )]; 
+
+         //Calculate the score for adding this missing character
+            thisScore = thisScore * 5 + pointMapp2[opposite];
+
+         //Remove this entry from the stack.
+            stack.pop( );
+         }
+
+      //Add to the vector of scores..
+         scores.push_back( thisScore );
+      }
+   }
+
+//Sort the score vector..
+   sort( scores.begin( ), scores.end( ) );
+
+//Get the middle score..
+   uint64_t middleScore = scores[( int ) ( scores.size( ) / 2 ) ];
+   cout << middleScore << endl;
 
 }
 
