@@ -11,8 +11,8 @@ using namespace std;
 /// <returns></returns>
 int main( )
 {
-   GlobalMethods::Utilities::CreateHeader( 10 );
-   Days::Dec10( );
+   GlobalMethods::Utilities::CreateHeader( 12 );
+   Days::Dec12( );
 
    cout << "\n";
    cout << "\n";

@@ -14,9 +14,21 @@
 #include "DIgitalDisplaySignal.h"
 #include "ThermalVentMap.h"
 #include "ThermalVentMapBasin.h"
+#include "DumboOctopus.h"
 
 using namespace std;
 using namespace GlobalMethods;
+
+
+void Days::Dec12( )
+{
+//Get the input and parse.
+   vector<string> inp = Utilities::CreateInputVectorString( "Dec12.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp03.txt" );
+
+}
 
 
 
@@ -26,11 +38,101 @@ void Days::Dec11( )
    vector<string> inp = Utilities::CreateInputVectorString( "Dec11.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp03.txt" );
 
+//Create all the octopi..
+   unordered_map<int, unordered_map<int, DumboOctopus*>> octopi;
+   for( size_t i = 0; i < inp.size( ); i++ )
+   {
+      unordered_map<int, DumboOctopus*> rowMap;
+      for( size_t j = 0; j < inp[i].size( ); j++ )
+      {
+         int val = stoi( string(1, inp[i][j]) );
+         DumboOctopus* c = new DumboOctopus( i, j, val );
+         rowMap.insert( { j, c } );
+      }
+      octopi.insert( { i, rowMap } );
+   }
 
+//Create the number of flashes..
+   uint64_t* nOfFlashes = new uint64_t( 0 );
 
+//Declare the number of flashes this turn..
+   uint64_t* nOfFlashesThisTurn = new uint64_t( 0 );
 
+//Declare the sync time
+   int syncTime = -1;
+
+//Print state before..
+   cout << "Initial state:\n";
+   DumboOctopus::PrintState( octopi );
+
+   int nSteps = 1000;
+   for( int i = 0; i < nSteps; i++ )
+   {
+   //Declare the vector of all the octopi that should flash..
+      vector<DumboOctopus*>* shouldFlashList = new vector<DumboOctopus*>( );
+
+   //Reset counter for number of flashes this turn
+      ( *nOfFlashesThisTurn ) = 0;
+
+   //Reset all the octopi and increment..
+      for( size_t i = 0; i < octopi.size( ); i++ )
+      {
+         for( size_t j = 0; j < octopi[i].size( ); j++ )
+         {
+         //Find this octopus
+            DumboOctopus* thisOctopus = octopi[i][j];
+
+         //Reset status
+            thisOctopus->Reset( );
+
+         //Increment.
+            bool thisShouldFlash = thisOctopus->Increment( );
+
+         //If this went over, it should flash. Collect it in the list.
+            if( thisShouldFlash )
+               shouldFlashList -> push_back( thisOctopus );
+         }
+      }
+
+   //Start by flashing the octopi..
+      while( shouldFlashList -> size( ) > 0 )
+      {
+         (*shouldFlashList)[0]->Flash( shouldFlashList, octopi, nOfFlashes, nOfFlashesThisTurn );
+         ( *nOfFlashes )++;
+         ( *nOfFlashesThisTurn )++;
+      }
+
+   //Print status after increment..
+      cout << "Number of flashes:" << ( *nOfFlashes ) << endl;
+      cout << "State after " << i+1 << +" steps:" << endl;
+      DumboOctopus::PrintState( octopi );
+
+   //Clean up the list allocated on the heap.
+      delete shouldFlashList;
+
+   //Break if number of flashes this turn is equal to 100;
+      if( ( *nOfFlashesThisTurn ) == 100 )
+      {
+         syncTime = i+1;
+         break;
+      }
+   }
+
+//Print answer
+   cout << "Time when they all sync: " << syncTime;
+
+//Clean up all the octopi allocated on the heap..
+   delete nOfFlashesThisTurn;
+   delete nOfFlashes;
+   for( size_t i = 0; i < octopi.size( ); i++ )
+      for( size_t j = 0; j < octopi[i].size( ); j++ )
+         delete octopi[i][j];
 }
+
+
+
 
 
 void Days::Dec10( )
