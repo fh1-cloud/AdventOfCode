@@ -51,10 +51,13 @@
     <ClCompile Include="ThermalVentMapBasin.cpp">
       <Filter>DayClasses</Filter>
     </ClCompile>
-    <ClCompile Include="DumboOctopus.cpp">
+    <ClCompile Include="Utilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Utilities.cpp">
+    <ClCompile Include="DumboOctopus.cpp">
+      <Filter>DayClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Cave.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -87,6 +90,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DumboOctopus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cave.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

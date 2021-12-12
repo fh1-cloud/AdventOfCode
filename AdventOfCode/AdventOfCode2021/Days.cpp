@@ -15,9 +15,22 @@
 #include "ThermalVentMap.h"
 #include "ThermalVentMapBasin.h"
 #include "DumboOctopus.h"
+#include "Cave.h"
 
 using namespace std;
 using namespace GlobalMethods;
+
+
+void Days::Dec13( )
+{
+//Get the input and parse.
+   vector<string> inp = Utilities::CreateInputVectorString( "Dec13.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp03.txt" );
+
+
+}
 
 
 void Days::Dec12( )
@@ -27,6 +40,51 @@ void Days::Dec12( )
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp03.txt" );
+
+   unordered_set<string> caveString;
+   for( size_t i = 0; i < inp.size( ); i++ )
+   {
+   //Split line by -
+      vector<string> spl = Utilities::split( inp[i], '-' );
+
+   //Add if they arent in the list of string..
+      for( size_t j = 0; j < 2; j++ )
+         if( caveString.find( spl[j] ) == caveString.end( ) )
+            caveString.insert( spl[j] );
+   }
+
+//Create the caves as objects..
+   unordered_map<string, Cave*> caves;
+   Cave* pStart = NULL;
+   for( string s : caveString )
+   {
+      Cave* pC = new Cave( s );
+      caves.insert( { s, pC } );
+      if( s == "start" )
+         pStart = pC;
+   }
+
+//Create the connections
+   for( string s : inp )
+   {
+      vector<string> spl = Utilities::split( s, '-' );
+      caves[spl[0]]->AddConnection( caves[spl[1]] );
+      caves[spl[1]]->AddConnection( caves[spl[0]] );
+   }
+
+   int* pCounter = new int( 0 );
+   unordered_set<Cave*> visited;
+   bool p2 = true;
+   Cave* pVIsitedTwice = nullptr;
+
+   Cave::CountPaths( pStart, visited, pVIsitedTwice, pCounter, p2 );
+
+//Start traversing from the cave called start.
+   cout << ( *pCounter ) << endl;
+
+//Delete the caves..
+   delete pCounter;
+   caves.clear( );
 
 }
 

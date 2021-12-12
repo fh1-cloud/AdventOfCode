@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BingoBoard.cpp" />
+    <ClCompile Include="Cave.cpp" />
     <ClCompile Include="DIgitalDisplaySignal.cpp" />
     <ClCompile Include="DumboOctopus.cpp" />
     <ClCompile Include="main.cpp" />
@@ -155,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BingoBoard.h" />
+    <ClInclude Include="Cave.h" />
     <ClInclude Include="Days.h" />
     <ClInclude Include="DIgitalDisplaySignal.h" />
     <ClInclude Include="DumboOctopus.h" />
