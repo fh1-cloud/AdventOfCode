@@ -58,7 +58,7 @@
       <Filter>DayClasses</Filter>
     </ClCompile>
     <ClCompile Include="Cave.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>DayClasses</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -20,6 +20,20 @@
 using namespace std;
 using namespace GlobalMethods;
 
+
+void Days::Dec14( )
+{
+   //Get the input and parse.
+   vector<string> inp = Utilities::CreateInputVectorString( "Dec14.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp03.txt" );
+
+
+   cout << 0 << endl;
+}
+
+
 void Days::Dec13( )
 {
    //Get the input and parse.
@@ -30,7 +44,7 @@ void Days::Dec13( )
 
 
 //parse input.
-   vector<pair<GlobalMethods::Utilities::FoldAlong,int>> folds;
+   vector<pair<GlobalMethods::Utilities::FoldAxis,int>> folds;
    vector<UIntPoint> coords;
    int rowCount = -1;
    int colCount = -1;
@@ -43,13 +57,13 @@ void Days::Dec13( )
          vector<string> spl = Utilities::split( i, ' ' );
          vector<string> spl2 = Utilities::split( spl[2],'=' );
 
-         Utilities::FoldAlong fa = Utilities::FoldAlong::X;
+         Utilities::FoldAxis fa = Utilities::FoldAxis::X;
          if( spl2[0][0] == 'y' )
-            fa = Utilities::FoldAlong::Y;
+            fa = Utilities::FoldAxis::X;
          else if( spl2[0][0] == 'x' )
-            fa = Utilities::FoldAlong::X;
+            fa = Utilities::FoldAxis::Y;
 
-         pair<Utilities::FoldAlong, int> thisP( fa, stoi( spl2[1] ) );
+         pair<Utilities::FoldAxis, int> thisP( fa, stoi( spl2[1] ) );
          folds.push_back( thisP );
       }
       else
@@ -93,13 +107,13 @@ void Days::Dec13( )
    for( int i = 0; i < flips; i++ )
    {
    //Unpack operation..
-      Utilities::FoldAlong thisFold = folds[i].first;
+      Utilities::FoldAxis thisFold = folds[i].first;
       int thisFoldCord = folds[i].second;
 
    //Extract submatrices
       vector<vector<int>> subMatrixFlip;
       vector<vector<int>> subMatrixOrg;
-      if( thisFold == Utilities::FoldAlong::X ) //Vertical line fold
+      if( thisFold == Utilities::FoldAxis::Y ) //Vertical line fold
       {
       //Find the dimensions of the new array. The right hand part might be smaller than the left hand part because the number of values in the array might be even.
          int leftColDim = thisFoldCord;
@@ -108,7 +122,7 @@ void Days::Dec13( )
          subMatrixOrg = Utilities::MatrixExtract( canvas, 0, 0, canvas.size( ), leftColDim );
          subMatrixFlip = Utilities::MatrixExtract( canvas, 0, thisFoldCord + 1 , canvas.size( ), rightColDim );
       }
-      else if( thisFold == Utilities::FoldAlong::Y ) //Horizontal line fold
+      else if( thisFold == Utilities::FoldAxis::X ) //Horizontal line fold
       {
       //Find the dimension of the new array. The bottom part might be smaller than the top part.
          int topRowDim = thisFoldCord;
@@ -139,7 +153,7 @@ void Days::Dec13( )
          if( j > 0 )
             visible++;
 
-   cout << visible;
+   cout << "Number of visible symbols: " << visible << endl;
 
 }
 

@@ -253,16 +253,16 @@ std::string GlobalMethods::Utilities::get_intersection_string( std::string s1, s
 /// <param name="arr">The matrix to flip</param>
 /// <param name="flipDir">The axis of the flip</param>
 /// <returns></returns>
-std::vector<std::vector<int>> GlobalMethods::Utilities::MatrixFlip( std::vector<std::vector<int>> arr, GlobalMethods::Utilities::FoldAlong const flipDir )
+std::vector<std::vector<int>> GlobalMethods::Utilities::MatrixFlip( std::vector<std::vector<int>> arr, GlobalMethods::Utilities::FoldAxis const flipDir )
 {
 
-//The fold is along x. This means that the fold is paralell to the Y axis and we need to reverse all the rows.
+//FoldAxis is Y, this means that the axis is paralell to the Y-axis
    vector<vector<int>> newVec;
-   if( flipDir == Utilities::FoldAlong::X )
+   if( flipDir == Utilities::FoldAxis::Y )
    {
       for( int i = 0; i < arr.size( ); i++ )
       {
-      //Reverse paralell to the x direction
+      //Reverse across Y axis
          vector<int> reversed;
          for( int j = arr[i].size( ) - 1; j >= 0; j-- )
             reversed.push_back( arr[i][j] );
@@ -271,7 +271,7 @@ std::vector<std::vector<int>> GlobalMethods::Utilities::MatrixFlip( std::vector<
          newVec.push_back( reversed );
       }
    }
-   if( flipDir == Utilities::FoldAlong::Y )
+   if( flipDir == Utilities::FoldAxis::X )
    {
       for( int i = arr.size( ) - 1; i >= 0; i-- )
       {
