@@ -253,37 +253,111 @@ std::string GlobalMethods::Utilities::get_intersection_string( std::string s1, s
 /// <param name="arr">The matrix to flip</param>
 /// <param name="flipDir">The axis of the flip</param>
 /// <returns></returns>
-std::vector<std::vector<int>> GlobalMethods::Utilities::MatrixFlip( std::vector<std::vector<int>> arr, FlipDirection flipDir )
+std::vector<std::vector<int>> GlobalMethods::Utilities::MatrixFlip( std::vector<std::vector<int>> arr, GlobalMethods::Utilities::FoldAlong const flipDir )
 {
-    return std::vector<std::vector<int>>( );
-}
 
-std::vector<std::vector<int>> GlobalMethods::Utilities::MatrixExtract( std::vector<std::vector<int>> arr, int xDim, int yDim )
-{
-    return std::vector<std::vector<int>>( );
-}
+//The fold is along x. This means that the fold is paralell to the Y axis and we need to reverse all the rows.
+   vector<vector<int>> newVec;
+   if( flipDir == Utilities::FoldAlong::X )
+   {
+      for( int i = 0; i < arr.size( ); i++ )
+      {
+      //Reverse paralell to the x direction
+         vector<int> reversed;
+         for( int j = arr[i].size( ) - 1; j >= 0; j-- )
+            reversed.push_back( arr[i][j] );
 
-std::vector<std::vector<int>> GlobalMethods::Utilities::MatrixAdd( std::vector<std::vector<int>> const& m1, std::vector<std::vector<int>> const& m2 )
-{
-//Check the size of the matrices
-   if( m1.size( ) != m2.size( ) || m1[0].size( ) != m2[0].size( ) )
-      throw new exception( "WRONG DIMENSIONS" );
-
-//Add matrices together
-   vector<vector<int>> result;
-   for( size_t i = 0; i < m1.size( ); i++ )
-      for( size_t j = 0; j < m2.size( ); j++ )
-         result[i][j] = m1[i][j] + m2[i][j];
-
-   return result;
+      //Add the vector..
+         newVec.push_back( reversed );
+      }
+   }
+   if( flipDir == Utilities::FoldAlong::Y )
+   {
+      for( int i = arr.size( ) - 1; i >= 0; i-- )
+      {
+         vector<int> thisRow;
+         for( int j = 0; j < arr[i].size( ); j++ )
+         {
+            thisRow.push_back( arr[i][j] );
+         }
+         newVec.push_back( thisRow );
+      }
+   }
+//Return the newly created vector..
+   return newVec;
 }
 
 /// <summary>
-/// Prints the folded matrix to the main window. The pund symbol for any integer larger than 0. Zero values represented as dots.
+/// Extract a submatrix from the input matrix
 /// </summary>
-/// <param name="mat"></param>
+/// <param name="arr">The matrix to be subtracted from</param>
+/// <param name="rowIdxStart">The row index where we have to start.</param>
+/// <param name="colIdxStart">The column index in the input matrix where we start our submatrix</param>
+/// <param name="nRows">The number of rows to be extracted</param>
+/// <param name="nCols">The number of columns to be </param>
 /// <returns></returns>
-std::vector<std::vector<int>> GlobalMethods::Utilities::MatrixPrint( std::vector<std::vector<int>> mat, char const& valueChar, char const& zeroChar )
+std::vector<std::vector<int>> GlobalMethods::Utilities::MatrixExtract( std::vector<std::vector<int>> arr, int const rowIdxStart, int const colIdxStart, int const nRows, int const nCols )
+{
+//Initialize the new array
+   vector<vector<int>> newArr;
+   for( int i = rowIdxStart; i < rowIdxStart + nRows; i++ )
+   {
+   //Initialize this row and loop through from the startIndexes.
+      vector<int> thisRow;
+      for( int j = colIdxStart; j < colIdxStart + nCols; j++ )
+         thisRow.push_back( arr[i][j] );
+
+   //Add this row to the returning vector
+      newArr.push_back( thisRow );
+   }
+   return newArr;
+}
+
+/// <summary>
+/// Adds two matrices together THis assumes a shift of the indexes to add together. IF A SHIFT IS EMPLOYED M1 IS ALWAYS ASSUMED TO BE LARGER THAN M2
+/// </summary>
+/// <param name="m1">THe left hans side matrix</param>
+/// <param name="m2">The right hand side matrix</param>
+/// <param name="deltaX">The shift in the x direction. columns. This is the sideways shift of the columns measured in number of indexes. i.e if dX=2 -> mr[0][2] = m1[0][2]+m2[0][0]</param>
+/// <param name="deltaY">The shift in the y direction. rows. See comment above</param>
+/// <returns></returns>
+std::vector<std::vector<int>> GlobalMethods::Utilities::MatrixAdd( std::vector<std::vector<int>> const& m1, std::vector<std::vector<int>> const& m2, int const deltaX, int const deltaY )
+{
+//Declare result
+   vector<vector<int>> result;
+
+//Loop over all the rows.
+   for( size_t i = 0; i < m1.size( ); i++ )
+   {
+      vector<int> thisRow;
+
+   //Loop over all the columns
+      for( size_t j = 0; j < m1[i].size( ); j++ )
+      {
+      //Calculate the shift.
+         int m2RowIdx = i - deltaY;
+         int m2ColIdx = j - deltaX;
+         bool addM2 = true;
+
+         if( m2RowIdx < 0 || m2ColIdx < 0 )
+            addM2 = false;
+
+         if( !addM2 )
+            thisRow.push_back( m1[i][j] );
+         else
+            thisRow.push_back( m1[i][j] + m2[m2RowIdx][m2ColIdx] );
+      }
+      result.push_back( thisRow );
+   }
+   return result;
+}
+
+///// <summary>
+///// Prints the folded matrix to the main window. The pund symbol for any integer larger than 0. Zero values represented as dots.
+///// </summary>
+///// <param name="mat"></param>
+///// <returns></returns>
+void GlobalMethods::Utilities::MatrixPrint( std::vector<std::vector<int>> mat, char const& valueChar, char const& zeroChar )
 {
    for( size_t i = 0; i < mat.size( ); i++ )
    {

@@ -29,12 +29,12 @@ namespace GlobalMethods
       static std::string get_union_string( std::string, std::string );
       static std::string get_intersection_string( std::string, std::string );
 
-      enum FlipDirection { X, Y };
+      enum class FoldAlong { X, Y };
 
-      static std::vector<std::vector<int>> MatrixFlip( std::vector<std::vector<int>> arr, FlipDirection flipDir );
-      static std::vector<std::vector<int>> MatrixExtract( std::vector<std::vector<int>> arr, int xDim, int yDim );
-      static std::vector<std::vector<int>> MatrixAdd( std::vector<std::vector<int>> const& m1, std::vector<std::vector<int>> const& m2 );
-      static std::vector<std::vector<int>> MatrixPrint( std::vector<std::vector<int>>, char const& valueChar, char const& zeroChar );
+      static std::vector<std::vector<int>> MatrixFlip( std::vector<std::vector<int>> arr, FoldAlong const flipDir );
+      static std::vector<std::vector<int>> MatrixExtract( std::vector<std::vector<int>> arr, int const rowStart, int const colStart, int const nRows, int const nCols );
+      static std::vector<std::vector<int>> MatrixAdd( std::vector<std::vector<int>> const& m1, std::vector<std::vector<int>> const& m2, int const deltaX, int const deltaY );
+      static void MatrixPrint( std::vector<std::vector<int>>, char const& valueChar, char const& zeroChar );
 
 
    };

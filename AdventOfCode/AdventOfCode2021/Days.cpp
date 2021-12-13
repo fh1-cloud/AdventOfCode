@@ -30,9 +30,10 @@ void Days::Dec13( )
 
 
 //parse input.
-   vector<pair<Utilities::FlipDirection,int>> folds;
+   vector<pair<GlobalMethods::Utilities::FoldAlong,int>> folds;
    vector<UIntPoint> coords;
-   int maxSize = -1;
+   int rowCount = -1;
+   int colCount = -1;
    for( auto i : inp )
    {
       if( i.size( ) == 0 )
@@ -42,13 +43,13 @@ void Days::Dec13( )
          vector<string> spl = Utilities::split( i, ' ' );
          vector<string> spl2 = Utilities::split( spl[2],'=' );
 
-         Utilities::FlipDirection fa = Utilities::FlipDirection::X;
+         Utilities::FoldAlong fa = Utilities::FoldAlong::X;
          if( spl2[0][0] == 'y' )
-            fa = Utilities::FlipDirection::Y;
+            fa = Utilities::FoldAlong::Y;
          else if( spl2[0][0] == 'x' )
-            fa = Utilities::FlipDirection::X;
+            fa = Utilities::FoldAlong::X;
 
-         pair<Utilities::FlipDirection, int> thisP( fa, stoi( spl2[1] ) );
+         pair<Utilities::FoldAlong, int> thisP( fa, stoi( spl2[1] ) );
          folds.push_back( thisP );
       }
       else
@@ -57,45 +58,88 @@ void Days::Dec13( )
          vector<string> spl = Utilities::split( i, ',' );
          int x = stoi( spl[0] );
          int y = stoi( spl[1] );
-         int thisMax = max( x, y );
-         if( thisMax > maxSize )
-            maxSize = thisMax;
+         if( x > colCount )
+            colCount = x;
+         if( y > rowCount )
+            rowCount = y;
 
       //Add point to the vector of points.
          UIntPoint p( x, y );
          coords.push_back( p );
       }
    }
+//Add one to the count because it is zero indexed
+   rowCount += 1;
+   colCount += 1;
 
 //Create the matrix.
-   vector<vector<bool>> canvas;
-   for( size_t i = 0; i < maxSize; i++ )
+   vector<vector<int>> canvas;
+   for( size_t i = 0; i < rowCount; i++ )
    {
-      vector<bool> thisVec;
-      for( size_t j = 0; j < maxSize; j++ )
-      {
-         thisVec.push_back( false );
-      }
+   //Fill the canvas with zeros..
+      vector<int> thisVec;
+      for( size_t j = 0; j < colCount; j++ )
+         thisVec.push_back( 0 );
       canvas.push_back( thisVec );
    }
 
 //Fill inn the points of this matrix from the coordinate list.
    for( size_t i = 0; i < coords.size( ); i++ )
-      canvas[coords[i].Y( )][coords[i].X( )] = true;
+      canvas[coords[i].Y( )][coords[i].X( )] = 1;
 
 //Loop over all the instructions and employ.
-   //int flips = folds.size( );
-   int flips = 1;
+   int flips = folds.size( );
+   //int flips = 1;
    for( int i = 0; i < flips; i++ )
    {
+   //Unpack operation..
+      Utilities::FoldAlong thisFold = folds[i].first;
+      int thisFoldCord = folds[i].second;
+
    //Extract submatrices
+      vector<vector<int>> subMatrixFlip;
+      vector<vector<int>> subMatrixOrg;
+      if( thisFold == Utilities::FoldAlong::X ) //Vertical line fold
+      {
+      //Find the dimensions of the new array. The right hand part might be smaller than the left hand part because the number of values in the array might be even.
+         int leftColDim = thisFoldCord;
+         int rightColDim = canvas[0].size( ) - thisFoldCord - 1;
 
+         subMatrixOrg = Utilities::MatrixExtract( canvas, 0, 0, canvas.size( ), leftColDim );
+         subMatrixFlip = Utilities::MatrixExtract( canvas, 0, thisFoldCord + 1 , canvas.size( ), rightColDim );
+      }
+      else if( thisFold == Utilities::FoldAlong::Y ) //Horizontal line fold
+      {
+      //Find the dimension of the new array. The bottom part might be smaller than the top part.
+         int topRowDim = thisFoldCord;
+         int bottomRowDim = canvas.size( ) - thisFoldCord - 1;
+
+         subMatrixOrg = Utilities::MatrixExtract( canvas, 0, 0, topRowDim, canvas[0].size( ) );
+         subMatrixFlip = Utilities::MatrixExtract( canvas, thisFoldCord + 1, 0, bottomRowDim, canvas[0].size( ) );
+      }
    //Flip the one at bottom/right
+      vector<vector<int>> flipped = Utilities::MatrixFlip( subMatrixFlip, thisFold );
 
-   //Add matrices
+   //Calculate the shift.
+      int xShift = subMatrixOrg[0].size( ) - subMatrixFlip[0].size( );
+      int yShift = subMatrixOrg.size( ) - subMatrixFlip.size( );
+
+   //Add matrices together.
+      canvas = Utilities::MatrixAdd( subMatrixOrg, flipped, xShift, yShift );
 
    }
 
+//Print the new canvas.
+   Utilities::MatrixPrint( canvas, '#', '.' );
+
+//Count number of dots visible
+   int visible = 0;
+   for( auto i : canvas )
+      for( auto j : i )
+         if( j > 0 )
+            visible++;
+
+   cout << visible;
 
 }
 
