@@ -31,8 +31,10 @@ namespace GlobalMethods
 
       enum FlipDirection { X, Y };
 
-      static std::vector<std::vector<int>> Flip( std::vector<std::vector<int>> arr, FlipDirection flipDir );
-      static std::vector<std::vector<int>> ExtractMatrix( std::vector<std::vector<int>> arr, int xDim, int yDim );
+      static std::vector<std::vector<int>> MatrixFlip( std::vector<std::vector<int>> arr, FlipDirection flipDir );
+      static std::vector<std::vector<int>> MatrixExtract( std::vector<std::vector<int>> arr, int xDim, int yDim );
+      static std::vector<std::vector<int>> MatrixAdd( std::vector<std::vector<int>> const& m1, std::vector<std::vector<int>> const& m2 );
+      static std::vector<std::vector<int>> MatrixPrint( std::vector<std::vector<int>>, char const& valueChar, char const& zeroChar );
 
 
    };

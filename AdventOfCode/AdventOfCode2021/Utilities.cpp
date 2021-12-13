@@ -247,6 +247,59 @@ std::string GlobalMethods::Utilities::get_intersection_string( std::string s1, s
    return ss.str( );
 }
 
+/// <summary>
+/// Flips an input matrix across an axis.
+/// </summary>
+/// <param name="arr">The matrix to flip</param>
+/// <param name="flipDir">The axis of the flip</param>
+/// <returns></returns>
+std::vector<std::vector<int>> GlobalMethods::Utilities::MatrixFlip( std::vector<std::vector<int>> arr, FlipDirection flipDir )
+{
+    return std::vector<std::vector<int>>( );
+}
+
+std::vector<std::vector<int>> GlobalMethods::Utilities::MatrixExtract( std::vector<std::vector<int>> arr, int xDim, int yDim )
+{
+    return std::vector<std::vector<int>>( );
+}
+
+std::vector<std::vector<int>> GlobalMethods::Utilities::MatrixAdd( std::vector<std::vector<int>> const& m1, std::vector<std::vector<int>> const& m2 )
+{
+//Check the size of the matrices
+   if( m1.size( ) != m2.size( ) || m1[0].size( ) != m2[0].size( ) )
+      throw new exception( "WRONG DIMENSIONS" );
+
+//Add matrices together
+   vector<vector<int>> result;
+   for( size_t i = 0; i < m1.size( ); i++ )
+      for( size_t j = 0; j < m2.size( ); j++ )
+         result[i][j] = m1[i][j] + m2[i][j];
+
+   return result;
+}
+
+/// <summary>
+/// Prints the folded matrix to the main window. The pund symbol for any integer larger than 0. Zero values represented as dots.
+/// </summary>
+/// <param name="mat"></param>
+/// <returns></returns>
+std::vector<std::vector<int>> GlobalMethods::Utilities::MatrixPrint( std::vector<std::vector<int>> mat, char const& valueChar, char const& zeroChar )
+{
+   for( size_t i = 0; i < mat.size( ); i++ )
+   {
+      stringstream ss;
+      for( size_t j = 0; j < mat[0].size( ); j++ )
+      {
+         if( mat[i][j] > 0 )
+            ss << valueChar;
+         else
+            ss << zeroChar;
+      }
+      cout << ss.str( ) << endl;
+   }
+   cout << " " << endl;
+}
+
 
 /// <summary>
 /// Gets the union of characters between the two strings.

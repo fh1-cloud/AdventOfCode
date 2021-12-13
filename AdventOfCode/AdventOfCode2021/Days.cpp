@@ -20,14 +20,81 @@
 using namespace std;
 using namespace GlobalMethods;
 
-
 void Days::Dec13( )
 {
-//Get the input and parse.
+   //Get the input and parse.
    vector<string> inp = Utilities::CreateInputVectorString( "Dec13.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp03.txt" );
+
+
+//parse input.
+   vector<pair<Utilities::FlipDirection,int>> folds;
+   vector<UIntPoint> coords;
+   int maxSize = -1;
+   for( auto i : inp )
+   {
+      if( i.size( ) == 0 )
+         continue;
+      else if( i[0] == 'f' )
+      {
+         vector<string> spl = Utilities::split( i, ' ' );
+         vector<string> spl2 = Utilities::split( spl[2],'=' );
+
+         Utilities::FlipDirection fa = Utilities::FlipDirection::X;
+         if( spl2[0][0] == 'y' )
+            fa = Utilities::FlipDirection::Y;
+         else if( spl2[0][0] == 'x' )
+            fa = Utilities::FlipDirection::X;
+
+         pair<Utilities::FlipDirection, int> thisP( fa, stoi( spl2[1] ) );
+         folds.push_back( thisP );
+      }
+      else
+      {
+      //Find maximum size of the vector.
+         vector<string> spl = Utilities::split( i, ',' );
+         int x = stoi( spl[0] );
+         int y = stoi( spl[1] );
+         int thisMax = max( x, y );
+         if( thisMax > maxSize )
+            maxSize = thisMax;
+
+      //Add point to the vector of points.
+         UIntPoint p( x, y );
+         coords.push_back( p );
+      }
+   }
+
+//Create the matrix.
+   vector<vector<bool>> canvas;
+   for( size_t i = 0; i < maxSize; i++ )
+   {
+      vector<bool> thisVec;
+      for( size_t j = 0; j < maxSize; j++ )
+      {
+         thisVec.push_back( false );
+      }
+      canvas.push_back( thisVec );
+   }
+
+//Fill inn the points of this matrix from the coordinate list.
+   for( size_t i = 0; i < coords.size( ); i++ )
+      canvas[coords[i].Y( )][coords[i].X( )] = true;
+
+//Loop over all the instructions and employ.
+   //int flips = folds.size( );
+   int flips = 1;
+   for( int i = 0; i < flips; i++ )
+   {
+   //Extract submatrices
+
+   //Flip the one at bottom/right
+
+   //Add matrices
+
+   }
 
 
 }
