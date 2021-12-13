@@ -2,8 +2,6 @@
 #include <vector>
 #include <string>
 
-using namespace std;
-
 /*ENUMS*/
 enum SUBMARINEINSTRUCTION
 {
@@ -29,7 +27,7 @@ public:
 
 /*METHODS*/
    void CarryOutInstruction( SUBMARINEINSTRUCTION const& ins, int const& val );
-   vector<int> GetPosition( );
+   std::vector<int> GetPosition( );
 
 };
 

@@ -1,11 +1,8 @@
 #pragma once
-
 #include <string>
 #include <vector>
 #include <unordered_map>
 #include <utility>
-
-using namespace std;
 
 class DumboOctopus
 {
@@ -24,11 +21,11 @@ public:
    int GetColIdx( );
    int GetVal( );
    bool Increment( );
-   void Flash( vector<DumboOctopus*>* theseShouldFlash, unordered_map<int, unordered_map<int, DumboOctopus*>> allOctopi, uint64_t* nOfFlashesTotal, uint64_t* nOfFlashesThisStep  );
+   void Flash( std::vector<DumboOctopus*>* theseShouldFlash, std::unordered_map<int, std::unordered_map<int, DumboOctopus*>> allOctopi, uint64_t* nOfFlashesTotal, uint64_t* nOfFlashesThisStep  );
    void Reset( );
 
-   static vector<DumboOctopus*> GetNeighbours( DumboOctopus* center, unordered_map<int, unordered_map<int, DumboOctopus*>> allOctopi );
-   static void PrintState( unordered_map<int, unordered_map<int, DumboOctopus*>> allOctopi );
+   static std::vector<DumboOctopus*> GetNeighbours( DumboOctopus* center, std::unordered_map<int, std::unordered_map<int, DumboOctopus*>> allOctopi );
+   static void PrintState( std::unordered_map<int, std::unordered_map<int, DumboOctopus*>> allOctopi );
 
 
 

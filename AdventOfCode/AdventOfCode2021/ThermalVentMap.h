@@ -4,25 +4,23 @@
 #include <unordered_set>
 #include "UIntPoint.h"
 
-using namespace std;
-
 class ThermalVentMap
 {
 
 public:
-   vector<vector<int>> m_Map;
+   std::vector<std::vector<int>> m_Map;
    int m_NRows;
    int m_NCols;
-   vector<UIntPoint> m_LowPoints;
-   ThermalVentMap( vector<string> );
+   std::vector<UIntPoint> m_LowPoints;
+   ThermalVentMap( std::vector<std::string> );
    ~ThermalVentMap( );
 
-   vector<UIntPoint> GetNeighbourPoints( int rowIdx, int colIdx );
+   std::vector<UIntPoint> GetNeighbourPoints( int rowIdx, int colIdx );
    bool IsLowPoint( int, int );
    int GetRows( );
    int GetCols( );
    int GetValue( int rowIdx, int colIdx );
-   vector<UIntPoint> GetLowPoints( );
+   std::vector<UIntPoint> GetLowPoints( );
 
 };
 

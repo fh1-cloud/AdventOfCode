@@ -1,5 +1,6 @@
 #include "Cave.h"
 
+using namespace std;
 /// <summary>
 /// Default constructor
 /// </summary>

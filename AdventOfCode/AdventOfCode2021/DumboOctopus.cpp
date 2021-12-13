@@ -1,5 +1,6 @@
 #include "DumboOctopus.h"
 #include <iostream>
+using namespace std;
 
 /// <summary>
 /// Initialize a dumbo octopus with rowindex, colindex and value

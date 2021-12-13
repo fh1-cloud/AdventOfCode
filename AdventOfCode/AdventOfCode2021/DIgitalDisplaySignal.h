@@ -3,23 +3,21 @@
 #include <vector>
 #include <unordered_map>
 
-using namespace std;
-
 class DigitalDisplaySignal
 {
 
 public:
-   vector<string> m_SignalPatterns;
-   vector<string> m_DigitOutputValue;
-   unordered_map<int, string> m_Translator;
+   std::vector<std::string> m_SignalPatterns;
+   std::vector<std::string> m_DigitOutputValue;
+   std::unordered_map<int, std::string> m_Translator;
 
-   DigitalDisplaySignal( string );
+   DigitalDisplaySignal( std::string );
    ~DigitalDisplaySignal( );
 
-   vector<string> GetSignalPatterns( );
-   vector<string> GetDigitOutputValue( );
+   std::vector<std::string> GetSignalPatterns( );
+   std::vector<std::string> GetDigitOutputValue( );
    int GetOutput( );
 
-   int GetIntegerFromString( string );
+   int GetIntegerFromString( std::string );
 };
 

@@ -2,6 +2,7 @@
 #include "ThermalVentMapBasin.h"
 #include "UIntPoint.h"
 #include "ThermalVentMap.h";
+using namespace std;
 
 /// <summary>
 /// Default constructor. Creates a basin from an input lowpoint

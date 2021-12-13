@@ -1,6 +1,7 @@
 #include "ThermalVentMap.h"
 #include "UIntPoint.h"
 
+using namespace std;
 /// <summary>
 /// Default constructor
 /// </summary>

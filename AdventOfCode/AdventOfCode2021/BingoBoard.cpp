@@ -7,6 +7,7 @@
 #include "Utilities.h"
 
 //Default constructor.
+using namespace std;
 BingoBoard::BingoBoard( vector<string> rows )
 {
 //Set the bingo status to false for this bingo board.

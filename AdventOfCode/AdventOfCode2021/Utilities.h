@@ -28,6 +28,13 @@ namespace GlobalMethods
       static std::unordered_set<char> get_intersection_set( std::string, std::string );
       static std::string get_union_string( std::string, std::string );
       static std::string get_intersection_string( std::string, std::string );
+
+      enum FlipDirection { X, Y };
+
+      static std::vector<std::vector<int>> Flip( std::vector<std::vector<int>> arr, FlipDirection flipDir );
+      static std::vector<std::vector<int>> ExtractMatrix( std::vector<std::vector<int>> arr, int xDim, int yDim );
+
+
    };
 
 /*TEMPLATE IMPLEMENTATIONS*/
