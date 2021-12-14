@@ -23,12 +23,6 @@ using namespace std;
 using namespace GlobalMethods;
 
 
-void Days::Dec15( )
-{
-
-}
-
-
 void Days::Dec14( )
 {
 //Get the input and parse.
@@ -85,11 +79,6 @@ void Days::Dec14( )
    unique_ptr<int> pMaxCount = make_unique<int>( maxSteps );
 
    vector<unordered_map<char, int>*> extraElementsPerStep;
-   unordered_map<char, int> *s1 = new unordered_map<char, int>( );
-   unordered_map<char, int> *s2 = new unordered_map<char, int>( );
-   unordered_map<char, int> *s3 = new unordered_map<char, int>( );
-   unordered_map<char, int> *s4 = new unordered_map<char, int>( );
-   unordered_map<char, int> *s5 = new unordered_map<char, int>( );
 
    for( int i = 0; i < orgPolymerChain.size( ) - 1; i++ )
    {
@@ -141,12 +130,26 @@ void Dec14p1( )
 //Get the input and parse.
    vector<string> inp = Utilities::CreateInputVectorString( "Dec14.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+=======
+void Days::Dec15( )
+{
+
+}
+
+
+void Days::Dec14( )
+{
+   //Get the input and parse.
+   //vector<string> inp = Utilities::CreateInputVectorString( "Dec14.txt" );
+   vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+>>>>>>> 826a2ff092a5c6ec25f439ad23c8365fc5756cbc
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp03.txt" );
 
 //Parse the input.
    string orgPolymerChain = inp[0];
 
+<<<<<<< HEAD
 //Create an unordered list of all the different reactions.
    vector<PolymerElement*> elements;
 
@@ -158,6 +161,8 @@ void Dec14p1( )
       reactions.insert( { spl[0], spl[2][0] } );
    }
 
+=======
+>>>>>>> 826a2ff092a5c6ec25f439ad23c8365fc5756cbc
 //Create a unique pointer..
    PolymerElement* pPrev = new PolymerElement( orgPolymerChain[0] );
    PolymerElement* first = pPrev;
@@ -206,13 +211,16 @@ void Dec14p1( )
 
 //Check for most ocurrences..
    unordered_map<char, uint64_t> counts;
-   for( size_t i = 0; i < elements.size( ); i++ )
+   PolymerElement* pCurrElem = first;
+   while( pCurrElem != nullptr ) 
    {
    //It is in the list
-      if( counts.find( elements[i]->GetSymbol( ) ) != counts.end( ) )
-         counts[elements[i]->GetSymbol( )]++;
+      if( counts.find( pCurrElem->GetSymbol( ) ) != counts.end( ) )
+         counts[pCurrElem->GetSymbol( )]++;
       else //It is not in the list
-         counts.insert( { elements[i]->GetSymbol( ), 1 } );
+         counts.insert( { pCurrElem->GetSymbol( ), 1 } );
+
+      pCurrElem = pCurrElem->GetNextInLine( );
    }
 
 //Find the maximum ocurrence..
@@ -241,7 +249,17 @@ void Dec14p1( )
    cout << "Answer: " << ans << endl;
 
 //Delete all the objects in the vector.
+<<<<<<< HEAD
 
+=======
+   PolymerElement* pCurrentElement;
+   while( first != nullptr )
+   {
+      pCurrentElement = first;
+      first = first->GetNextInLine( );
+      delete pCurrentElement;
+   }
+>>>>>>> 826a2ff092a5c6ec25f439ad23c8365fc5756cbc
 
 }
 
