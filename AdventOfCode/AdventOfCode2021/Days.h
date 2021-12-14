@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "DumboOctopus.h"
 
 static class Days
 {

@@ -23,25 +23,27 @@ using namespace std;
 using namespace GlobalMethods;
 
 
+void Days::Dec15( )
+{
+
+}
+
+
 void Days::Dec14( )
 {
    //Get the input and parse.
-   vector<string> inp = Utilities::CreateInputVectorString( "Dec14.txt" );
-   //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Dec14.txt" );
+   vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp03.txt" );
 
 //Parse the input.
    string orgPolymerChain = inp[0];
 
-//Create an unordered list of all the different reactions.
-   vector<PolymerElement*> elements;
-
 //Create a unique pointer..
    PolymerElement* pPrev = new PolymerElement( orgPolymerChain[0] );
    PolymerElement* first = pPrev;
 
-   elements.push_back( pPrev );
    for( int i = 1; i < orgPolymerChain.size( ); i++ )
    {
    //Create the current element.
@@ -49,9 +51,6 @@ void Days::Dec14( )
 
    //Set this element as the next in line from the previous element
       pPrev->SetNextInLine( pCur );
-
-   //Add to list.
-      elements.push_back( pCur );
 
    //Set the previous pointer to the current pointer
       pPrev = pCur;
@@ -66,7 +65,7 @@ void Days::Dec14( )
    }
 
 //Number of steps
-   int steps = 40;
+   int steps = 10;
    for( int i = 0; i < steps; i++ )
    {
    //Loop and create new reactions.
@@ -85,9 +84,6 @@ void Days::Dec14( )
          //Set new chains..
             pNewElement->SetNextInLine( pNext );
             pCur->SetNextInLine( pNewElement );
-
-         //Add to vector of all the elements so we can delete it later.
-            elements.push_back( pNewElement );
          }
 
       //Set the next pair.
@@ -97,16 +93,18 @@ void Days::Dec14( )
 
    }
 
-
 //Check for most ocurrences..
    unordered_map<char, uint64_t> counts;
-   for( size_t i = 0; i < elements.size( ); i++ )
+   PolymerElement* pCurrElem = first;
+   while( pCurrElem != nullptr ) 
    {
    //It is in the list
-      if( counts.find( elements[i]->GetSymbol( ) ) != counts.end( ) )
-         counts[elements[i]->GetSymbol( )]++;
+      if( counts.find( pCurrElem->GetSymbol( ) ) != counts.end( ) )
+         counts[pCurrElem->GetSymbol( )]++;
       else //It is not in the list
-         counts.insert( { elements[i]->GetSymbol( ), 1 } );
+         counts.insert( { pCurrElem->GetSymbol( ), 1 } );
+
+      pCurrElem = pCurrElem->GetNextInLine( );
    }
 
 //Find the maximum ocurrence..
@@ -128,7 +126,6 @@ void Days::Dec14( )
       }
    }
 
-
 //Print the answer
    uint64_t ans = currMax - currMin;
    cout << "The most common element is " << string(1,maxElem ) << " and occurs " << std::to_string( currMax ) << " times."  << endl;
@@ -136,9 +133,13 @@ void Days::Dec14( )
    cout << "Answer: " << ans << endl;
 
 //Delete all the objects in the vector.
-
-
-
+   PolymerElement* pCurrentElement;
+   while( first != nullptr )
+   {
+      pCurrentElement = first;
+      first = first->GetNextInLine( );
+      delete pCurrentElement;
+   }
 
 }
 

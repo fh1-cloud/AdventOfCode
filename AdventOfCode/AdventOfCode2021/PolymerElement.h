@@ -9,7 +9,7 @@ protected:
 
 public:
    PolymerElement( const char c );
-   ~PolymerElement( ) = delete;
+   ~PolymerElement( );
    char GetSymbol( );
    void SetNextInLine( PolymerElement* next );
    PolymerElement* GetNextInLine( );
