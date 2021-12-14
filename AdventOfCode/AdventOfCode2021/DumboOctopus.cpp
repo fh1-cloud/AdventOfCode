@@ -20,6 +20,7 @@ DumboOctopus::DumboOctopus( int rowIdx, int colIdx, int val )
 /// </summary>
 DumboOctopus::~DumboOctopus( )
 {
+   double test = 0.0;
    //Nothing is allocated on the heap?
 }
 

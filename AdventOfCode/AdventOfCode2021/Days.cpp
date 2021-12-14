@@ -23,6 +23,11 @@ using namespace std;
 using namespace GlobalMethods;
 
 
+void Days::Dec15( )
+{
+
+}
+
 
 void Days::Dec14( )
 {
@@ -157,7 +162,6 @@ void Dec14p1( )
    PolymerElement* pPrev = new PolymerElement( orgPolymerChain[0] );
    PolymerElement* first = pPrev;
 
-   elements.push_back( pPrev );
    for( int i = 1; i < orgPolymerChain.size( ); i++ )
    {
    //Create the current element.
@@ -165,9 +169,6 @@ void Dec14p1( )
 
    //Set this element as the next in line from the previous element
       pPrev->SetNextInLine( pCur );
-
-   //Add to list.
-      elements.push_back( pCur );
 
    //Set the previous pointer to the current pointer
       pPrev = pCur;
@@ -194,9 +195,6 @@ void Dec14p1( )
          //Set new chains..
             pNewElement->SetNextInLine( pNext );
             pCur->SetNextInLine( pNewElement );
-
-         //Add to vector of all the elements so we can delete it later.
-            elements.push_back( pNewElement );
          }
 
       //Set the next pair.
@@ -205,7 +203,6 @@ void Dec14p1( )
       }
 
    }
-
 
 //Check for most ocurrences..
    unordered_map<char, uint64_t> counts;
@@ -236,7 +233,6 @@ void Dec14p1( )
          currMin = i.second;
       }
    }
-
 
 //Print the answer
    uint64_t ans = currMax - currMin;

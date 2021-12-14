@@ -11,6 +11,12 @@ PolymerElement::PolymerElement( const char c )
    m_Symbol = c;
 }
 
+PolymerElement::~PolymerElement( )
+{
+   //if( m_NextInLine != nullptr )
+   //   delete m_NextInLine;
+}
+
 char PolymerElement::GetSymbol( )
 {
    return m_Symbol;
