@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include <fstream>
 #include <vector>
 #include <iostream>
@@ -16,6 +17,7 @@
 #include "ThermalVentMapBasin.h"
 #include "DumboOctopus.h"
 #include "Cave.h"
+#include "PolymerElement.h"
 
 using namespace std;
 using namespace GlobalMethods;
@@ -29,12 +31,120 @@ void Days::Dec14( )
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp03.txt" );
 
+//Parse the input.
+   string orgPolymerChain = inp[0];
 
-   cout << 0 << endl;
+//Create an unordered list of all the different reactions.
+   vector<PolymerElement*> elements;
+
+//Create a unique pointer..
+   PolymerElement* pPrev = new PolymerElement( orgPolymerChain[0] );
+   PolymerElement* first = pPrev;
+
+   elements.push_back( pPrev );
+   for( int i = 1; i < orgPolymerChain.size( ); i++ )
+   {
+   //Create the current element.
+      PolymerElement* pCur = new PolymerElement( orgPolymerChain[i] );
+
+   //Set this element as the next in line from the previous element
+      pPrev->SetNextInLine( pCur );
+
+   //Add to list.
+      elements.push_back( pCur );
+
+   //Set the previous pointer to the current pointer
+      pPrev = pCur;
+   }
+
+//Create the map over the reactions.
+   unordered_map<string, char> reactions;
+   for( size_t i = 2; i < inp.size( ); i++ )
+   {
+      vector<string> spl = Utilities::split( inp[i], ' ' );
+      reactions.insert( { spl[0], spl[2][0] } );
+   }
+
+//Number of steps
+   int steps = 40;
+   for( int i = 0; i < steps; i++ )
+   {
+   //Loop and create new reactions.
+      PolymerElement* pCur = first;
+      PolymerElement* pNext = first->GetNextInLine( );
+      while( pNext != nullptr )
+      {
+      //Create a string representation of the two elements..
+         auto thisReaction = std::string(1,pCur->GetSymbol( ) )+pNext->GetSymbol( );
+
+      //Check if the reaction exists. If it does, we need to create a new polymer atom
+         if( reactions.find( thisReaction ) != reactions.end( ) )
+         {
+            PolymerElement* pNewElement = new PolymerElement( reactions[thisReaction] );
+
+         //Set new chains..
+            pNewElement->SetNextInLine( pNext );
+            pCur->SetNextInLine( pNewElement );
+
+         //Add to vector of all the elements so we can delete it later.
+            elements.push_back( pNewElement );
+         }
+
+      //Set the next pair.
+         pCur = pNext;
+         pNext = pNext->GetNextInLine( );
+      }
+
+   }
+
+
+//Check for most ocurrences..
+   unordered_map<char, uint64_t> counts;
+   for( size_t i = 0; i < elements.size( ); i++ )
+   {
+   //It is in the list
+      if( counts.find( elements[i]->GetSymbol( ) ) != counts.end( ) )
+         counts[elements[i]->GetSymbol( )]++;
+      else //It is not in the list
+         counts.insert( { elements[i]->GetSymbol( ), 1 } );
+   }
+
+//Find the maximum ocurrence..
+   char maxElem = ' ';
+   uint64_t currMax = -1;
+   char minElem = ' ';
+   uint64_t currMin = 1.0e6;
+   for( auto i : counts )
+   {
+      if( i.second >= currMax )
+      {
+         maxElem = i.first;
+         currMax = i.second;
+      }
+      if( i.second <= currMin )
+      {
+         minElem = i.first;
+         currMin = i.second;
+      }
+   }
+
+
+//Print the answer
+   uint64_t ans = currMax - currMin;
+   cout << "The most common element is " << string(1,maxElem ) << " and occurs " << std::to_string( currMax ) << " times."  << endl;
+   cout << "The least common element is " << string(1,minElem ) << " and occurs " << std::to_string( currMin ) << " times."  << endl;
+   cout << "Answer: " << ans << endl;
+
+//Delete all the objects in the vector.
+
+
+
+
 }
 
 
-void Days::Dec13( )
+void Days::Dec13(
+)
 {
    //Get the input and parse.
    vector<string> inp = Utilities::CreateInputVectorString( "Dec13.txt" );

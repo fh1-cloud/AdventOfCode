@@ -60,6 +60,9 @@
     <ClCompile Include="Cave.cpp">
       <Filter>DayClasses</Filter>
     </ClCompile>
+    <ClCompile Include="PolymerElement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Days.h">
@@ -93,6 +96,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Cave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PolymerElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

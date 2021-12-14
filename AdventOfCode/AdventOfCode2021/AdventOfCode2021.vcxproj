@@ -147,6 +147,7 @@
     <ClCompile Include="DumboOctopus.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Days.cpp" />
+    <ClCompile Include="PolymerElement.cpp" />
     <ClCompile Include="Submarine.cpp" />
     <ClCompile Include="ThermalVentMap.cpp" />
     <ClCompile Include="ThermalVentMapBasin.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Days.h" />
     <ClInclude Include="DIgitalDisplaySignal.h" />
     <ClInclude Include="DumboOctopus.h" />
+    <ClInclude Include="PolymerElement.h" />
     <ClInclude Include="Submarine.h" />
     <ClInclude Include="ThermalVentMap.h" />
     <ClInclude Include="ThermalVentMapBasin.h" />
