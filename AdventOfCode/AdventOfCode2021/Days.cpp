@@ -25,131 +25,23 @@ using namespace GlobalMethods;
 
 void Days::Dec14( )
 {
-//Get the input and parse.
-   //vector<string> inp = Utilities::CreateInputVectorString( "Dec14.txt" );
-   vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
-   //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
-   //vector<string> inp = Utilities::CreateInputVectorString( "Temp03.txt" );
+//Run each down to 10 depth where you store the strings with count maps for whole depths?
 
-//Parse the input.
-   string orgPolymerChain = inp[0];
-
-//Create the map over the reactions.
-   unordered_map<string, char> *pReactions = new unordered_map<string, char>( );
-   for( size_t i = 2; i < inp.size( ); i++ )
-   {
-      vector<string> spl = Utilities::split( inp[i], ' ' );
-      pReactions -> insert( { spl[0], spl[2][0] } );
-   }
-
-//Create the unordered map of the ocurrences and create all the occurences. Also in the reactions.
-   unordered_map<char, uint64_t> *pCounts = new unordered_map<char, uint64_t>( );
-   unordered_set<char> uniqueElements;
-   for( auto i : orgPolymerChain )
-   {
-   //Count not find it in the set. Add to set.
-      if( uniqueElements.find( i ) == uniqueElements.end( ) )
-         uniqueElements.insert( i );
-   }
-   for( auto i : (*pReactions) )
-   {
-   //unpack
-      char l1 = i.first[0];
-      char l2 = i.first[1];
-      char l3 = i.second;
-
-   //Count not find it in the set. Add to set.
-      if( uniqueElements.find( l1 ) == uniqueElements.end( ) )
-         uniqueElements.insert( l1 );
-      if( uniqueElements.find( l2 ) == uniqueElements.end( ) )
-         uniqueElements.insert( l2 );
-      if( uniqueElements.find( l3 ) == uniqueElements.end( ) )
-         uniqueElements.insert( l3 );
-   }
-//Initialize all the unique elements in the rections and the polymer chain to the count mapl
-   for( auto i : uniqueElements )
-      pCounts -> insert( { i, 0 } );
-
-//Add the original polymer chain to the count
-   for( auto i : orgPolymerChain )
-      (*pCounts)[i]++;
-
-//Call the method by recursion
-   int maxSteps = 5;
-   unique_ptr<int> pMaxCount = make_unique<int>( maxSteps );
-
-   vector<unordered_map<char, int>*> extraElementsPerStep;
-
-   for( int i = 0; i < orgPolymerChain.size( ) - 1; i++ )
-   {
-      char lhs = orgPolymerChain[i];
-      char rhs = orgPolymerChain[i + 1];
-      PolymerElement::ExpandPolymer( pMaxCount.get( ), 0, lhs, rhs, pCounts, pReactions );
-   }
-
-//Loop for patterns in the steps..
-
-   uint64_t currMax = 0;
-   uint64_t currMin = 1.0e8;
-   char maxElem = ' ';
-   char minElem = ' ';
-
-   for( auto i : (*pCounts ) )
-   {
-      if( i.second > currMax )
-      {
-         maxElem = i.first;
-         currMax = i.second;
-      }
-      if( i.second < currMin )
-      {
-         minElem = i.first;
-         currMin = i.second;
-      }
-
-   }
-
-   uint64_t ans = currMax - currMin;
-
-//Print the answer
-   cout << "The most common element is " << string(1,maxElem ) << " and occurs " << std::to_string( currMax ) << " times."  << endl;
-   cout << "The least common element is " << string(1,minElem ) << " and occurs " << std::to_string( currMin ) << " times."  << endl;
-   cout << "Answer: " << ans << endl;
-
-//Delete all the objects in the vector.
-   delete pCounts;
-   delete pReactions;
 
 
 }
-
 
 void Dec14p1( )
 {
-
-//Get the input and parse.
+   //Get the input and parse.
    vector<string> inp = Utilities::CreateInputVectorString( "Dec14.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
-=======
-void Days::Dec15( )
-{
-
-}
-
-
-void Days::Dec14( )
-{
-   //Get the input and parse.
-   //vector<string> inp = Utilities::CreateInputVectorString( "Dec14.txt" );
-   vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
->>>>>>> 826a2ff092a5c6ec25f439ad23c8365fc5756cbc
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
    //vector<string> inp = Utilities::CreateInputVectorString( "Temp03.txt" );
 
 //Parse the input.
    string orgPolymerChain = inp[0];
 
-<<<<<<< HEAD
 //Create an unordered list of all the different reactions.
    vector<PolymerElement*> elements;
 
@@ -161,8 +53,6 @@ void Days::Dec14( )
       reactions.insert( { spl[0], spl[2][0] } );
    }
 
-=======
->>>>>>> 826a2ff092a5c6ec25f439ad23c8365fc5756cbc
 //Create a unique pointer..
    PolymerElement* pPrev = new PolymerElement( orgPolymerChain[0] );
    PolymerElement* first = pPrev;
@@ -179,9 +69,8 @@ void Days::Dec14( )
       pPrev = pCur;
    }
 
-
 //Number of steps
-   int steps = 10;
+   int steps = 20;
    for( int i = 0; i < steps; i++ )
    {
    //Loop and create new reactions.
@@ -249,9 +138,6 @@ void Days::Dec14( )
    cout << "Answer: " << ans << endl;
 
 //Delete all the objects in the vector.
-<<<<<<< HEAD
-
-=======
    PolymerElement* pCurrentElement;
    while( first != nullptr )
    {
@@ -259,14 +145,194 @@ void Days::Dec14( )
       first = first->GetNextInLine( );
       delete pCurrentElement;
    }
->>>>>>> 826a2ff092a5c6ec25f439ad23c8365fc5756cbc
+}
+
+
+void Dec14Old( )
+{
+
+//Get the input and parse.
+   //vector<string> inp = Utilities::CreateInputVectorString( "Dec14.txt" );
+   vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp03.txt" );
+
+//Parse the input.
+   string orgPolymerChain = inp[0];
+
+//Create the map over the reactions.
+   unordered_map<string, char> *pReactions = new unordered_map<string, char>( );
+   for( size_t i = 2; i < inp.size( ); i++ )
+   {
+      vector<string> spl = Utilities::split( inp[i], ' ' );
+      pReactions -> insert( { spl[0], spl[2][0] } );
+   }
+
+//Create the unordered map of the ocurrences and create all the occurences. Also in the reactions.
+   unordered_map<char, uint64_t> *pCounts = new unordered_map<char, uint64_t>( );
+   unordered_set<char> uniqueElements;
+   for( auto i : orgPolymerChain )
+   {
+   //Count not find it in the set. Add to set.
+      if( uniqueElements.find( i ) == uniqueElements.end( ) )
+         uniqueElements.insert( i );
+   }
+   for( auto i : (*pReactions) )
+   {
+   //unpack
+      char l1 = i.first[0];
+      char l2 = i.first[1];
+      char l3 = i.second;
+
+   //Count not find it in the set. Add to set.
+      if( uniqueElements.find( l1 ) == uniqueElements.end( ) )
+         uniqueElements.insert( l1 );
+      if( uniqueElements.find( l2 ) == uniqueElements.end( ) )
+         uniqueElements.insert( l2 );
+      if( uniqueElements.find( l3 ) == uniqueElements.end( ) )
+         uniqueElements.insert( l3 );
+   }
+//Initialize all the unique elements in the rections and the polymer chain to the count mapl
+   for( auto i : uniqueElements )
+      pCounts -> insert( { i, 0 } );
+
+//Add the original polymer chain to the count
+   for( auto i : orgPolymerChain )
+      (*pCounts)[i]++;
+
+//Call each pair to a depth of 20 and store the result in a map
+   unordered_map<string, unordered_map<char, uint64_t>>* pTwentyDeepMap = new unordered_map<string, unordered_map<char, uint64_t>>( );
+   int maxSteps = 20;
+   unique_ptr<int> pMaxCount = make_unique<int>( maxSteps );
+
+   for( auto i : *pReactions )
+   {
+      char lhs = i.first[0];
+      char rhs = i.first[1];
+
+      unordered_map<char, uint64_t> reactionCountMap( *pCounts );
+      PolymerElement::ExpandPolymer( pMaxCount.get( ), 0, lhs, rhs, &reactionCountMap, pReactions );
+
+      pTwentyDeepMap->insert( { i.first, reactionCountMap } );
+   }
+
+//Loop through the linked list from part one..
+   PolymerElement* pPrev = new PolymerElement( orgPolymerChain[0] );
+   PolymerElement* first = pPrev;
+
+   for( int i = 1; i < orgPolymerChain.size( ); i++ )
+   {
+   //Create the current element.
+      PolymerElement* pCur = new PolymerElement( orgPolymerChain[i] );
+
+   //Set this element as the next in line from the previous element
+      pPrev->SetNextInLine( pCur );
+
+   //Set the previous pointer to the current pointer
+      pPrev = pCur;
+   }
+
+//Number of steps
+   int steps = 19;
+   for( int i = 0; i < steps; i++ )
+   {
+   //Loop and create new reactions.
+      PolymerElement* pCur = first;
+      PolymerElement* pNext = first->GetNextInLine( );
+      while( pNext != nullptr )
+      {
+      //Create a string representation of the two elements..
+         auto thisReaction = std::string(1,pCur->GetSymbol( ) )+pNext->GetSymbol( );
+
+      //Check if the reaction exists. If it does, we need to create a new polymer atom
+         if( (*pReactions).find( thisReaction ) != (*pReactions).end( ) )
+         {
+            PolymerElement* pNewElement = new PolymerElement( (*pReactions)[thisReaction] );
+
+         //Set new chains..
+            pNewElement->SetNextInLine( pNext );
+            pCur->SetNextInLine( pNewElement );
+         }
+
+      //Set the next pair.
+         pCur = pNext;
+         pNext = pNext->GetNextInLine( );
+      }
+   }
+
+//Add the total number count
+   unordered_map<char, uint64_t> totalCount( *pCounts );
+
+//Count the numbers so far..
+   PolymerElement* pCurrElem = first;
+   while( pCurrElem != nullptr ) 
+   {
+   //It is in the list
+      if( totalCount.find( pCurrElem->GetSymbol( ) ) != totalCount.end( ) )
+         totalCount[pCurrElem->GetSymbol( )]++;
+      else //It is not in the list
+         totalCount.insert( { pCurrElem->GetSymbol( ), 1 } );
+
+      pCurrElem = pCurrElem->GetNextInLine( );
+   }
+
+//Count the rest twenty deep
+   pCurrElem = first;
+   while( pCurrElem != nullptr ) 
+   {
+
+   //Create string of the two linked..
+      if( pCurrElem->GetNextInLine( ) != nullptr )
+      {
+         string thisPair = string( 1, pCurrElem->GetSymbol( ) ) + pCurrElem->GetNextInLine( )->GetSymbol( );
+         unordered_map<char, uint64_t> thisTwentyDeep = ( *pTwentyDeepMap )[thisPair];
+         for( auto i : thisTwentyDeep )
+         {
+            totalCount[i.first] = totalCount[i.first] + thisTwentyDeep[i.first];
+         }
+
+      }
+   }
+
+   uint64_t currMax = 0;
+   uint64_t currMin = 1.0e8;
+   char maxElem = ' ';
+   char minElem = ' ';
+
+   for( auto i : totalCount )
+   {
+      if( i.second > currMax )
+      {
+         maxElem = i.first;
+         currMax = i.second;
+      }
+      if( i.second < currMin )
+      {
+         minElem = i.first;
+         currMin = i.second;
+      }
+
+   }
+
+   uint64_t ans = currMax - currMin;
+
+//Print the answer
+   cout << "The most common element is " << string(1,maxElem ) << " and occurs " << std::to_string( currMax ) << " times."  << endl;
+   cout << "The least common element is " << string(1,minElem ) << " and occurs " << std::to_string( currMin ) << " times."  << endl;
+   cout << "Answer: " << ans << endl;
+
+//Delete all the objects in the vector.
+   delete pCounts;
+   delete pReactions;
+
 
 }
 
 
 
-void Days::Dec13(
-)
+
+
+void Days::Dec13()
 {
    //Get the input and parse.
    vector<string> inp = Utilities::CreateInputVectorString( "Dec13.txt" );
