@@ -144,6 +144,7 @@
     <ClCompile Include="BingoBoard.cpp" />
     <ClCompile Include="Cave.cpp" />
     <ClCompile Include="DIgitalDisplaySignal.cpp" />
+    <ClCompile Include="DjikstraNode.cpp" />
     <ClCompile Include="DumboOctopus.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Days.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Cave.h" />
     <ClInclude Include="Days.h" />
     <ClInclude Include="DIgitalDisplaySignal.h" />
+    <ClInclude Include="DjikstraNode.h" />
     <ClInclude Include="DumboOctopus.h" />
     <ClInclude Include="PolymerElement.h" />
     <ClInclude Include="Submarine.h" />

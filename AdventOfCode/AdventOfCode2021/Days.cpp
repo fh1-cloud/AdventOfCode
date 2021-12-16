@@ -18,9 +18,160 @@
 #include "DumboOctopus.h"
 #include "Cave.h"
 #include "PolymerElement.h"
+#include "DjikstraNode.h"
+#include <map>
+#include <queue>
 
 using namespace std;
 using namespace GlobalMethods;
+
+
+void Days::Dec15( )
+{
+
+//Implement the priority que?
+   //https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-using-priority_queue-stl/
+
+   //Tried 
+   //2948
+   //
+
+
+   
+//Get the input and parse.
+   vector<string> inp = Utilities::CreateInputVectorString( "Dec15.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp01.txt" );
+   //vector<string> inp = Utilities::CreateInputVectorString( "Temp02.txt" );
+
+//Manipulate the input vector.
+   vector<string> p2Inp;
+
+   for( int i = 0; i < inp.size( ) * 5; i++ )
+   {
+   //Create this row..
+      int thisRowAdder = 0;
+      if( i > inp.size( ) * 4 )
+         thisRowAdder = 4;
+      else if( i > inp.size( ) * 3 )
+         thisRowAdder = 3;
+      else if( i > inp.size( ) * 2 )
+         thisRowAdder = 2;
+      else if( i > inp.size( ) * 1 )
+         thisRowAdder = 1;
+      else
+         thisRowAdder = 0;
+
+   //Find the original row..
+      string thisRow = inp[ i % inp.size( ) ];
+
+   //Create the string 5 times..
+      stringstream rowStream;
+
+      for( int j = 0; j < 5; j++ )
+      {
+         int thisColumnAdder = j;
+         for( int k = 0; k < thisRow.size( ); k++ )
+         {
+            char thisOriginalChar = thisRow[k];
+            int val = stoi( string( 1, thisOriginalChar ) );
+
+            val += thisRowAdder;
+            if( val > 9 )
+               val -= 9;
+            val += thisColumnAdder;
+            if( val > 9 )
+               val -= 9;
+            rowStream << val;
+         }
+      }
+
+   //Add row to the input..
+      p2Inp.push_back( rowStream.str( ) );
+   }
+
+//Create the map on the heap so we can pass it by pointer to other functions
+   vector<vector<DjikstraNode*>>* map = new vector<vector<DjikstraNode*>>( );
+   for( int i = 0; i<p2Inp.size( ); i++ )
+   {
+      vector<DjikstraNode*> thisRow;
+      for( int j = 0; j < p2Inp[i].size( ); j++ )
+      {
+         int thisWeight = 0;
+         if( i == 0 && j == 0 )
+            thisWeight = 0;
+         else
+            thisWeight = stoi( string(1, p2Inp[i][j] ) );
+
+         thisRow.push_back( new DjikstraNode( i, j, thisWeight, 1.0e10 ) );
+      }
+      map->push_back( thisRow );
+   }
+
+//Print the matrix before we start..
+   for( size_t i = 0; i < (*map).size( ); i++ )
+   {
+      stringstream ss;
+      for( size_t j = 0; j < (*map)[i].size( ); j++ )
+      {
+         ss << ( *map )[i][j]->GetWeight( );
+      }
+      cout << ss.str( ) << endl;
+   }
+
+//Start the checking of the weights by recursion..
+   DjikstraNode* pFirst = (*map)[0][0];
+
+//Calculates the current value for all the nodes..
+
+//RUn first node
+   pFirst->Run( map );
+
+   priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> que;
+
+   DjikstraNode* pMinNode = DjikstraNode::GetLowestUnvisitedNode( map );
+
+//Run for all node..
+   while( pMinNode != nullptr )
+   {
+
+   //Run algorithm on the minimum node.
+      pMinNode->Run( map );
+
+   //Get the next pointer.. 
+
+
+
+
+
+      //THIS METHOD IS TRASH AND SLOW
+      //
+      //
+      //
+      //
+      //
+      //
+      //
+      //
+
+      pMinNode = DjikstraNode::GetLowestUnvisitedNode( map );
+
+   }
+
+////Run for last node..
+   DjikstraNode* pLast = ( *map )[( *map ).size( ) - 1][( *map )[0].size( ) - 1];
+
+//The answer is the weight for the last node..
+   uint64_t maxRisk = pLast->GetValue( );
+
+   cout << "Maximum risk " << maxRisk << endl;
+
+//Delete the map on the heap.
+   //while( map->size( ) > 0 )
+   //   while( ( *map )[0].size( ) > 0 )
+   //      delete ( *map )[map->size( ) - 1][(*map)[map->size( ) - 1 )];
+   //delete map;
+}
+
 
 
 void Days::Dec14( )
