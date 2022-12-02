@@ -1,14 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 using AdventOfCode2022.Classes;
+using System.Windows.Forms;
 
 namespace AdventOfCode2022
 {
    public class Days
    {
+
+
+
+      /// <summary>
+      /// Dec2
+      /// </summary>
+      public static void Dec02( )
+      {
+      //Parse input file..
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
+
+         long ans = 0;
+         for( int i = 0; i<inp.Length; i++ )
+         {
+            string[] split = inp[i].Split( ' ' );
+            RockPaperScissors thisGame = new RockPaperScissors( split[0][0], split[1][0] );
+            ans += thisGame.Score;
+         }
+
+         Console.WriteLine( "Total score: " + ans.ToString( ) );
+         Clipboard.SetDataObject( ans.ToString( ) );
+
+      }
 
       /// <summary>
       /// Dec1
