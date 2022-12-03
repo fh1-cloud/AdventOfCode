@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Security.Permissions;
 using System.Text;
@@ -11,7 +12,232 @@ namespace AdventOfCode2022
 {
    public class Days
    {
+      /// <summary>
+      /// 
+      /// </summary>
+      public static void Dec25( )
+      {
 
+
+
+      }
+      /// <summary>
+      /// 
+      /// </summary>
+      public static void Dec24( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// 
+      /// </summary>
+      public static void Dec23( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// 
+      /// </summary>
+      public static void Dec22( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// 
+      /// </summary>
+      public static void Dec21( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// 
+      /// </summary>
+      public static void Dec20( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// 
+      /// </summary>
+      public static void Dec19( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// 
+      /// </summary>
+      public static void Dec18( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// 
+      /// </summary>
+      public static void Dec17( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// 
+      /// </summary>
+      public static void Dec16( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// 
+      /// </summary>
+      public static void Dec15( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// 
+      /// </summary>
+      public static void Dec14( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// Dec13
+      /// </summary>
+      public static void Dec13( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// Dec12
+      /// </summary>
+      public static void Dec12( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// Dec11
+      /// </summary>
+      public static void Dec11( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// Dec10
+      /// </summary>
+      public static void Dec10( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// Dec09
+      /// </summary>
+      public static void Dec09( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// Dec08
+      /// </summary>
+      public static void Dec08( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// De07c
+      /// </summary>
+      public static void Dec07( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// De06c
+      /// </summary>
+      public static void Dec06( )
+      {
+
+
+
+      }
+      /// <summary>
+      /// Dec05
+      /// </summary>
+      public static void Dec05( )
+      {
+
+
+
+      }
+
+      /// <summary>
+      /// Dec04
+      /// </summary>
+      public static void Dec04( )
+      {
+
+
+
+      }
+
+      /// <summary>
+      /// Dec03
+      /// </summary>
+      public static void Dec03( )
+      {
+      //Parse input file..
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec03.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
+
+      //Loop over items and create rucksacks..
+         long ans = 0;
+         List<Rucksack> sacks = new List<Rucksack>( );
+         for( int i = 0; i<inp.Length; i++ )
+            sacks.Add( new Rucksack( inp[i] ) );
+
+      //Find badge items..
+         for( int i = 0; i<sacks.Count; i = i+3 )
+         {
+            long badgeScore = sacks[i].FindBadgeValue( sacks[i+1], sacks[i+2] );
+            ans += badgeScore;
+         }
+
+      //Loop over the
+         Console.WriteLine( "Ans: " + ans.ToString( ) );
+         Clipboard.SetText( ans.ToString( ) );
+      }
 
 
       /// <summary>

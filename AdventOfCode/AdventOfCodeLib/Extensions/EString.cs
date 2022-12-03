@@ -28,7 +28,7 @@ namespace AdventOfCodeLib.Extensions
       }
 
       /// <summary>
-      /// Counts the number of times the same character occurs at the same position in a string. The strings must be equal in lenth or this method returns 0;
+      /// Counts the number of times the same character occurs at the same position in two different strings . The strings must be equal in length
       /// </summary>
       /// <param name="str"></param>
       /// <param name="comparer"></param>

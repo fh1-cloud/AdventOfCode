@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Classes\ElfWithCalories.cs" />
     <Compile Include="Classes\RockPaperScissors.cs" />
+    <Compile Include="Classes\Rucksack.cs" />
     <Compile Include="Days.cs" />
     <Compile Include="GlobalMethods.cs" />
     <Compile Include="Program.cs" />
@@ -83,6 +84,11 @@
     <Content Include="Inputs\Temp02.txt" />
     <Content Include="Inputs\Temp01.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\AdventOfCodeLib\AdventOfCodeLib.csproj">
+      <Project>{01114F59-07A5-4BE1-874F-C6D582CB80ED}</Project>
+      <Name>AdventOfCodeLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
