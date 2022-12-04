@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CleaningElf.cs" />
     <Compile Include="Classes\ElfWithCalories.cs" />
     <Compile Include="Classes\RockPaperScissors.cs" />
     <Compile Include="Classes\Rucksack.cs" />

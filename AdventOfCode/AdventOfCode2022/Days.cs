@@ -207,8 +207,27 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec04( )
       {
+         //Read input..
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec04.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
 
+         //Split by comma..
+         long ans = 0;
+         foreach( string s in inp )
+         {
+            string[] splt = s.Split( ',' );
+            CleaningElf c1 = new CleaningElf( splt[0] );
+            CleaningElf c2 = new CleaningElf( splt[1] );
 
+            //if( CleaningElf.DoesEncapsulate( c1, c2 ) )
+            //   ans++;
+            if( CleaningElf.DoesOverlap( c1, c2 ) )
+               ans++;
+         }
+
+      //Loop over the
+         Console.WriteLine( "Ans: " + ans.ToString( ) );
+         Clipboard.SetText( ans.ToString( ) );
 
       }
 
