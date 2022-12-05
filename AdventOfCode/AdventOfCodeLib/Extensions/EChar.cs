@@ -50,6 +50,38 @@ namespace AdventOfCodeLib.Extensions
          return char.IsUpper( a );
       }
 
+      /// <summary>
+      /// Checks if the char is an upper case letter..
+      /// </summary>
+      /// <param name="a"></param>
+      /// <returns></returns>
+      public static bool IsUpperCaseLetter( this char a )
+      {
+         int cVal = ( int ) a;
+         return cVal >= 65 && cVal <= 90;
+      }
+
+      /// <summary>
+      /// Checks if the character is a lower case letter..
+      /// </summary>
+      /// <param name="a"></param>
+      /// <returns></returns>
+      public static bool IsLowerCaseLetter( this char a )
+      {
+         int cVal = ( int ) a;
+         return cVal >= 97 && cVal <= 122;
+      }
+
+      /// <summary>
+      /// Checks if the character is a letter..
+      /// </summary>
+      /// <param name="a"></param>
+      /// <returns></returns>
+      public static bool IsLetter( this char a )
+      {
+         return ( a.IsUpperCaseLetter( ) || a.IsLowerCaseLetter( ) );
+      }
+
    #endregion
 
    /*STATIC METHODS*/

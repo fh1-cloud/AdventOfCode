@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AdventOfCode2022.Classes;
 using System.Windows.Forms;
+using AdventOfCodeLib.Extensions;
 
 namespace AdventOfCode2022
 {
@@ -197,8 +198,86 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec05( )
       {
+         //Read input..
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec05.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
+
+         //Find the IDX line..
+         int idxLine = -1;
+         for( int i = 0; i<inp.Length; i++ )
+         {
+            string[] parts= Array.ConvertAll( inp[i].Split(','), p => p.Trim());
+            if( parts.Length == 1 && parts[0].Equals( "" ) )
+            {
+               idxLine = i-1;
+               break;
+            }
+         }
+
+      //Create all the stacks..
+         string[] stackIdxSplit = Array.ConvertAll( inp[idxLine].Split(','), p => p.Trim())[0].Split( ' ' );
+         List<int> numbers = new List<int>( );
+         foreach( string s in stackIdxSplit )
+         {
+            bool parsed = int.TryParse( s, out int num );
+            if( parsed )
+               numbers.Add( num );
+         }
+
+         List<CrateStack> stackList = new List<CrateStack>( );
+         foreach( int stack in numbers )
+            stackList.Add( new CrateStack( stack ) );
 
 
+         string firstLine = inp[0];
+         for( int i = 0; i<firstLine.Length; i++ )
+         {
+         //Look downwards for the first uppercase letter. If nothing is found, skip to next column..
+            List<char> cratesInStack = new List<char>( );
+            bool foundOne = false;
+            for( int j = 0; j<= idxLine; j++ )
+            {
+               if( inp[j][i].IsUpperCaseLetter( ) )
+               {
+                  cratesInStack.Add( inp[j][i] );
+                  foundOne = true;
+               }
+            }
+
+         //Continue if we found a crate stack..
+            if( !foundOne )
+               continue;
+
+         //Find the number of the crate stack to add to from parsing the index line..
+            CrateStack current = stackList[ int.Parse( inp[idxLine][i].ToString( ) ) - 1 ];
+
+         //Reverse the order of the crates to stack in correct order..
+            cratesInStack.Reverse( );
+
+         //Add to stack..
+            foreach( char c in cratesInStack )
+               current.Stack.Push( c );
+         }
+
+
+      //Parse the instructions and carry out..
+         int instructionStartIdx = idxLine + 2;
+         List<CrateMoveInstruction> instructions = new List<CrateMoveInstruction>( );
+         for( int i = instructionStartIdx; i<inp.Length; i++ )
+         {
+            CrateMoveInstruction ins = new CrateMoveInstruction( inp[i] );
+            ins.CarryOutInstruction( stackList );
+         }
+
+
+      //Write the answer..
+         StringBuilder sb = new StringBuilder( );
+         foreach( CrateStack cs in stackList )
+            sb.Append( cs.Stack.Peek( ).ToString( ) );
+
+      //Write answer..
+         Console.WriteLine( "Ans: " + sb.ToString( ) );
+         Clipboard.SetText( sb.ToString( ) );
 
       }
 
