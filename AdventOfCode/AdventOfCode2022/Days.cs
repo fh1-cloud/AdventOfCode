@@ -189,8 +189,32 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec06( )
       {
+         //Read input..
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec06.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
+
+         string message = inp[0];
+         string current4 = message.Substring( 0, 14 );
+         int firstIdx = -1;
+         for( int i = 14; i<message.Length; i++ )
+         {
+            bool isUnique = current4.ConsistsOfUniqueCharacters( );
+            if( isUnique )
+            {
+               firstIdx = i;
+               break;
+            }
+
+         //Remove the first index of the string and add the last..
+            current4 = current4.Remove( 0, 1 );
+            current4 += message[i];
+
+         }
 
 
+      //Write answer..
+         Console.WriteLine( "Ans: " + firstIdx );
+         Clipboard.SetDataObject( firstIdx );
 
       }
       /// <summary>
