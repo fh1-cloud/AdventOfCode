@@ -47,6 +47,8 @@
     <Compile Include="Classes\CleaningElf.cs" />
     <Compile Include="Classes\CrateMoveInstruction.cs" />
     <Compile Include="Classes\CrateStack.cs" />
+    <Compile Include="Classes\DirectoryFile.cs" />
+    <Compile Include="Classes\DirectoryFolder.cs" />
     <Compile Include="Classes\ElfWithCalories.cs" />
     <Compile Include="Classes\RockPaperScissors.cs" />
     <Compile Include="Classes\Rucksack.cs" />
