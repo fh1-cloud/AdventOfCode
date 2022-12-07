@@ -13,8 +13,8 @@ namespace AdventOfCode2022
       static void Main( string[ ] args )
       {
 
-         Console.Write( GlobalMethods.GetConsoleHeader( 7 ) );
-         Days.Dec07( );
+         Console.Write( GlobalMethods.GetConsoleHeader( 8 ) );
+         Days.Dec08( );
          Console.ReadKey( );
       }
    }

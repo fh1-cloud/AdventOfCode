@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AdventOfCode2022.Classes;
 using System.Windows.Forms;
 using AdventOfCodeLib.Extensions;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AdventOfCode2022
 {
@@ -180,10 +181,106 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec07( )
       {
+         //Read input..
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec07.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
 
+      //Loop over and create all the folders..
+         DirectoryFolder rootFolder = new DirectoryFolder( "/", null );
+         DirectoryFolder currentFolder = rootFolder;
+         for( int i = 1; i<inp.Length; i++ )
+         {
+
+         //If the command is a list command, extract the listed strings and create the subdirectories and files..
+            if( inp[i].Substring( 0, 4 ) == "$ ls" )
+            {
+            //Extract substring that does not contain a $
+               List<string> listedParts = new List<string>( );
+               int localIdx = i + 1;
+               while( true )
+               {
+               //Exit this loop if the next line contains a command..
+                  if( localIdx > inp.Length-1 || inp[localIdx][0] == '$' )
+                     break;
+
+               //If the code reached this point, this is not a command. Create the local file in the directory
+                  listedParts.Add( inp[localIdx] );
+
+               //Increment the local index..
+                  localIdx++;
+               }
+
+            //Create the files and folder that was extracted from the command..
+               foreach( string s in listedParts )
+               {
+                  if( s.Substring( 0, 3 ) == "dir" ) //The string is a listed directory..
+                  {
+                     string folderName = s.Substring( 4 );
+                     if( !currentFolder.SubFolders.ContainsKey( folderName ) )
+                        currentFolder.SubFolders.Add( folderName, new DirectoryFolder( folderName, currentFolder ) );
+                  }
+                  else //The string is a listed file, create the file in the current folder..
+                  {
+                     string[] splitter = s.Split( new char[]{ ' ' }, StringSplitOptions.RemoveEmptyEntries );
+                     long fileSize = long.Parse( splitter[0] );
+                     if( !currentFolder.Files.ContainsKey( splitter[1] ) )
+                        currentFolder.Files.Add( splitter[1], new DirectoryFile( splitter[1], fileSize ) );
+                  }
+               }
+
+            //Set the local index to one less because the i is incremented
+               i = localIdx-1;
+               continue;
+            }
+            else if( inp[i].Substring( 0, 4 ) == "$ cd" ) //Set the current directory as something else and increment one..
+            {
+               if( inp[i].Length >= 7 && inp[i].Substring( 5, 2 ) == ".." ) //Navigate up one level..
+               {
+                  currentFolder = currentFolder.Parent;
+               }
+               else //Set the current folder to a sub folder of this folder. Look for it and set to current folder..
+               {
+                  string folderName = inp[i].Substring( 5 );
+                  currentFolder = currentFolder.GetFolder( folderName );
+                  if( currentFolder == null )
+                     throw new Exception( );
+               }
+            }
+            else
+            {
+               throw new Exception( );
+            }
+
+         }
+
+      //Loop over all the directories in the subdirectory. Find all the folders that are larger than a certain value..
+         List<DirectoryFolder> sizeLimitFolder = new List<DirectoryFolder>();
+         rootFolder.CollectLargeDirectories( sizeLimitFolder );
+         long sizeSum = sizeLimitFolder.Select( x => x.GetSizeOfFolder( ) ).Sum( );
+
+      //File system size:
+         long totalSystemSize = 70000000;
+         long usedSpace = rootFolder.GetSizeOfFolder( );
+         long freeSpace = totalSystemSize - usedSpace;
+         long targetSize = 30000000 - freeSpace;
+
+         List<DirectoryFolder> foldersThatAreLargeEnough = new List<DirectoryFolder>( );
+         rootFolder.CollectLargeDirectories( foldersThatAreLargeEnough, targetSize );
+
+      //Order the folders by size..
+         List<DirectoryFolder> orderedFolders = foldersThatAreLargeEnough.OrderBy( x => x.GetSizeOfFolder( ) ).ToList( );
+
+      //Get the size of the folder that is just large enough..
+         long targetFolderSize = orderedFolders[0].GetSizeOfFolder( );
+
+      //Write answer..
+         Console.WriteLine( "Ans: " + targetFolderSize );
+         Clipboard.SetDataObject( targetFolderSize );
 
 
       }
+
+
       /// <summary>
       /// De06c
       /// </summary>

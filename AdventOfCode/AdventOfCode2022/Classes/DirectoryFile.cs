@@ -20,12 +20,12 @@ namespace AdventOfCode2022.Classes
    /*MEMBERS*/
    #region
       protected string m_Name = null;
-      protected int m_Size = -1;
+      protected long m_Size = -1;
    #endregion
 
    /*CONSTRUCTORS*/
    #region
-      public DirectoryFile( string name, int size )
+      public DirectoryFile( string name, long size )
       {
          m_Size = size;
          m_Name = name;
@@ -35,7 +35,7 @@ namespace AdventOfCode2022.Classes
    /*PROPERTIES*/
    #region
       public string Name { get { return m_Name; } }
-      public int Size { get { return m_Size; } }
+      public long Size { get { return m_Size; } }
    #endregion
 
    /*OPERATORS*/
