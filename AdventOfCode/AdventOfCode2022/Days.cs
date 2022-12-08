@@ -173,12 +173,48 @@ namespace AdventOfCode2022
       public static void Dec08( )
       {
       //Read input and parse..
-         int[ ] inp = GlobalMethods.GetInputIntArray( "..\\..\\Inputs\\Dec08.txt" );
-         //int[ ] inp = GlobalMethods.GetInputIntArray( "..\\..\\Inputs\\Temp01.txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec08.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
 
+      //Create forest..
+         TreeWithPosition[ ,] forest = new TreeWithPosition[inp.Length,inp[0].ToString().Length];
+         for( int i = 0; i< inp.Length; i++ )
+         {
+            for( int j = 0; j<forest.GetLength( 1 ); j++ )
+               forest[i,j] = new TreeWithPosition( int.Parse( inp[i][j].ToString( ) ), i, j );
+         }
 
+      //Loop over the visible trees and calculate visible trees..
+         long visible = 0;
+         for( int i = 0; i< inp.Length; i++ )
+         {
+            for( int j = 0; j<forest.GetLength( 1 ); j++ )
+            {
+               forest[i,j].SetIsVisible( forest );
+               if( forest[i,j].IsVisible )
+                  visible++;
+            }
+         }
 
+      //Loop over and se the scenic score..
+         long maxScenicScore = -1;
+         TreeWithPosition maxTree = null;
+         for( int i = 0; i< inp.Length; i++ )
+         {
+            for( int j = 0; j<forest.GetLength( 1 ); j++ )
+            {
+               forest[i,j].SetScenicScore( forest );
+               if( forest[i,j].ScenicScore > maxScenicScore )
+               {
+                  maxScenicScore = forest[i,j].ScenicScore;
+                  maxTree = forest[i,j];
+               }
+            }
+         }
 
+      //Print the answer
+         Console.WriteLine( "Ans: " + maxScenicScore );
+         Clipboard.SetDataObject( maxScenicScore );
 
       }
       /// <summary>
