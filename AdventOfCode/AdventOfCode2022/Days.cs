@@ -172,6 +172,11 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec08( )
       {
+      //Read input and parse..
+         int[ ] inp = GlobalMethods.GetInputIntArray( "..\\..\\Inputs\\Dec08.txt" );
+         //int[ ] inp = GlobalMethods.GetInputIntArray( "..\\..\\Inputs\\Temp01.txt" );
+
+
 
 
 

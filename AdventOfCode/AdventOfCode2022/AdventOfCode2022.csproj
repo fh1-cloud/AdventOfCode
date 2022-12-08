@@ -52,6 +52,7 @@
     <Compile Include="Classes\ElfWithCalories.cs" />
     <Compile Include="Classes\RockPaperScissors.cs" />
     <Compile Include="Classes\Rucksack.cs" />
+    <Compile Include="Classes\TreeWithPosition.cs" />
     <Compile Include="Days.cs" />
     <Compile Include="GlobalMethods.cs" />
     <Compile Include="Program.cs" />
