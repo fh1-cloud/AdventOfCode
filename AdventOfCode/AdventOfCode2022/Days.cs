@@ -9,6 +9,7 @@ using AdventOfCode2022.Classes;
 using System.Windows.Forms;
 using AdventOfCodeLib.Extensions;
 using System.Security.Cryptography.X509Certificates;
+using AdventOfCodeLib.Numerics;
 
 namespace AdventOfCode2022
 {
@@ -163,10 +164,80 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec09( )
       {
+         //Read input and parse..
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec09.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp02.txt" );
 
+         RopeKnot head  = new RopeKnot( null,  0, new UVector2D( 0.0, 0.0 ) );
+         RopeKnot knot1 = new RopeKnot( head,  1, new UVector2D( 0.0, 0.0 ) );
+         RopeKnot knot2 = new RopeKnot( knot1, 2, new UVector2D( 0.0, 0.0 ) );
+         RopeKnot knot3 = new RopeKnot( knot2, 3, new UVector2D( 0.0, 0.0 ) );
+         RopeKnot knot4 = new RopeKnot( knot3, 4, new UVector2D( 0.0, 0.0 ) );
+         RopeKnot knot5 = new RopeKnot( knot4, 5, new UVector2D( 0.0, 0.0 ) );
+         RopeKnot knot6 = new RopeKnot( knot5, 6, new UVector2D( 0.0, 0.0 ) );
+         RopeKnot knot7 = new RopeKnot( knot6, 7, new UVector2D( 0.0, 0.0 ) );
+         RopeKnot knot8 = new RopeKnot( knot7, 8, new UVector2D( 0.0, 0.0 ) );
+         RopeKnot knot9 = new RopeKnot( knot8, 9, new UVector2D( 0.0, 0.0 ) );
+         head.Child = knot1;
+         knot1.Child = knot2;
+         knot2.Child = knot3;
+         knot3.Child = knot4;
+         knot4.Child = knot5;
+         knot5.Child = knot6;
+         knot6.Child = knot7;
+         knot7.Child = knot8;
+         knot8.Child = knot9;
 
+      //Loop over instructions and parse..
+         List<RopeKnotMovementPair> instructions = new List<RopeKnotMovementPair>( );
+
+         for( int i = 0; i < inp.Length; i++ )
+         //for( int i = 0; i<3; i++ )
+         {
+            string[] split = inp[i].Split( new char[]{ ' ' }, StringSplitOptions.RemoveEmptyEntries );
+            RopeKnot.MOVEDIRECTION? dir = null;
+            if( split[0][0] == 'R' )
+               dir = RopeKnot.MOVEDIRECTION.RIGHT;
+            else if( split[0][0] == 'L' )
+               dir = RopeKnot.MOVEDIRECTION.LEFT;
+            else if( split[0][0] == 'U' )
+               dir = RopeKnot.MOVEDIRECTION.UP;
+            else if( split[0][0] == 'D' )
+               dir = RopeKnot.MOVEDIRECTION.DOWN;
+            else
+               throw new Exception( );
+            int repeats = int.Parse( split[1] );
+            instructions.Add( new RopeKnotMovementPair( (RopeKnot.MOVEDIRECTION) dir, repeats ) );
+
+         }
+         
+      //Carry out instructions for the rope knot movement pair..
+         //int canvasRows = 21;
+         //int canvasCols = 26;
+         foreach( RopeKnotMovementPair ins in instructions )
+         {
+            //Console.WriteLine( "== " + ins.Direction.ToString( ) + " " + ins.Repeats.ToString( ) + " ==" );
+            for( int i = 0; i<ins.Repeats; i++ )
+            {
+               head.MoveKnot( ins.Direction );
+               //head.PrintState( canvasRows, canvasCols, ( canvasRows / 2 ), ( canvasCols / 2 ) );
+               //head.PrintState( canvasRows, canvasCols, 4, 0 );
+               //head.PrintState( canvasRows, canvasCols, 15, 11 );
+            }
+         }
+
+      //Find the number of unique entries in the tail..
+         int nOfUniquePositions = knot9.GetNumberOfUniquePositions( );
+
+      //Print the answer
+         Console.WriteLine( "Ans: " + nOfUniquePositions );
+         Clipboard.SetDataObject( nOfUniquePositions );
 
       }
+
+
+
       /// <summary>
       /// Dec08
       /// </summary>

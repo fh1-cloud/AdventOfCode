@@ -51,6 +51,8 @@
     <Compile Include="Classes\DirectoryFolder.cs" />
     <Compile Include="Classes\ElfWithCalories.cs" />
     <Compile Include="Classes\RockPaperScissors.cs" />
+    <Compile Include="Classes\RopeKnot.cs" />
+    <Compile Include="Classes\RopeKnotMovementPair.cs" />
     <Compile Include="Classes\Rucksack.cs" />
     <Compile Include="Classes\TreeWithPosition.cs" />
     <Compile Include="Days.cs" />
