@@ -54,6 +54,11 @@ namespace AdventOfCode2022
       }
 
 
+      /// <summary>
+      /// Split the input string array by an empty line..
+      /// </summary>
+      /// <param name="input"></param>
+      /// <returns></returns>
       public static List<string[]> SplitStringArrayByEmptyLine( string[] input )
       {
       //Collect the individual passport data in the list.
@@ -88,8 +93,6 @@ namespace AdventOfCode2022
       {
          if( str == null )
             return 0;
-
-
          if( positions != null )
          {
             int count = 0;
@@ -106,8 +109,6 @@ namespace AdventOfCode2022
          }
       }
 
-
-
       /// <summary>
       /// Gets a nice header for each day.
       /// </summary>
@@ -118,7 +119,7 @@ namespace AdventOfCode2022
          StringBuilder sb = new StringBuilder( );
          sb.AppendLine( "*****************************************************************" );
          sb.AppendLine( "*                                                               *" );
-         sb.AppendLine( "*                    ADVENT OF CODE 2020                        *" );
+         sb.AppendLine( "*                    ADVENT OF CODE 2022                        *" );
          sb.AppendLine( "*                        December " + ( decemberDate.ToString().Length == 1 ? decemberDate.ToString() + " " : decemberDate.ToString() ) + "                            *" );
          sb.AppendLine( "*                                                               *" );
          sb.AppendLine( "*                                                               *" );

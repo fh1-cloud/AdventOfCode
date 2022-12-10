@@ -150,15 +150,41 @@ namespace AdventOfCode2022
 
 
       }
+
       /// <summary>
       /// Dec10
       /// </summary>
       public static void Dec10( )
       {
+         //Read input and parse..
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec10.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp02.txt" );
 
+         //Loop over the input list and create the instructionrs..
+         CathodeRayCPU cpu = new CathodeRayCPU( 1, true );
+         for( int i = 0; i<inp.Length; i++ )
+         {
+            string[] split = inp[i].Split( new char[]{' ' }, StringSplitOptions.RemoveEmptyEntries );
 
+            CathodeRayCPU.INSTRUCTION? ins = null;
+            long? inp1Val = null;
+            if( split[0] == "noop" )
+               ins = CathodeRayCPU.INSTRUCTION.NOOP;
+            else if( split[0] == "addx" )
+            {
+               ins = CathodeRayCPU.INSTRUCTION.ADDX;
+               inp1Val = long.Parse( split[1] );
+            }
 
+         //Carry out the instruction on the cpu..
+            cpu.CarryOutInstructionPart2( (CathodeRayCPU.INSTRUCTION) ins, true, inp1Val );
+
+         }
+      //Print the answer
+         Console.Write( cpu.GetScreenContent( ) );
       }
+
       /// <summary>
       /// Dec09
       /// </summary>
@@ -236,8 +262,6 @@ namespace AdventOfCode2022
 
       }
 
-
-
       /// <summary>
       /// Dec08
       /// </summary>
@@ -288,6 +312,7 @@ namespace AdventOfCode2022
          Clipboard.SetDataObject( maxScenicScore );
 
       }
+
       /// <summary>
       /// De07c
       /// </summary>
@@ -392,7 +417,6 @@ namespace AdventOfCode2022
 
       }
 
-
       /// <summary>
       /// De06c
       /// </summary>
@@ -426,6 +450,7 @@ namespace AdventOfCode2022
          Clipboard.SetDataObject( firstIdx );
 
       }
+
       /// <summary>
       /// Dec05
       /// </summary>

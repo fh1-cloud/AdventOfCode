@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CathodeRayCPU.cs" />
     <Compile Include="Classes\CleaningElf.cs" />
     <Compile Include="Classes\CrateMoveInstruction.cs" />
     <Compile Include="Classes\CrateStack.cs" />
