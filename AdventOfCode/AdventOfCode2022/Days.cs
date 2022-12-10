@@ -146,10 +146,21 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec11( )
       {
+      //Read input and parse..
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec11.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp02.txt" );
 
+         for( int i = 0; i<inp.Length; i++ )
+         {
+            string[] split = inp[i].Split( new char[]{ ' ' }, StringSplitOptions.RemoveEmptyEntries );
+         }
 
 
       }
+
+
+
 
       /// <summary>
       /// Dec10
@@ -157,9 +168,9 @@ namespace AdventOfCode2022
       public static void Dec10( )
       {
       //Read input and parse..
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec10.txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec10.txt" );
          //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
-         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp02.txt" );
 
          //Loop over the input list and create the instructionrs..
          CathodeRayCPU cpu = new CathodeRayCPU( 1, true );
