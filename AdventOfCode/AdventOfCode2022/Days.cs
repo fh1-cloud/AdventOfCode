@@ -157,9 +157,9 @@ namespace AdventOfCode2022
       public static void Dec10( )
       {
       //Read input and parse..
-         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec10.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec10.txt" );
          //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp02.txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp02.txt" );
 
          //Loop over the input list and create the instructionrs..
          CathodeRayCPU cpu = new CathodeRayCPU( 1, true );

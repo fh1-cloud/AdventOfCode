@@ -12,8 +12,8 @@ namespace AdventOfCode2022
       [STAThread]
       static void Main( string[ ] args )
       {
-         Console.Write( GlobalMethods.GetConsoleHeader( 11 ) );
-         Days.Dec11( );
+         Console.Write( GlobalMethods.GetConsoleHeader( 10 ) );
+         Days.Dec10( );
          Console.ReadKey( );
       }
    }

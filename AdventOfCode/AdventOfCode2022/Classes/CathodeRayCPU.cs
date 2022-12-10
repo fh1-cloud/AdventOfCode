@@ -153,12 +153,20 @@ namespace AdventOfCode2022.Classes
       /// </summary>
       public void PaintIfMatch( )
       {
-      //Draw the Pixel IF the x-position +-1 is equal to the cycle number..
-         if( (m_Cycles%40)- m_XRegister == 2 || (m_Cycles%40)- m_XRegister == 1 || (m_Cycles%40)- m_XRegister == 0 )
+      //Draw the Pixel if the sprite is located above the current cycle..
+      //If we are at the last pixel of each line, we need to check that the x-register is only one less..
+         if( m_Cycles%40 == 0 ) 
+         {
+            if( m_XRegister == 39 || m_XRegister == 40 )
+            {
+               ( int rowIdx, int colIdx ) = GetCanvasPositionFromCycle( (int ) m_Cycles );
+               Canvas[rowIdx, colIdx] = true;
+            }
+         }
+         else if( (m_Cycles%40)- m_XRegister == 2 || (m_Cycles%40)- m_XRegister == 1 || (m_Cycles%40)- m_XRegister == 0 )
          {
             ( int rowIdx, int colIdx ) = GetCanvasPositionFromCycle( (int ) m_Cycles );
-            if( colIdx != -1 )
-               Canvas[rowIdx, colIdx] = true;
+            Canvas[rowIdx, colIdx] = true;
          }
       }
 
