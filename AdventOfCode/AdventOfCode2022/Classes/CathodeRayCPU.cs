@@ -8,6 +8,7 @@ namespace AdventOfCode2022.Classes
 {
    public class CathodeRayCPU
    {
+
    /*ENUMS*/
    #region
       public enum INSTRUCTION
@@ -71,22 +72,12 @@ namespace AdventOfCode2022.Classes
       }
 
 
-      #endregion
+   #endregion
 
-      /*PROPERTIES*/
-      #region
+   /*PROPERTIES*/
+   #region
       public long XRegister { get { return m_XRegister; } }
-      public long Cycles 
-      { 
-         get 
-         {
-            return m_Cycles; 
-         } 
-         set
-         {
-            m_Cycles = value;
-         }
-      }
+      public long Cycles { get { return m_Cycles; } set { m_Cycles = value; } }
    #endregion
 
    /*OPERATORS*/
@@ -140,46 +131,21 @@ namespace AdventOfCode2022.Classes
       /// <param name="inpVal1">The input value for the instruction, if any</param>
       public void CarryOutInstructionPart2( INSTRUCTION ins, bool printStatus = false, long? inpVal1 = null )
       {
-
-         //Console.WriteLine( m_Cycles.ToString( ) );
-
-
          if( ins == INSTRUCTION.NOOP )
          {
-         //Start of cycle..
             m_Cycles++;
-
-         //During cycle..
             PaintIfMatch( );
-
-         //End of cycle..
          }
          else if( ins == INSTRUCTION.ADDX && inpVal1 != null )
          {
-         //Start of cycle 1..
             m_Cycles++;
-
-         //During cycle..
             PaintIfMatch( );
-
-         //End of cycle..
-
-         //Start of cycle 2..
             m_Cycles++;
-
-         //during cycle 2..
             PaintIfMatch( );
-
-         //End of cycle 2..
             m_XRegister += ( long ) inpVal1; //Cycles are finished. increment the x-register..
-
          }
          else
-         {
             throw new Exception( );
-         }
-
-
       }
 
       /// <summary>
@@ -188,11 +154,9 @@ namespace AdventOfCode2022.Classes
       public void PaintIfMatch( )
       {
       //Draw the Pixel IF the x-position +-1 is equal to the cycle number..
-         
          if( (m_Cycles%40)- m_XRegister == 2 || (m_Cycles%40)- m_XRegister == 1 || (m_Cycles%40)- m_XRegister == 0 )
          {
             ( int rowIdx, int colIdx ) = GetCanvasPositionFromCycle( (int ) m_Cycles );
-
             if( colIdx != -1 )
                Canvas[rowIdx, colIdx] = true;
          }
@@ -229,31 +193,15 @@ namespace AdventOfCode2022.Classes
       {
          if( ins == INSTRUCTION.NOOP )
          {
-         //Start of cycle..
             m_Cycles++;
-
-         //During cycle..
             CheckSignalStrength( );
-
-         //End of cycle..
          }
          else if( ins == INSTRUCTION.ADDX && inpVal1 != null )
          {
-         //Start of cycle 1..
             m_Cycles++;
-
-         //During cycle..
             CheckSignalStrength( );
-
-         //End of cycle..
-
-         //Start of cycle 2..
             m_Cycles++;
-
-         //during cycle 2..
             CheckSignalStrength( );
-
-         //End of cycle 2..
             m_XRegister += ( long ) inpVal1; //Cycles are finished. increment the x-register..
 
          }
@@ -261,8 +209,6 @@ namespace AdventOfCode2022.Classes
          {
             throw new Exception( );
          }
-
-
       }
 
       /// <summary>

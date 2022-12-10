@@ -156,7 +156,7 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec10( )
       {
-         //Read input and parse..
+      //Read input and parse..
          string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec10.txt" );
          //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
          //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp02.txt" );
@@ -166,7 +166,6 @@ namespace AdventOfCode2022
          for( int i = 0; i<inp.Length; i++ )
          {
             string[] split = inp[i].Split( new char[]{' ' }, StringSplitOptions.RemoveEmptyEntries );
-
             CathodeRayCPU.INSTRUCTION? ins = null;
             long? inp1Val = null;
             if( split[0] == "noop" )
@@ -179,7 +178,6 @@ namespace AdventOfCode2022
 
          //Carry out the instruction on the cpu..
             cpu.CarryOutInstructionPart2( (CathodeRayCPU.INSTRUCTION) ins, true, inp1Val );
-
          }
       //Print the answer
          Console.Write( cpu.GetScreenContent( ) );
