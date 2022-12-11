@@ -137,10 +137,16 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec12( )
       {
+      //Read input and parse..
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec11.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
 
-
-
+         long ans = 0;
+         Console.WriteLine( "Ans: " + ans );
+         Clipboard.SetDataObject( ans );
       }
+
+
       /// <summary>
       /// Dec11
       /// </summary>
@@ -148,18 +154,48 @@ namespace AdventOfCode2022
       {
       //Read input and parse..
          string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec11.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp02.txt" );
 
-         for( int i = 0; i<inp.Length; i++ )
+      //Create all the monkeys from input..
+         List<string[ ]> splitMonkeys = GlobalMethods.SplitStringArrayByEmptyLine( inp );
+         Dictionary<int, Monkey> allMonkeys = new Dictionary<int, Monkey>( );
+         foreach( string[] monkey in splitMonkeys )
          {
-            string[] split = inp[i].Split( new char[]{ ' ' }, StringSplitOptions.RemoveEmptyEntries );
+            Monkey thisMonkey = new Monkey( monkey );
+            allMonkeys.Add( thisMonkey.ID, thisMonkey );
          }
 
+      //Find the monkeymodder to reduce the value by. This is the divisor for all the monkeys multiplied together to make sure that the remainder remainds the same..
+         long monkeyModder = 1;
+         foreach( var kvp in allMonkeys )
+         {
+            monkeyModder *= kvp.Value.Divisor;
+         }
+         Monkey.MonkeyModder = monkeyModder;
 
+      //Make the monkeys take turns..
+         int numberOfTurns = 10000;
+         for( int i = 1; i<=numberOfTurns; i++ )
+         {
+            foreach( KeyValuePair<int, Monkey> kvp in allMonkeys )
+               kvp.Value.TakeTurn( allMonkeys, true );
+
+            if( i == 1 || i == 20 || i%1000 == 0 )
+            {
+            //Print status..
+               Monkey.PrintStatusPart2( i, allMonkeys );
+            }
+         }
+
+      //Print the answers..
+         //Get a list of number of inspections..
+         List<long> inspections = allMonkeys.Select( x => x.Value ).ToList( ).Select( y => y.Inspections ).ToList( );
+         inspections.Sort( );
+         inspections.Reverse( );
+         long monkeyBusiness = inspections[0] * inspections[1];
+
+         Console.WriteLine( "Ans: " + monkeyBusiness );
+         Clipboard.SetDataObject( monkeyBusiness );
       }
-
-
 
 
       /// <summary>
@@ -169,8 +205,6 @@ namespace AdventOfCode2022
       {
       //Read input and parse..
          string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec10.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp02.txt" );
 
          //Loop over the input list and create the instructionrs..
          CathodeRayCPU cpu = new CathodeRayCPU( 1, true );
@@ -199,10 +233,8 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec09( )
       {
-         //Read input and parse..
+      //Read input and parse..
          string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec09.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp02.txt" );
 
          RopeKnot head  = new RopeKnot( null,  0, new UVector2D( 0.0, 0.0 ) );
          RopeKnot knot1 = new RopeKnot( head,  1, new UVector2D( 0.0, 0.0 ) );
@@ -244,23 +276,12 @@ namespace AdventOfCode2022
                throw new Exception( );
             int repeats = int.Parse( split[1] );
             instructions.Add( new RopeKnotMovementPair( (RopeKnot.MOVEDIRECTION) dir, repeats ) );
-
          }
          
       //Carry out instructions for the rope knot movement pair..
-         //int canvasRows = 21;
-         //int canvasCols = 26;
          foreach( RopeKnotMovementPair ins in instructions )
-         {
-            //Console.WriteLine( "== " + ins.Direction.ToString( ) + " " + ins.Repeats.ToString( ) + " ==" );
             for( int i = 0; i<ins.Repeats; i++ )
-            {
                head.MoveKnot( ins.Direction );
-               //head.PrintState( canvasRows, canvasCols, ( canvasRows / 2 ), ( canvasCols / 2 ) );
-               //head.PrintState( canvasRows, canvasCols, 4, 0 );
-               //head.PrintState( canvasRows, canvasCols, 15, 11 );
-            }
-         }
 
       //Find the number of unique entries in the tail..
          int nOfUniquePositions = knot9.GetNumberOfUniquePositions( );
@@ -268,7 +289,6 @@ namespace AdventOfCode2022
       //Print the answer
          Console.WriteLine( "Ans: " + nOfUniquePositions );
          Clipboard.SetDataObject( nOfUniquePositions );
-
       }
 
       /// <summary>
@@ -278,15 +298,12 @@ namespace AdventOfCode2022
       {
       //Read input and parse..
          string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec08.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
 
       //Create forest..
          TreeWithPosition[ ,] forest = new TreeWithPosition[inp.Length,inp[0].ToString().Length];
          for( int i = 0; i< inp.Length; i++ )
-         {
             for( int j = 0; j<forest.GetLength( 1 ); j++ )
                forest[i,j] = new TreeWithPosition( int.Parse( inp[i][j].ToString( ) ), i, j );
-         }
 
       //Loop over the visible trees and calculate visible trees..
          long visible = 0;
@@ -315,11 +332,9 @@ namespace AdventOfCode2022
                }
             }
          }
-
       //Print the answer
          Console.WriteLine( "Ans: " + maxScenicScore );
          Clipboard.SetDataObject( maxScenicScore );
-
       }
 
       /// <summary>
@@ -327,16 +342,14 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec07( )
       {
-         //Read input..
+      //Read input..
          string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec07.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
 
       //Loop over and create all the folders..
          DirectoryFolder rootFolder = new DirectoryFolder( "/", null );
          DirectoryFolder currentFolder = rootFolder;
          for( int i = 1; i<inp.Length; i++ )
          {
-
          //If the command is a list command, extract the listed strings and create the subdirectories and files..
             if( inp[i].Substring( 0, 4 ) == "$ ls" )
             {
@@ -396,7 +409,6 @@ namespace AdventOfCode2022
             {
                throw new Exception( );
             }
-
          }
 
       //Loop over all the directories in the subdirectory. Find all the folders that are larger than a certain value..
@@ -431,10 +443,8 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec06( )
       {
-         //Read input..
+      //Read input..
          string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec06.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
-
          string message = inp[0];
          string current4 = message.Substring( 0, 14 );
          int firstIdx = -1;
@@ -450,14 +460,11 @@ namespace AdventOfCode2022
          //Remove the first index of the string and add the last..
             current4 = current4.Remove( 0, 1 );
             current4 += message[i];
-
          }
-
 
       //Write answer..
          Console.WriteLine( "Ans: " + firstIdx );
          Clipboard.SetDataObject( firstIdx );
-
       }
 
       /// <summary>
@@ -465,11 +472,10 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec05( )
       {
-         //Read input..
+      //Read input..
          string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec05.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
 
-         //Find the IDX line..
+      //Find the IDX line..
          int idxLine = -1;
          for( int i = 0; i<inp.Length; i++ )
          {
@@ -494,7 +500,6 @@ namespace AdventOfCode2022
          List<CrateStack> stackList = new List<CrateStack>( );
          foreach( int stack in numbers )
             stackList.Add( new CrateStack( stack ) );
-
 
          string firstLine = inp[0];
          for( int i = 0; i<firstLine.Length; i++ )
@@ -526,7 +531,6 @@ namespace AdventOfCode2022
                current.Stack.Push( c );
          }
 
-
       //Parse the instructions and carry out..
          int instructionStartIdx = idxLine + 2;
          List<CrateMoveInstruction> instructions = new List<CrateMoveInstruction>( );
@@ -535,7 +539,6 @@ namespace AdventOfCode2022
             CrateMoveInstruction ins = new CrateMoveInstruction( inp[i] );
             ins.CarryOutInstruction( stackList );
          }
-
 
       //Write the answer..
          StringBuilder sb = new StringBuilder( );
@@ -553,25 +556,19 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec04( )
       {
-         //Read input..
+      //Read input..
          string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec04.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
 
-         //Split by comma..
+      //Split by comma..
          long ans = 0;
          foreach( string s in inp )
          {
             string[] splt = s.Split( ',' );
             CleaningElf c1 = new CleaningElf( splt[0] );
             CleaningElf c2 = new CleaningElf( splt[1] );
-
-            //if( CleaningElf.DoesEncapsulate( c1, c2 ) )
-            //   ans++;
             if( CleaningElf.DoesOverlap( c1, c2 ) )
                ans++;
          }
-
-      //Loop over the
          Console.WriteLine( "Ans: " + ans.ToString( ) );
          Clipboard.SetText( ans.ToString( ) );
 
@@ -584,7 +581,6 @@ namespace AdventOfCode2022
       {
       //Parse input file..
          string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec03.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
 
       //Loop over items and create rucksacks..
          long ans = 0;
@@ -606,8 +602,8 @@ namespace AdventOfCode2022
          //    .Select(e => e[0].Intersect(e[1]).Intersect(e[2]).First())
          //    .Select(e => char.IsUpper(e) ? e - 38 : e - 96)
          //    .Sum();
-
          //Console.WriteLine(score);
+
       //Loop over the
          Console.WriteLine( "Ans: " + ans.ToString( ) );
          Clipboard.SetText( ans.ToString( ) );
@@ -621,7 +617,6 @@ namespace AdventOfCode2022
       {
       //Parse input file..
          string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec02.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
 
          long ans = 0;
          for( int i = 0; i<inp.Length; i++ )
@@ -630,7 +625,6 @@ namespace AdventOfCode2022
             RockPaperScissors thisGame = new RockPaperScissors( split[0][0], split[1][0] );
             ans += thisGame.Score;
          }
-
          Console.WriteLine( "Total score: " + ans.ToString( ) );
          Clipboard.SetDataObject( ans.ToString( ) );
 
@@ -661,18 +655,10 @@ namespace AdventOfCode2022
          //Add the food item..
             currentElf.Food.Add( int.Parse( inp[i] ) );
          }
-
-         //Find max elf..
-         //List<long> calList = allElves.Select( x => x.TotalCalories ).ToList( );
-         //Console.WriteLine( "Max calories of one elf: " + maxCal.ToString( ) );
-
          List<ElfWithCalories> sorted = allElves.OrderBy( x => x.TotalCalories ).ToList( );
          sorted.Reverse( );
          long totSum = sorted[0].TotalCalories + sorted[1].TotalCalories + sorted[2].TotalCalories;
-
          Console.WriteLine( "Max calories of top three elves: " + totSum.ToString( ) );
-
-
       }
 
    }

@@ -51,6 +51,7 @@
     <Compile Include="Classes\DirectoryFile.cs" />
     <Compile Include="Classes\DirectoryFolder.cs" />
     <Compile Include="Classes\ElfWithCalories.cs" />
+    <Compile Include="Classes\Monkey.cs" />
     <Compile Include="Classes\RockPaperScissors.cs" />
     <Compile Include="Classes\RopeKnot.cs" />
     <Compile Include="Classes\RopeKnotMovementPair.cs" />
