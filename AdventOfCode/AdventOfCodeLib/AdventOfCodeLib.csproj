@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\HashSetIndexPair.cs" />
     <Compile Include="Classes\HashSetUVector2D.cs" />
+    <Compile Include="Classes\IntegerPair.cs" />
     <Compile Include="Extensions\EChar.cs" />
     <Compile Include="Extensions\EDouble.cs" />
     <Compile Include="Extensions\EString.cs" />

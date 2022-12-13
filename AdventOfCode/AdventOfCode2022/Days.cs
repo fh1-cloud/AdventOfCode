@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using System.Linq;
 using System.Security.Permissions;
 using System.Text;
@@ -10,6 +9,7 @@ using System.Windows.Forms;
 using AdventOfCodeLib.Extensions;
 using System.Security.Cryptography.X509Certificates;
 using AdventOfCodeLib.Numerics;
+using DotNetty.Common.Utilities;
 
 namespace AdventOfCode2022
 {
@@ -132,18 +132,123 @@ namespace AdventOfCode2022
 
 
       }
+
+
+
       /// <summary>
       /// Dec12
       /// </summary>
       public static void Dec12( )
       {
       //Read input and parse..
-         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec11.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec12.txt" );
 
-         long ans = 0;
-         Console.WriteLine( "Ans: " + ans );
-         Clipboard.SetDataObject( ans );
+      //Translate to a char array..
+         int nRows = inp.Length;
+         int nCols = inp[0].Length;
+         MapNode[,] terrain = new MapNode[nRows, nCols];
+         HashSet<MapNode> unvisited = new HashSet<MapNode>( );
+         List<MapNode> potentialStarters = new List<MapNode>( );
+         int startRowIdx = -1;
+         int startColIdx = -1;
+         int endRowIdx = -1;
+         int endColIdx = -1;
+         for( int i = 0; i<terrain.GetLength( 0 ); i++ )
+         {
+            for( int j = 0; j<terrain.GetLength( 1 ); j++ )
+            {
+               MapNode thisNode = new MapNode( inp[i][j], i, j );
+               terrain[i,j] = thisNode;
+               unvisited.Add( thisNode );
+               if( terrain[i,j].NodeValue == 'S' )
+               {
+                  startRowIdx = i;
+                  startColIdx = j;
+                  potentialStarters.Add( thisNode );
+               }
+               else if( terrain[i,j].NodeValue == 'E' )
+               {
+                  endRowIdx = i;
+                  endColIdx = j;
+               }
+               else if( j==0 && thisNode.NodeValue == 'a' )
+                  potentialStarters.Add( thisNode );
+            }
+         }
+      //Set the starting distance from the start to 0;
+         MapNode start = terrain[ startRowIdx, startColIdx];
+         start.NodeValue = 'a';
+         MapNode end = terrain[endRowIdx, endColIdx];
+         end.NodeValue = 'z';
+
+      //Declare the shortest path so far..
+         long shortestPathSoFar = long.MaxValue;
+
+      //Loop over all the potential starters..
+         foreach( MapNode startNode in potentialStarters )
+         {
+         //Create a new copy of the terrain objects first.. this is to not cause errors later..
+            MapNode[,] terrainDeepCopy = new MapNode[terrain.GetLength( 0 ), terrain.GetLength( 1 ) ];
+            HashSet<MapNode> unvisitedCopy = new HashSet<MapNode>( );
+            for( int i = 0; i < terrain.GetLength( 0 ); i++ )
+            {
+               for( int j = 0; j < terrain.GetLength( 1 ); j++ )
+               {
+                  MapNode thisNode = new MapNode( terrain[i,j] );
+                  terrainDeepCopy[i,j] = thisNode;
+                  unvisitedCopy.Add( thisNode );
+               }
+            }
+
+         //Declare the current node..
+            MapNode currentNode = terrainDeepCopy[startNode.RowIdx, startNode.ColIdx];
+            currentNode.ShortestRoadTo = 0;
+
+         //Start the loop..
+            while( true )
+            {
+            //Consider all the unvisited neighbours and calculate the tentative distance through the current node..
+            //Collect all the neighbours..
+               List<MapNode> unvisitedNeighbours = MapNode.GetNeighbours( currentNode, terrainDeepCopy );
+
+            //Calculate the tentative distance to each of these nodes..
+               foreach( MapNode neighbour in unvisitedNeighbours )
+               {
+                  long distance = currentNode.ShortestRoadTo + 1;
+                  if( neighbour.ShortestRoadTo > distance )
+                     neighbour.ShortestRoadTo = distance;
+               }
+
+            //Mark the current node as visited..
+               currentNode.Visited = true;
+
+            //When done considering all the unvisited neighbours of the current node, mark the node as visited and remove it from the unvisited set
+               unvisitedCopy.Remove( currentNode );
+
+            //When the destination node is marked as visited, exit
+               if( unvisitedCopy.Count == 0 )
+                  break;
+
+            //The next node to visit should be the neighbour with the currently smallest distance from the initial node..
+               //Find the minimum unvisited path value..
+               long minVal = unvisitedCopy.Select( x => x.ShortestRoadTo ).ToList( ).Min( );
+
+               //Find this node..
+               currentNode = unvisitedCopy.Where( x => x.ShortestRoadTo == minVal ).FirstOrDefault( );
+            }
+
+         //We have broken the while loop, witch means that we have the path weight for the final node here..
+            MapNode endNode = terrainDeepCopy[endRowIdx, endColIdx];
+            Console.WriteLine( "Length from node " + startNode.RowIdx + ", " + startNode.ColIdx + ": " + endNode.ShortestRoadTo );
+
+         //Check for the shortest path so far..
+            if( endNode.ShortestRoadTo < shortestPathSoFar )
+               shortestPathSoFar = endNode.ShortestRoadTo;
+         }
+
+      //Find the answer..
+         Console.WriteLine( "Ans: " + shortestPathSoFar );
+         Clipboard.SetDataObject( shortestPathSoFar );
       }
 
 
