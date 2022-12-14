@@ -99,6 +99,7 @@
     <Compile Include="Classes\ElfWithCalories.cs" />
     <Compile Include="Classes\MapNode.cs" />
     <Compile Include="Classes\Monkey.cs" />
+    <Compile Include="Classes\Packet.cs" />
     <Compile Include="Classes\RockPaperScissors.cs" />
     <Compile Include="Classes\RopeKnot.cs" />
     <Compile Include="Classes\RopeKnotMovementPair.cs" />

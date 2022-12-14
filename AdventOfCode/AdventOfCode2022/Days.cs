@@ -119,20 +119,122 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec14( )
       {
+      //Read input and parse..
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec14.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
 
 
+         int ans = 0;
+      //Find the answer..
+         Console.WriteLine( "Ans: " + ans );
+         Clipboard.SetDataObject( ans );
 
       }
+
+
+
+
       /// <summary>
       /// Dec13
       /// </summary>
       public static void Dec13( )
       {
+      //Read input and parse..
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec13.txt" );
 
+      //Part 1
+         int packetPairIdx = 1;
+         List<int> idxOfOkPackets = new List<int>( );
+         List<Packet> packets = new List<Packet>( );
+         for( int i = 0; i<inp.Length; i=i+3 )
+         {
+         //Create packets..
+            Packet pack1 = new Packet( inp[i] );
+            Packet pack2 = new Packet( inp[i+1] );
 
+         //Add to list of packets for sorting in part two.
+            packets.Add( pack1 );
+            packets.Add( pack2 );
 
+         //Check the packet if it is in the right order..
+            Packet.PACKETCHECK check = Packet.PacketsAreInRightOrder( pack1, pack2 );
+
+         //Add indices if it is in order..
+            if( check == Packet.PACKETCHECK.OK )
+               idxOfOkPackets.Add( packetPairIdx );
+
+         //This cannot be inconclusive, they are probably equal. throw if so..
+            if( check == Packet.PACKETCHECK.INCONCLUSIVE )
+               throw new Exception( );
+
+         //Increment the packet index..
+            packetPairIdx++;
+         }
+
+      //Add the divider packets for part 2
+         Packet divider1 = new Packet( "[[2]]" );
+         Packet divider2 = new Packet( "[[6]]" );
+         packets.Add( divider1 );
+         packets.Add( divider2 );
+           
+      //Part1
+         int ans1 = idxOfOkPackets.Sum( );
+
+      //Part 2. Sort the packets.. We have already created the method that checks where it should be inserted. Loop over list and add to a sorted list..
+         //Declare the sorted list..
+         List<Packet> sortedPackets = new List<Packet>( );
+         List<Packet> unSortedPackets = new List<Packet>( packets );
+         sortedPackets.Add( packets[0] );
+         unSortedPackets.Remove( packets[0] );
+
+      //SOrt the packets..
+         while( unSortedPackets.Count > 0 )
+         {
+         //Unpack the current packet..
+            Packet packetToBeSorted = unSortedPackets.First( );
+         //Loop over all the packets in the sorted list and check if it should be before or after..
+            int newIdx = -1;
+            foreach( Packet p in sortedPackets )
+            {
+               Packet.PACKETCHECK isInOrder = Packet.PacketsAreInRightOrder( p, packetToBeSorted );
+               if( isInOrder == Packet.PACKETCHECK.OK )
+               {
+               //CHeck if this is the last packet in the sorted list, if so add it at the end..
+                  if( sortedPackets.IndexOf( p ) == sortedPackets.Count - 1 )
+                     newIdx = sortedPackets.Count;
+                  else
+                     continue;
+               }
+               else if( isInOrder == Packet.PACKETCHECK.NOTOK )
+               {
+                  newIdx = sortedPackets.IndexOf( p );
+                  break;
+               }
+               else if( isInOrder == Packet.PACKETCHECK.INCONCLUSIVE )
+                  throw new Exception( );
+            }
+
+         //Insert the packet to be sorted at correct index..
+            sortedPackets.Insert( newIdx, packetToBeSorted );
+
+         //Remove the packet from the list of unsorted packets..
+            unSortedPackets.Remove( packetToBeSorted );
+         }
+
+      //Print the sorted list..
+         foreach( Packet p in sortedPackets )
+            Console.WriteLine( p.GetString( ) );
+         Console.WriteLine( );
+
+      //Find the index of the divider packets..
+         int idxDiv1 = sortedPackets.IndexOf( divider1 ) + 1;
+         int idxDiv2 = sortedPackets.IndexOf( divider2 ) + 1;
+         long ans2 = idxDiv1 * idxDiv2;
+
+      //Find the answer..
+         Console.WriteLine( "Ans: " + ans2 );
+         Clipboard.SetDataObject( ans2 );
       }
-
 
 
       /// <summary>

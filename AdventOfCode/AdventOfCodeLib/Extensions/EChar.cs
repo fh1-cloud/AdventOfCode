@@ -41,6 +41,16 @@ namespace AdventOfCodeLib.Extensions
    #region
 
       /// <summary>
+      /// A method that returns wheter or not the char is an integer or not..
+      /// </summary>
+      /// <param name="a"></param>
+      /// <returns></returns>
+      public static bool IsInteger( this char a )
+      {
+         return ( ( int ) a >= ( int ) '0' && ( int ) a <= ( int ) '9' );
+      }
+
+      /// <summary>
       /// Extension for the IsUpper so its easier to write..
       /// </summary>
       /// <param name="a"></param>
