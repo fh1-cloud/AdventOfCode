@@ -104,6 +104,7 @@
     <Compile Include="Classes\RopeKnot.cs" />
     <Compile Include="Classes\RopeKnotMovementPair.cs" />
     <Compile Include="Classes\Rucksack.cs" />
+    <Compile Include="Classes\SandLabyrinth.cs" />
     <Compile Include="Classes\TreeWithPosition.cs" />
     <Compile Include="Days.cs" />
     <Compile Include="GlobalMethods.cs" />

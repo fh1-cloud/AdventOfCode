@@ -120,9 +120,14 @@ namespace AdventOfCode2022
       public static void Dec14( )
       {
       //Read input and parse..
-         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec14.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec14.txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
 
+      //Create the map..
+         SandLabyrinth lab = new SandLabyrinth( inp );
+
+      //Print the labyrinth..
+         lab.PrintGrid( );
 
          int ans = 0;
       //Find the answer..
