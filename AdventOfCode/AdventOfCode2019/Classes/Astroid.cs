@@ -28,7 +28,6 @@ namespace AdventOfCode2019.Classes
 
       protected int m_RowIdx = -1;
       protected int m_ColIdx = -1;
-      private static object dictionary;
 
       #endregion
 

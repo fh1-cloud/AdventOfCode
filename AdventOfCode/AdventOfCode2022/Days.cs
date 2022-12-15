@@ -110,34 +110,71 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec15( )
       {
+      //Read input and parse..
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec14.txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
 
+         //Create all the sensors..
+         List<Sensor> sensors = new List<Sensor>( );
+         foreach( string s in inp )
+         {
+            Sensor t = new Sensor( s );
+            sensors.Add( t );
+         }
+         int minX = sensors.Select( x => x.MinX ).ToArray( ).Min( );
+         int maxX = sensors.Select( x => x.MaxX ).ToArray( ).Max( );
+
+      //int targetHeight = 2000000;
+         int targetHeight = 10;
+
+      //Create a list of all the intersection lines..
+         bool[] isOccupied = new bool[maxX - minX];
+         foreach( Sensor s in sensors )
+            s.IntersectCoverageWithHeight( targetHeight, intersectionPoints );
+
+
+
+
+
+      //Find the answer..
+         long ans = 0;
+         Console.WriteLine( "Ans: " + ans );
+         Clipboard.SetDataObject( ans );
 
 
       }
+
+
+
+
+
       /// <summary>
       /// 
       /// </summary>
       public static void Dec14( )
       {
       //Read input and parse..
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec14.txt" );
-         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec14.txt" );
 
       //Create the map..
          SandLabyrinth lab = new SandLabyrinth( inp );
-
+         long placedGrains = 0;
+         while( true )
+         {
+            bool laidToRest = lab.AddSandgrain( );
+            if( laidToRest )
+               placedGrains++;
+            else
+               break;
+         }
       //Print the labyrinth..
          lab.PrintGrid( );
 
-         int ans = 0;
       //Find the answer..
-         Console.WriteLine( "Ans: " + ans );
-         Clipboard.SetDataObject( ans );
+         Console.WriteLine( "Ans: " + placedGrains );
+         Clipboard.SetDataObject( placedGrains );
 
       }
-
-
-
 
       /// <summary>
       /// Dec13
@@ -240,7 +277,6 @@ namespace AdventOfCode2022
          Console.WriteLine( "Ans: " + ans2 );
          Clipboard.SetDataObject( ans2 );
       }
-
 
       /// <summary>
       /// Dec12

@@ -20,12 +20,19 @@ namespace AdventOfCode2022.Classes
 
    /*MEMBERS*/
    #region
+      //Static members
+      protected static char m_SymbolRock = '#';
+      protected static char m_SymbolVacant = '.';
+      protected static char m_SymbolSand = 'o';
+
+      //Non static members
       protected Dictionary<KeyValuePair<int,int>,char> m_OccupiedSlots = new Dictionary<KeyValuePair<int,int>,char>();
       protected int m_MinX = -1;
       protected int m_MaxX = -1;
       protected int m_MinY = 0;
       protected int m_MaxY = -1;
       protected int m_GrainFunnelStart = 500;
+
    #endregion
 
    /*CONSTRUCTORS*/
@@ -35,9 +42,8 @@ namespace AdventOfCode2022.Classes
       /// LOop over all the input strings and create the rock obstacles..
       /// </summary>
       /// <param name="obstactes"></param>
-      public SandLabyrinth( string[] rockVectors )
+      public SandLabyrinth( string[] rockVectors, bool part2 = true )
       {
-
       //Loop over all the rock vectors..
          foreach( string s in rockVectors )
          {
@@ -77,7 +83,7 @@ namespace AdventOfCode2022.Classes
                      int yCor = j;
                      KeyValuePair<int,int> coordinate = new KeyValuePair<int, int>( xCor, j );
                      if( !m_OccupiedSlots.ContainsKey( coordinate ) )
-                        m_OccupiedSlots.Add( coordinate, '#' );
+                        m_OccupiedSlots.Add( coordinate, m_SymbolRock );
                   }
                }
                else //THe vector is in the x direction..
@@ -95,13 +101,12 @@ namespace AdventOfCode2022.Classes
                      int xCor = j;
                      KeyValuePair<int,int> coordinate = new KeyValuePair<int, int>( j, yCor );
                      if( !m_OccupiedSlots.ContainsKey( coordinate ) )
-                        m_OccupiedSlots.Add( coordinate, '#' );
+                        m_OccupiedSlots.Add( coordinate, m_SymbolRock );
                   }
                }
             }
 
          } //End foreach
-
 
       //Find the minimum and maximum x-coordinate of the obstaces. Used to check if the grain of sand fell outside..
          int xMin = 100000;
@@ -119,6 +124,21 @@ namespace AdventOfCode2022.Classes
          m_MaxX = xMax;
          m_MinX = xMin;
          m_MaxY = yMax;
+
+      //Add floor if part 2..
+         if( part2 )
+         {
+            m_MaxY = m_MaxY+2;
+
+         //Add a really large line at the bottom...
+            m_MinX = m_MinX - m_MaxY;
+            m_MaxX = m_MaxX + m_MaxY;
+
+         //Add the obstacle..
+            for( int i = m_MinX; i<m_MaxX; i++ )
+               m_OccupiedSlots.Add( new KeyValuePair<int, int>( i, m_MaxY ), m_SymbolRock );
+         }
+
       }
    #endregion
 
@@ -138,7 +158,11 @@ namespace AdventOfCode2022.Classes
    #region
 
 
-      public bool AddSandgrain( )
+      /// <summary>
+      /// Adds a sand grain to the labyrinth. Returns if the grain was not placed..
+      /// </summary>
+      /// <returns></returns>
+      public bool AddSandgrain( bool part2 = true )
       {
       //Adds a grain of sand, returns a bool indicating wheter or not it fell through the labyrinth or not..
 
@@ -148,31 +172,60 @@ namespace AdventOfCode2022.Classes
 
          while( true )
          {
-
-         //Straight below..
-            KeyValuePair<int,int> below = new KeyValuePair<int, int>( xCur, yCur+1);
-
-         //Check the current slot..
-            if( m_OccupiedSlots.ContainsKey( below ) )
+         //Check if there is a sand grain at the top..
+            if( part2 )
             {
-
-
+               if( m_OccupiedSlots.ContainsKey( new KeyValuePair<int, int>( 500, 0 ) ) )
+                  return false;
+            }
+            else //Part 1. Check if it is outside
+            {
+               if( yCur > m_MaxY )
+                  return false;
             }
 
+         //Check below the current slot..
+            KeyValuePair<int,int> below = new KeyValuePair<int, int>( xCur, yCur+1);
+            if( !m_OccupiedSlots.ContainsKey( below ) )
+            {
+               yCur++;
+               continue;
+            }
 
+         //Check below and to the left of the current slot
+            KeyValuePair<int,int> belowLeft = new KeyValuePair<int, int>( xCur-1, yCur+1);
+            if( !m_OccupiedSlots.ContainsKey( belowLeft ) )
+            {
+               xCur--;
+               yCur++;
+               continue;
+            }
 
+         //Check below and to the right of the current slot
+            KeyValuePair<int,int> belowRight = new KeyValuePair<int, int>( xCur+1, yCur+1);
+            if( !m_OccupiedSlots.ContainsKey( belowRight ) )
+            {
+               xCur++;
+               yCur++;
+               continue;
+            }
+
+         //If the code reached this point, it has to be placed..
+            if( yCur < m_MaxY )
+            {
+               KeyValuePair<int,int> thisPosition = new KeyValuePair<int, int>( xCur, yCur );
+               m_OccupiedSlots.Add( thisPosition, m_SymbolSand );
+            //The sand grain was placed. Return true
+               return true;
+            }
          }
-      
-
-
       }
-
 
 
       /// <summary>
       /// Prints the current sand labyrinth to the console..
       /// </summary>
-      public void PrintGrid( char blankChar = '.' )
+      public void PrintGrid( )
       {
 
       //Draw the grid..
@@ -196,7 +249,7 @@ namespace AdventOfCode2022.Classes
                   if( m_OccupiedSlots.ContainsKey( location ) )
                      sb.Append( m_OccupiedSlots[location].ToString( ) );
                   else
-                     sb.Append( blankChar.ToString( ) );
+                     sb.Append( m_SymbolVacant.ToString( ) );
                }
             }
 
@@ -206,7 +259,6 @@ namespace AdventOfCode2022.Classes
 
       //Write empty line at the end..
          Console.WriteLine( );
-
       }
    #endregion
 
