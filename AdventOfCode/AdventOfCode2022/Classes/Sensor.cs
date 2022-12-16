@@ -93,6 +93,7 @@ namespace AdventOfCode2022.Classes
       public int MaxX { get { return (int) m_Vertices[VERTICEPLACEMENT.RIGHT].X; } }
       public int MaxY { get { return (int) m_Vertices[VERTICEPLACEMENT.BOTTOM].Y; } }
       public int MinY { get { return (int) m_Vertices[VERTICEPLACEMENT.TOP].Y; } }
+      public UVector2D Position => m_SensorPlacement;
    #endregion
 
    /*OPERATORS*/
@@ -107,21 +108,24 @@ namespace AdventOfCode2022.Classes
       /// </summary>
       /// <param name="line"></param>
       /// <returns></returns>
-      public void IntersectCoverageWithHeight( int ycor, int minX, int maxX, bool[] isOccupied )
+      public void IntersectCoverageWithHeight( int ycor, int canvasMin, int canvasMax, List<Interval> segments )
       {
          if( Math.Abs( m_SensorPlacement.Y - ycor ) > m_Radius )
             return;
 
-         int offset = Math.Abs( m_Radius - ycor );
+         int offset = m_Radius - Math.Abs( ycor - ( int ) m_SensorPlacement.Y );
          int intersectStartX = ( int ) m_SensorPlacement.X - offset;
          int intersectEndX = ( int ) m_SensorPlacement.X + offset;
+         if( intersectEndX < canvasMin )
+            return;
+         if( intersectStartX > canvasMax )
+            return;
+         intersectStartX = Math.Max( intersectStartX, canvasMin );
+         intersectEndX = Math.Min( intersectEndX, canvasMax );
 
-         for( int i = 0; i<
-         isOccupied[minX-intersectStartX] = 
-         
+         Interval thisSegment = new Interval( intersectStartX, intersectEndX );
+         segments.Add( thisSegment );
 
-
-         intersectionPoints.Add( new KeyValuePair<int, int>( intersectStartX, intersectEndX ) );
       }
 
    #endregion

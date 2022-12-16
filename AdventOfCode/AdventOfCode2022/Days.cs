@@ -101,20 +101,25 @@ namespace AdventOfCode2022
       /// </summary>
       public static void Dec16( )
       {
+         //Read input and parse..
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec16.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
 
 
 
       }
+
+
+
       /// <summary>
       /// 
       /// </summary>
       public static void Dec15( )
       {
       //Read input and parse..
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec14.txt" );
-         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec15.txt" );
 
-         //Create all the sensors..
+      //Create all the sensors..
          List<Sensor> sensors = new List<Sensor>( );
          foreach( string s in inp )
          {
@@ -123,28 +128,76 @@ namespace AdventOfCode2022
          }
          int minX = sensors.Select( x => x.MinX ).ToArray( ).Min( );
          int maxX = sensors.Select( x => x.MaxX ).ToArray( ).Max( );
+         int minHeight = 0;
+         int maxHeight = 4000000;
 
-      //int targetHeight = 2000000;
-         int targetHeight = 10;
+         for( int k = minHeight; k <= maxHeight; k++ )
+         {
+            int targetHeight = k;
+            List<Interval> segments = new List<Interval>( );
+            foreach( Sensor s in sensors )
+               s.IntersectCoverageWithHeight( targetHeight, minHeight, maxHeight, segments );
 
-      //Create a list of all the intersection lines..
-         bool[] isOccupied = new bool[maxX - minX];
-         foreach( Sensor s in sensors )
-            s.IntersectCoverageWithHeight( targetHeight, intersectionPoints );
+            bool didSomething = false;
+            do
+            {
+               didSomething = false;
+               for( int i = 0; i<segments.Count; i++ )
+               {
+                  Interval segment1 = segments[i];
+                  for( int j = 0; j <segments.Count; j++ )
+                  {
+                     if( i == j )
+                        continue;
+                     Interval segment2 = segments[j];
+                     if( segment1.Start > segment2.End || segment1.End < segment2.Start )
+                     {
+                        continue;
+                     }
+                     else if( segment1.Start < segment2.Start && segment1.End > segment2.End )
+                     {
+                        segments.Remove( segment2 );
+                        didSomething = true;
+                        break;
+                     }
+                     else if( segment2.Start < segment1.Start && segment2.End > segment1.End )
+                     {
+                        segments.Remove( segment1 );
+                        didSomething = true;
+                        break;
+                     }
+                     else if( segment1.Start < segment2.Start && segment1.End <= segment2.End )
+                     {
+                        segment2.Start = segment1.Start;
+                        segments.Remove( segment1 );
+                        didSomething = true;
+                        break;
+                     }
+                     else if( segment1.Start >= segment2.Start && segment1.End > segment2.End )
+                     {
+                        segment2.End = segment1.End;
+                        segments.Remove( segment1 );
+                        didSomething = true;
+                        break;
+                     }
+                  }
+                  if( didSomething )
+                     break;
+               }
 
-
-
-
-
-      //Find the answer..
-         long ans = 0;
-         Console.WriteLine( "Ans: " + ans );
-         Clipboard.SetDataObject( ans );
-
-
+            } while( didSomething );
+            if( segments.Count == 2 )
+            {
+               segments = segments.OrderBy( u => u.Start ).ToList( );
+               int x = segments[0].End + 1;
+               Console.WriteLine( $" x coordinate:{x}" );
+               Console.WriteLine( $" y coordinate:{k}" );
+               long ans = x * 4000000 + k;
+               Console.WriteLine( $"ans:{ans}" );
+               break;
+            }
+         }
       }
-
-
 
 
 

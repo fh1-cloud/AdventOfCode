@@ -98,6 +98,7 @@
     <Compile Include="Classes\DirectoryFile.cs" />
     <Compile Include="Classes\DirectoryFolder.cs" />
     <Compile Include="Classes\ElfWithCalories.cs" />
+    <Compile Include="Classes\Interval.cs" />
     <Compile Include="Classes\MapNode.cs" />
     <Compile Include="Classes\Monkey.cs" />
     <Compile Include="Classes\Packet.cs" />
