@@ -230,7 +230,7 @@ namespace AdventOfCode2020
       /// </summary>
       private void PrintIntermediate()
       {
-         return;
+         //return;
          //System.Threading.Thread.Sleep(  );
          //Console.Clear( );
          StringBuilder sb = new StringBuilder( );

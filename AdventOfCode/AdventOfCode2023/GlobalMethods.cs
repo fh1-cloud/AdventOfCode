@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventOfCode2020
+namespace AdventOfCode2023
 {
-   static class GlobalMethods
+   public class GlobalMethods
    {
-
-
 
       /// <summary>
       /// A method that gets a list of ints from the input. Use this if the input is an list of integers
@@ -111,6 +110,40 @@ namespace AdventOfCode2020
       }
 
 
+      /// <summary>
+      /// Get input for the passed day..
+      /// </summary>
+      /// <param name="day"></param>
+      public static async void GetInput( int day, int year)
+      {
+      //Build file path for input..
+         StringBuilder sb = new StringBuilder( );
+         sb.Append( "..\\..\\Inputs\\" );
+         sb.Append( day.ToString( ).Length <= 1 ? ( "Dec0" + day.ToString( ) ) : ( "Dec" + day.ToString( ) ) );
+         sb.Append( ".txt" );
+
+         //Fetch the input..
+         try
+         {
+            Task task = AdventOfCodeLib.InputFetcher.GetInput( day, year, sb.ToString( ) );
+            task.Wait( );
+         }
+         catch
+         {
+
+         }
+      }
+
+      /// <summary>
+      /// Get method info from passed object. Used to run the day by reflection so we only have to change an integer to swap methods..
+      /// </summary>
+      /// <param name="obj"></param>
+      /// <param name="methodName"></param>
+      /// <returns></returns>
+      public static MethodInfo GetMethodByName( object obj, string methodName )
+      {
+         return obj.GetType( ).GetMethods( ).FirstOrDefault( m => m.Name == methodName );
+      }
 
       /// <summary>
       /// Gets a nice header for each day.
@@ -122,7 +155,7 @@ namespace AdventOfCode2020
          StringBuilder sb = new StringBuilder( );
          sb.AppendLine( "*****************************************************************" );
          sb.AppendLine( "*                                                               *" );
-         sb.AppendLine( "*                    ADVENT OF CODE 2020                        *" );
+         sb.AppendLine( "*                    ADVENT OF CODE 2023                        *" );
          sb.AppendLine( "*                        December " + ( decemberDate.ToString().Length == 1 ? decemberDate.ToString() + " " : decemberDate.ToString() ) + "                            *" );
          sb.AppendLine( "*                                                               *" );
          sb.AppendLine( "*                                                               *" );

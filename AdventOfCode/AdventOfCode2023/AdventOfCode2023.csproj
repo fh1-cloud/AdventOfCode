@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{01114F59-07A5-4BE1-874F-C6D582CB80ED}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AdventOfCodeLib</RootNamespace>
-    <AssemblyName>AdventOfCodeLib</AssemblyName>
+    <ProjectGuid>{E6AC0839-EB6C-4B0D-95CB-905C443A5CCD}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>AdventOfCode2023</RootNamespace>
+    <AssemblyName>AdventOfCode2023</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,10 +23,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -34,8 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdventOfCodeLib">
+      <HintPath>..\AdventOfCodeLib\bin\Debug\AdventOfCodeLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,20 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\HashSetIndexPair.cs" />
-    <Compile Include="Classes\HashSetUVector2D.cs" />
-    <Compile Include="Classes\IntegerPair.cs" />
-    <Compile Include="Extensions\EChar.cs" />
-    <Compile Include="Extensions\EDouble.cs" />
-    <Compile Include="Extensions\EString.cs" />
-    <Compile Include="Classes\InputFetcher.cs" />
-    <Compile Include="Math\UMath.cs" />
-    <Compile Include="Numerics\ULineStraight.cs" />
-    <Compile Include="Numerics\UMatrix2x2.cs" />
-    <Compile Include="Numerics\UMatrixBase.cs" />
-    <Compile Include="Numerics\UVector2D.cs" />
-    <Compile Include="Numerics\UVector3D.cs" />
+    <Compile Include="Days.cs" />
+    <Compile Include="GlobalMethods.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Classes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Inputs\Test02.txt" />
+    <Content Include="Inputs\Test01.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
