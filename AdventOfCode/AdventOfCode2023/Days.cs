@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode2023.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Permissions;
@@ -20,8 +21,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -35,8 +36,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -50,8 +51,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -65,8 +66,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -80,8 +81,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -95,8 +96,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -110,8 +111,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -125,8 +126,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -140,8 +141,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -155,8 +156,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -170,8 +171,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -185,8 +186,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -200,8 +201,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -215,8 +216,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -230,8 +231,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -245,8 +246,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -260,8 +261,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -275,8 +276,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -290,8 +291,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -305,8 +306,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -320,8 +321,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -335,8 +336,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -350,8 +351,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -365,8 +366,8 @@ namespace AdventOfCode2023
 
       //Parse the text file to a string..
          string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
          Console.WriteLine( ans );
@@ -376,21 +377,66 @@ namespace AdventOfCode2023
 
 
 
+
+
+
+
       public static void Dec01( )
       {
 
       //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test01.txt" );
-         //string[] inp = GlobalMethods.GetInputStringArray( @"Inputs\\Test02.txt" );
-
-
-
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
          long ans = 0;
+         foreach( string s in inp )
+         {
+            StringBuilder sb = new StringBuilder( );
+
+         //First occurence..
+            for( int i = 0; i<s.Length; i++ )
+            {
+               bool succ = int.TryParse( s[i].ToString( ), out int p );
+            //Check if digit is number..
+               if( succ )
+               {
+                  sb.Append( p.ToString( ) );
+                  break;
+               }
+            //Check if this is a start of a numerlaterlal..
+               bool succ2 = NumerLiteral.CheckIfNumerliteralStart( s, i, out p );
+               if( succ2 )
+               {
+                  sb.Append( p.ToString( ) );
+                  break;
+               }
+            }
+         //Last occurence
+            for( int i = s.Length-1; i>= 0; i-- )
+            {
+               bool succ = int.TryParse( s[i].ToString( ), out int p );
+               if( succ )
+               {
+                  sb.Append( p.ToString( ) );
+                  break;
+               }
+
+            //Check if this is a start of a numerlaterlal..
+               bool succ2 = NumerLiteral.CheckIfNumerliteralEnd( s, i, out p );
+               if( succ2 )
+               {
+                  sb.Append( p.ToString( ) );
+                  break;
+               }
+
+            }
+         //Parse num..
+            int thisAns = int.Parse( sb.ToString( ) );
+            Console.WriteLine( thisAns );
+            ans += thisAns;
+         }
          Console.WriteLine( ans );
          Clipboard.SetText( ans.ToString( ) );
-
-
       }
 
 #endregion
