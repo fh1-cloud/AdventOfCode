@@ -349,9 +349,9 @@ namespace AdventOfCode2023
       public static void Dec03( )
       {
 
-      //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //Parse the text file to a string..
+         //string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
          long ans = 0;
@@ -363,31 +363,43 @@ namespace AdventOfCode2023
 
       public static void Dec02( )
       {
-
       //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
 
-         long ans = 0;
+      //Create cube games
+         List<CubeGame> games = new List<CubeGame>( );
+         foreach( string s in inp )
+         {
+            CubeGame g = new CubeGame( s );
+            games.Add( g );
+         }
+
+      //Loop over all games and count the valid ids..
+         long idSum = 0;
+         foreach( CubeGame game in games )
+         {
+            if( game.IsValid( ) )
+               idSum += game.Number;
+         }
+
+      //Get the sum of the powers..
+         long powerSum = 0;
+
+         foreach( CubeGame game in games )
+            powerSum += game.GetPower( );
+
+      //Write answer..
+         long ans = powerSum;
          Console.WriteLine( ans );
          Clipboard.SetText( ans.ToString( ) );
 
       }
 
-
-
-
-
-
-
       public static void Dec01( )
       {
-
       //Parse the text file to a string..
          string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
+
          long ans = 0;
          foreach( string s in inp )
          {

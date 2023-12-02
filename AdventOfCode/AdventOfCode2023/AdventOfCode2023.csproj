@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CubeGame.cs" />
     <Compile Include="Classes\NumerLiteral.cs" />
     <Compile Include="Days.cs" />
     <Compile Include="GlobalMethods.cs" />
@@ -59,6 +60,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Inputs\Dec01.txt" />
+    <Content Include="Inputs\Dec02.txt" />
     <Content Include="Inputs\Test02.txt" />
     <Content Include="Inputs\Test01.txt" />
   </ItemGroup>
