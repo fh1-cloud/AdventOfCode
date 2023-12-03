@@ -346,18 +346,28 @@ namespace AdventOfCode2023
       }
 
 
+
+
+
       public static void Dec03( )
       {
-
-         //Parse the text file to a string..
-         //string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
-
-         long ans = 0;
-         Console.WriteLine( ans );
-         Clipboard.SetText( ans.ToString( ) );
-
+      //Parse the text file to a string..
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         object[ ,] grid = new object[inp.Length,inp[0].Length];
+         for( int i = 0; i<inp.Length; i++ )
+         {
+            for( int j = 0; j<inp[0].Length; j++ )
+            {
+               if( inp[i][j] != '.' )
+                  grid[i,j] = inp[i][j];
+               else
+                  grid[i,j] = null;
+            }
+         }
+         long ans1 = GridChecker.GetSerialNumberSum( grid, out long ans2 );
+         Console.WriteLine( ans1 );
+         Console.WriteLine( ans2 );
+         Clipboard.SetText( ans2.ToString( ) );
       }
 
 
