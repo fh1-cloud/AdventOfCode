@@ -333,21 +333,25 @@ namespace AdventOfCode2023
 
       public static void Dec04( )
       {
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         List<ScratchCard> cards = new List<ScratchCard>( );
 
-      //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
+      //Part 1
+         long totalScore = 0;
+         foreach( string line in inp )
+         {
+            ScratchCard card = new ScratchCard( line );
+            cards.Add( card );
+            totalScore += card.Score;
+         }
 
-         long ans = 0;
-         Console.WriteLine( ans );
-         Clipboard.SetText( ans.ToString( ) );
+      //Part 2
+         foreach( ScratchCard c in cards )
+            c.PlayGame( cards );
+         long scratchCards = cards.Select( x => x.Instances ).ToList( ).Sum( );
 
+         Console.WriteLine( scratchCards );
       }
-
-
-
-
 
       public static void Dec03( )
       {

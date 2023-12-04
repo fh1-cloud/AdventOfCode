@@ -50,6 +50,7 @@
     <Compile Include="Classes\CubeGame.cs" />
     <Compile Include="Classes\GridChecker.cs" />
     <Compile Include="Classes\NumerLiteral.cs" />
+    <Compile Include="Classes\ScratchCard.cs" />
     <Compile Include="Days.cs" />
     <Compile Include="GlobalMethods.cs" />
     <Compile Include="Program.cs" />
@@ -63,6 +64,7 @@
     <Content Include="Inputs\Dec01.txt" />
     <Content Include="Inputs\Dec02.txt" />
     <Content Include="Inputs\Dec03.txt" />
+    <Content Include="Inputs\Dec04.txt" />
     <Content Include="Inputs\Test02.txt" />
     <Content Include="Inputs\Test01.txt" />
   </ItemGroup>

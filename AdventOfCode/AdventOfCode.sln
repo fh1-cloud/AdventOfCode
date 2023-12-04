@@ -25,6 +25,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode2022", "AdventOfCode2022\AdventOfCode2022.csproj", "{9290523E-75B6-4587-94B1-777C84DED1D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode2023", "AdventOfCode2023\AdventOfCode2023.csproj", "{E6AC0839-EB6C-4B0D-95CB-905C443A5CCD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{01114F59-07A5-4BE1-874F-C6D582CB80ED} = {01114F59-07A5-4BE1-874F-C6D582CB80ED}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
