@@ -55,6 +55,8 @@
     <Compile Include="Numerics\ULineStraight.cs" />
     <Compile Include="Numerics\UMatrix2x2.cs" />
     <Compile Include="Numerics\UMatrixBase.cs" />
+    <Compile Include="Numerics\URange1D.cs" />
+    <Compile Include="Numerics\URangeSingle1D.cs" />
     <Compile Include="Numerics\UVector2D.cs" />
     <Compile Include="Numerics\UVector3D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

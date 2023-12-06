@@ -1,4 +1,5 @@
 ﻿using AdventOfCode2023.Classes;
+using AdventOfCodeLib.Numerics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -318,20 +319,33 @@ namespace AdventOfCode2023
 
       public static void Dec05( )
       {
-
       //Parse the text file to a string..
-         //string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
 
+      //Part1
+         List<long> seedList = null;
+         SeedMapper map = new SeedMapper( inp, out seedList );
+         List<long> locationNumbers = new List<long>( );
+         foreach( long seed in seedList )
+         {
+            long location = map.GetSeedLocationNumberP1( seed );
+            locationNumbers.Add( location );
+         }
 
-         SeedMapper map = new SeedMapper( inp );
-
-
-         long ans = 0;
+      //Part 2
+         URange1D completeRange = new URange1D( new List<URangeSingle1D>( ) );
+         for( int i = 0; i<seedList.Count-1; i=i+2 )
+         {
+            URangeSingle1D range1 = new URangeSingle1D( seedList[i], seedList[i] + seedList[i+1] - 1 );
+            List<URangeSingle1D> rangeList = new List<URangeSingle1D>( );
+            rangeList.Add( range1 );
+            URange1D thisSeedRange = new URange1D( rangeList );
+            URange1D endRangesForThisSeed = map.GetRangeFromSeedRange( thisSeedRange );
+            completeRange.Add( endRangesForThisSeed );
+         }
+         long ans = completeRange.GetMinValue( );
          Console.WriteLine( ans );
          Clipboard.SetText( ans.ToString( ) );
-
       }
 
 
