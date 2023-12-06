@@ -304,18 +304,26 @@ namespace AdventOfCode2023
 
       public static void Dec06( )
       {
-
       //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         string[ ] ts = inp[0].Split( new char[ ] { ' ' }, StringSplitOptions.RemoveEmptyEntries );
+         string[ ] ds = inp[1].Split( new char[ ] { ' ' }, StringSplitOptions.RemoveEmptyEntries );
 
-         long ans = 0;
-         Console.WriteLine( ans );
-         Clipboard.SetText( ans.ToString( ) );
+      //Part 1
+         long errorMargin = 1;
+         StringBuilder sbTime = new StringBuilder( );
+         StringBuilder sbDist = new StringBuilder( );
+         for( int i = 1; i<ts.Length; i++ )
+         {
+            errorMargin *= new BoatRace( long.Parse( ts[i] ), long.Parse( ds[i] ) ).GetNumberOfWaysToWin( );
+            sbTime.Append( ts[i] );
+            sbDist.Append( ds[i] );
+         }
 
+      //Part 2
+         long ans2 = new BoatRace( long.Parse( sbTime.ToString( ) ), long.Parse( sbDist.ToString( ) ) ).GetNumberOfWaysToWin( );
+         Console.WriteLine( ans2 );
       }
-
 
       public static void Dec05( )
       {
