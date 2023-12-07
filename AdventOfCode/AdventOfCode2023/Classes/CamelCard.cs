@@ -11,11 +11,13 @@ namespace AdventOfCode2023.Classes
 
    /*MEMBERS*/
    #region
-      protected static Dictionary<char,int> m_RelValue = new Dictionary<char, int>( );
+      protected static Dictionary<char,int> m_RelValue = new Dictionary<char, int>( ); //Maps the relative value to the comparer.
    #endregion
 
    /*CONSTRUCTORS*/
    #region
+
+      //Static constructor
       static CamelCard( )
       {
          m_RelValue.Add( 'A', 13 );
@@ -33,6 +35,7 @@ namespace AdventOfCode2023.Classes
          m_RelValue.Add( 'J', 1 );
       }
 
+      //Default constructor
       public CamelCard( char character  )
       {
          this.C = character;
@@ -52,27 +55,13 @@ namespace AdventOfCode2023.Classes
       public static bool operator < ( CamelCard c1, CamelCard c2 ) { return ( m_RelValue[ c1.C ] < m_RelValue[ c2.C ]); }
       public static bool operator >= ( CamelCard c1, CamelCard c2 ) { return ( m_RelValue[ c1.C ] >= m_RelValue[ c2.C ]); }
       public static bool operator <= ( CamelCard c1, CamelCard c2 ) { return ( m_RelValue[ c1.C ] <= m_RelValue[ c2.C ]); }
-
    #endregion
 
    /*METHODS*/
    #region
-
-      public override bool Equals( object obj )
-      {
-         return base.Equals( obj );
-      }
-
-      public override int GetHashCode( )
-      {
-         return base.GetHashCode( );
-      }
-      #endregion
-
-      public override string ToString( )
-      {
-         return this.C.ToString( );
-      }
-
+      public override bool Equals( object obj ) { return base.Equals( obj ); }
+      public override int GetHashCode( ) { return base.GetHashCode( ); }
+      public override string ToString( ) { return this.C.ToString( ); }
+   #endregion
    }
 }
