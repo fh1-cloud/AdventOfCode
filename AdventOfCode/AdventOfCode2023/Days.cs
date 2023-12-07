@@ -2,7 +2,9 @@
 using AdventOfCodeLib.Numerics;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
@@ -289,16 +291,14 @@ namespace AdventOfCode2023
 
       public static void Dec07( )
       {
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         List<CamelCardHand> hands = new List<CamelCardHand>( );
+         for( int i = 0; i<inp.Length; i++ )
+            hands.Add( new CamelCardHand( inp[i], false ) );
 
-      //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
-
-         long ans = 0;
+         long ans = CamelCardHand.GetTotalWinnings( hands );
          Console.WriteLine( ans );
          Clipboard.SetText( ans.ToString( ) );
-
       }
 
 

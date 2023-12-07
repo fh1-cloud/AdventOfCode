@@ -1,48 +1,18 @@
-﻿
-
-
-
-
-
-
-      public SeedMapper( string[] allText )
-      {
-         this.InitialSeeds = new HashSet<long>( );
-         this.ClassMaps = new List<ClassMap>( );
-
-      //Create seeds..
-         string[] seeds = allText[0].Split( new char[] { ' ' } );
-         for( int i = 1; i<seeds.Length; i++ )
-         {
-            this.InitialSeeds.Add( long.Parse( seeds[i] ) );
-         }
-         
-      //Split by blocks
-         int? blockStart = null;
-         List<string[]> blocks = new List<string[]>( );
-         for( int i = 1; i<allText.Length; i++ )
-         {
-            if( allText[i] == "" && blockStart == null )
-            {
-               blockStart = i;
-            }
-            else if( ( allText[i] == "" && blockStart != null ) || i == allText.Length - 1 )
-            {
-               List<string> currentBlock = new List<string>( );
-               int endLim = i;
-               if( i == allText.Length - 1 )
-                  endLim++;
-               for( int j = (int) blockStart+1; j<endLim; j++ )
-                  currentBlock.Add( allText[j] );
-               blockStart = i;
-               blocks.Add( currentBlock.ToArray( ) );
-            }
-         }
-
-      //Create all the class maps..
-         foreach( string[] block in blocks )
-            this.ClassMaps.Add( new ClassMap( block.ToList( ) ) );
-
-
-      }
-
+﻿2345A 2
+Q2Q2Q 19
+T3T3J 17
+T3Q33 13
+2345J 5
+J345A 3
+32T3K 7
+T55J5 29
+KK677 11
+KTJJT 34
+QQQJA 31
+JJJJJ 37
+JAAAA 43
+AAAAJ 59
+AAAAA 61
+2AAAA 23
+2JJJJ 53
+JJJJ2 41

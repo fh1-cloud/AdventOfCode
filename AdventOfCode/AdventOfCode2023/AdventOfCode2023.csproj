@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CamelCard.cs" />
+    <Compile Include="Classes\CamelCardHand.cs" />
     <Compile Include="Classes\CubeGame.cs" />
     <Compile Include="Classes\GridChecker.cs" />
     <Compile Include="Classes\NumerLiteral.cs" />
@@ -69,6 +71,7 @@
     <Content Include="Inputs\Dec04.txt" />
     <Content Include="Inputs\Dec05.txt" />
     <Content Include="Inputs\Dec06.txt" />
+    <Content Include="Inputs\Dec07.txt" />
     <Content Include="Inputs\Test02.txt" />
     <Content Include="Inputs\Test01.txt" />
   </ItemGroup>
