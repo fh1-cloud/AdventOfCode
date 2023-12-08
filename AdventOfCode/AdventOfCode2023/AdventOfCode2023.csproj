@@ -50,6 +50,7 @@
     <Compile Include="Classes\CamelCard.cs" />
     <Compile Include="Classes\CamelCardHand.cs" />
     <Compile Include="Classes\CubeGame.cs" />
+    <Compile Include="Classes\DesertNode.cs" />
     <Compile Include="Classes\GridChecker.cs" />
     <Compile Include="Classes\NumerLiteral.cs" />
     <Compile Include="Classes\BoatRace.cs" />
@@ -72,6 +73,7 @@
     <Content Include="Inputs\Dec05.txt" />
     <Content Include="Inputs\Dec06.txt" />
     <Content Include="Inputs\Dec07.txt" />
+    <Content Include="Inputs\Dec08.txt" />
     <Content Include="Inputs\Test02.txt" />
     <Content Include="Inputs\Test01.txt" />
   </ItemGroup>

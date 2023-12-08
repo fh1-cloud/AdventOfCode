@@ -1,4 +1,5 @@
 ﻿using AdventOfCode2023.Classes;
+using AdventOfCodeLib;
 using AdventOfCodeLib.Numerics;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,9 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Security.Permissions;
+using System.Security.Principal;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -276,16 +279,30 @@ namespace AdventOfCode2023
 
       public static void Dec08( )
       {
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         Regex childRx = new Regex( @"\(([^()]*)\)" );
+         Dictionary<string,DesertNode> nodes = new Dictionary<string, DesertNode>( );
 
-      //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
+      //Create tree
+         for( int i = 2; i < inp.Length; i++ )
+            nodes.Add( inp[i].Split( new char[ ] { ' ' }, StringSplitOptions.RemoveEmptyEntries )[0], new DesertNode( inp[i].Split( new char[ ] { ' ' }, StringSplitOptions.RemoveEmptyEntries )[0] ) );
+         for( int i = 2; i < inp.Length; i++ )
+         {
+            string par = inp[i].Split( new char[] { ' ' } , StringSplitOptions.RemoveEmptyEntries )[0];
+            string[ ] children = childRx.Match( inp[i] ).Value.Substring( 1, childRx.Match( inp[i] ).Value.Length - 2 ).Split( new char[]{ ',' }, StringSplitOptions.RemoveEmptyEntries );
+            nodes[par].LChild = nodes[children[0].Trim( )];
+            nodes[par].RChild = nodes[children[1].Trim( )];
+         }
+      //Part 1
+         long ans1 = DesertNode.FindCycle( inp[0], nodes["AAA"], nodes["ZZZ"] );
 
-         long ans = 0;
-         Console.WriteLine( ans );
-         Clipboard.SetText( ans.ToString( ) );
+      //Part 2
+         long ans2 = 1;
+         foreach( KeyValuePair<string,DesertNode> kvp in nodes )
+            if( kvp.Key[kvp.Key.Length-1] == 'A' )
+               ans2 = UMath.LCM( ans2, DesertNode.FindCycle( inp[0], kvp.Value) );
 
+         Console.WriteLine( ans2.ToString( ) );
       }
 
 
