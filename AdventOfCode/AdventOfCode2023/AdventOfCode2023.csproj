@@ -54,6 +54,7 @@
     <Compile Include="Classes\GridChecker.cs" />
     <Compile Include="Classes\NumerLiteral.cs" />
     <Compile Include="Classes\BoatRace.cs" />
+    <Compile Include="Classes\OasisNumberSeries.cs" />
     <Compile Include="Classes\ScratchCard.cs" />
     <Compile Include="Classes\SeedMapper.cs" />
     <Compile Include="Days.cs" />
@@ -74,6 +75,7 @@
     <Content Include="Inputs\Dec06.txt" />
     <Content Include="Inputs\Dec07.txt" />
     <Content Include="Inputs\Dec08.txt" />
+    <Content Include="Inputs\Dec09.txt" />
     <Content Include="Inputs\Test02.txt" />
     <Content Include="Inputs\Test01.txt" />
   </ItemGroup>
