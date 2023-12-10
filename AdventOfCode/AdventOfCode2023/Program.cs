@@ -14,7 +14,7 @@ namespace AdventOfCode2023
       [STAThread]
       static void Main( string[ ] args )
       {
-      //Set the day..
+         //Set the day..
          int day = 11;
 
       //Try to get the input if it doesnt exist already..
