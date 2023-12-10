@@ -55,9 +55,12 @@
     <Compile Include="Classes\NumerLiteral.cs" />
     <Compile Include="Classes\BoatRace.cs" />
     <Compile Include="Classes\OasisNumberSeries.cs" />
+    <Compile Include="Classes\PipePart.cs" />
+    <Compile Include="Classes\PipeTraverser.cs" />
     <Compile Include="Classes\ScratchCard.cs" />
     <Compile Include="Classes\SeedMapper.cs" />
-    <Compile Include="Days.cs" />
+    <Compile Include="Days_1-10.cs" />
+    <Compile Include="Days_11-20.cs" />
     <Compile Include="GlobalMethods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,6 +79,7 @@
     <Content Include="Inputs\Dec07.txt" />
     <Content Include="Inputs\Dec08.txt" />
     <Content Include="Inputs\Dec09.txt" />
+    <Content Include="Inputs\Dec10.txt" />
     <Content Include="Inputs\Test02.txt" />
     <Content Include="Inputs\Test01.txt" />
   </ItemGroup>
