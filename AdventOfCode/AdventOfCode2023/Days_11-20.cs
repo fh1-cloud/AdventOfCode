@@ -227,8 +227,6 @@ namespace AdventOfCode2023
 
       public static void Dec11( )
       {
-
-         //Parse the text file to a string..
          string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          long totalExpansionWidth = 1000000;
          HashSet<Galaxy> allGalaxies = Galaxy.GetAllGalaxies( inp, totalExpansionWidth );
@@ -248,7 +246,6 @@ namespace AdventOfCode2023
          }
          long ans = dist;
          Console.WriteLine( ans );
-
       }
 
    #endregion
