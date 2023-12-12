@@ -24,7 +24,6 @@ namespace AdventOfCode2023.Classes
          m_ColIdx = colIdx;
          m_ID = id;
       }
-   
    #endregion
 
    /*PROPERTIES*/

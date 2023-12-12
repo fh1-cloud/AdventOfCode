@@ -214,9 +214,21 @@ namespace AdventOfCode2023
       {
 
       //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
+
+         List<HotSpringGroupLine> lines = new List<HotSpringGroupLine>( );
+         for( int i = 0; i<inp.Length; i++ )
+         {
+            HotSpringGroupLine line = new HotSpringGroupLine( inp[i] );
+            lines.Add( line );
+         }
+
+         List<string> bases = new List<string>( ) { ".", "#" };
+
+         List<string> test = HotSpringGroupLine.GetNthEnumeration( bases, 2 ).ToList( );
+
 
          long ans = 0;
          Console.WriteLine( ans );
