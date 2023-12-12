@@ -212,28 +212,16 @@ namespace AdventOfCode2023
 
       public static void Dec12( )
       {
-
-      //Parse the text file to a string..
-         //string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
-
-         List<HotSpringGroupLine> lines = new List<HotSpringGroupLine>( );
-         for( int i = 0; i<inp.Length; i++ )
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         long ans1 = 0;
+         long ans2 = 0;
+         foreach( string[] line in inp.Select( x => x.Split( ' ' ) ) )
          {
-            HotSpringGroupLine line = new HotSpringGroupLine( inp[i] );
-            lines.Add( line );
+            ans1 += new HotSpringGroupLine( line[0] + " " + line[1] ).GetNumberOfPossiblePermutations( );
+            ans2 += new HotSpringGroupLine( string.Join( "?", Enumerable.Repeat( line[0], 5 ) ) + " " + string.Join( ",", Enumerable.Repeat( line[1], 5 ) ) ).GetNumberOfPossiblePermutations( );
          }
-
-         List<string> bases = new List<string>( ) { ".", "#" };
-
-         List<string> test = HotSpringGroupLine.GetNthEnumeration( bases, 2 ).ToList( );
-
-
-         long ans = 0;
-         Console.WriteLine( ans );
-         Clipboard.SetText( ans.ToString( ) );
-
+         Console.WriteLine( ans1 );
+         Console.WriteLine( ans2 );
       }
 
 
