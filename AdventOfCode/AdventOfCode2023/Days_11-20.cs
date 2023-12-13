@@ -198,12 +198,27 @@ namespace AdventOfCode2023
       public static void Dec13( )
       {
 
-      //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         //Parse the text file to a string..
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
-         long ans = 0;
+         List<string[]> blocks = GlobalMethods.SplitStringArrayByEmptyLine( inp );
+
+         long ans1 = 0;
+         for( int i = 0; i < blocks.Count; i++ )
+         {
+
+            MirrorBlock m = new MirrorBlock( blocks[i] );
+
+            long tA1 = m.GetAnsP1( );
+            Console.WriteLine( "#" + (i+1).ToString( ) + "  " + tA1 );
+            ans1 += tA1;
+         }
+
+
+
+         long ans = ans1;
          Console.WriteLine( ans );
          Clipboard.SetText( ans.ToString( ) );
 

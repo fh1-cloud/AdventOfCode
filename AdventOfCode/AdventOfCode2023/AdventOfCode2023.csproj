@@ -54,6 +54,7 @@
     <Compile Include="Classes\Galaxy.cs" />
     <Compile Include="Classes\GridChecker.cs" />
     <Compile Include="Classes\HotSpringGroupLine.cs" />
+    <Compile Include="Classes\MirrorBlock.cs" />
     <Compile Include="Classes\NumerLiteral.cs" />
     <Compile Include="Classes\BoatRace.cs" />
     <Compile Include="Classes\OasisNumberSeries.cs" />
@@ -84,6 +85,7 @@
     <Content Include="Inputs\Dec10.txt" />
     <Content Include="Inputs\Dec11.txt" />
     <Content Include="Inputs\Dec12.txt" />
+    <Content Include="Inputs\Dec13.txt" />
     <Content Include="Inputs\Test02.txt" />
     <Content Include="Inputs\Test01.txt" />
   </ItemGroup>
