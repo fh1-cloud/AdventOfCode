@@ -183,14 +183,26 @@ namespace AdventOfCode2023
       public static void Dec14( )
       {
 
-      //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
+         //Parse the text file to a string..
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
-         long ans = 0;
-         Console.WriteLine( ans );
-         Clipboard.SetText( ans.ToString( ) );
+
+         TiltBoard b = new TiltBoard( inp );
+
+         //int cycles = 1000000000;
+         int cycles = 100;
+         for( int i = 0; i<cycles; i++ )
+         {
+            b.Cycle( );
+
+         }
+
+
+         //long ans = test;
+         //Console.WriteLine( ans );
+         //Clipboard.SetText( ans.ToString( ) );
 
       }
 
