@@ -8,11 +8,6 @@ namespace AdventOfCode2023.Classes
 {
    public class TiltBoard
    {
-
-   /*LOCAL CLASSES*/
-   #region
-   #endregion
-
    /*ENUMS*/
    #region
       public enum TILDIRECTION
@@ -26,14 +21,18 @@ namespace AdventOfCode2023.Classes
 
    /*MEMBERS*/
    #region
-
       protected HashSet<Tuple<int, int>> m_CubeRocks = new HashSet<Tuple<int, int>>(); //true == rock
       protected HashSet<Tuple<int, int>> m_RoundRocks = new HashSet<Tuple<int, int>>( );
 
-      protected long m_LastCycleWeight = -1;
-
       protected int m_ColDim = -1;
       protected int m_RowDim = -1;
+
+      protected HashSet<string> m_States = new HashSet<string>();
+      protected List<long> m_Cycles = new List<long>( );
+      protected string m_FirstCycleState = null;
+      protected long m_CycleCounter = 0;
+      protected long m_Iterations = 0;
+      protected long m_IterationsBeforeCycling = 0;
    #endregion
 
    /*CONSTRUCTORS*/
@@ -55,19 +54,7 @@ namespace AdventOfCode2023.Classes
       }
    #endregion
 
-   /*PROPERTIES*/
-   #region
-   #endregion
-
-   /*OPERATORS*/
-   #region
-   #endregion
-
-   /*METHODS*/
-   #region
-
-
-      public void PrintState( )
+      protected string GetStateString( )
       {
          StringBuilder sb = new StringBuilder( );
          for( int i = 0; i< m_RowDim; i++ )
@@ -83,32 +70,68 @@ namespace AdventOfCode2023.Classes
             }
             sb.Append( "\n" );
          }
-         Console.Write( sb.ToString() );
+         return sb.ToString( );
       }
 
-      public void Cycle( )
+      protected void Cycle( )
       {
          Tilt( TILDIRECTION.NORTH );
          Tilt( TILDIRECTION.WEST );
          Tilt( TILDIRECTION.SOUTH );
          Tilt( TILDIRECTION.EAST );
 
-         //PrintState( );
-
-         long cycleRes = GetWeightOnNorthBeam( );
-         long change = m_LastCycleWeight - cycleRes;
-         m_LastCycleWeight = cycleRes;
-         Console.WriteLine( change );
+         m_Iterations++;
+         string state = GetStateString( );
+         if( !m_States.Contains( GetStateString( ) ) )
+         {
+            m_States.Add( state );
+         }
+         else //This state was found previously
+         {
+            if( m_FirstCycleState == null )
+            {
+               m_IterationsBeforeCycling = m_Iterations;
+               m_FirstCycleState = state;
+               m_CycleCounter = 0;
+            }
+            else if( m_FirstCycleState == state ) 
+            {
+               m_Cycles.Add( m_CycleCounter );
+               Console.WriteLine( m_CycleCounter ); //Write the cycle to console.
+               m_CycleCounter = 0;
+            }
+            m_CycleCounter++;
+         }
       }
 
-      public long GetWeightOnNorthBeam( )
+      protected long FindCycle( )
+      {
+         while( m_Cycles.Count < 10 )
+            Cycle( );
+
+         bool isEqual = true;
+         for( int i = 0; i<m_Cycles.Count; i++ )
+            isEqual &= ( m_Cycles[0] == m_Cycles[i] );
+
+         if( !isEqual )
+            throw new Exception( );
+         return m_Cycles[0];
+      }
+
+      public long FindState( int targetCycles )
+      {
+         long cycle = FindCycle( );
+         long restCycles = ( targetCycles - m_IterationsBeforeCycling ) % cycle;
+         for( int i = 0; i<restCycles; i++ )
+            Cycle( );
+         return GetWeightOnNorthBeam( );
+      }
+
+      protected long GetWeightOnNorthBeam( )
       {
          long ans1 = 0;
-         foreach( var t in m_RoundRocks )
-         {
-            long thisAns = (m_RowDim - t.Item1);
-            ans1 += thisAns;
-         }
+         foreach( Tuple<int, int> t in m_RoundRocks )
+            ans1 += (m_RowDim - t.Item1);
          return ans1;
       }
 
@@ -237,7 +260,6 @@ namespace AdventOfCode2023.Classes
          }
          else if( direction == TILDIRECTION.EAST )
          {
-
             for( int rowIdx = 0; rowIdx < m_RowDim; rowIdx++ )
             {
                bool hasFreeSpace = false;
@@ -278,12 +300,6 @@ namespace AdventOfCode2023.Classes
 
 
       }
-
-   #endregion
-
-   /*STATIC METHODS*/
-   #region
-   #endregion
 
 
    }
