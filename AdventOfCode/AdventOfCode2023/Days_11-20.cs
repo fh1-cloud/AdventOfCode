@@ -153,13 +153,33 @@ namespace AdventOfCode2023
 
       public static void Dec16( )
       {
-
-      //Parse the text file to a string..
-         //string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
-
-         long ans = 0;
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         long maxPropagation = 0;
+         for( int i = 0; i<inp[0].Length; i++ )
+         {
+            MirrorField f = new MirrorField( inp );
+            f.PropagateRay( new MirrorFieldBeam( -1, i, MirrorFieldBeam.BEAMDIRECTION.DOWN, f.Height, f.Width ) );
+            maxPropagation = Math.Max( maxPropagation, f.GetNumberOfEnergizedTiles( ) );
+         }
+         for( int i = 0; i<inp[0].Length; i++ )
+         {
+            MirrorField f = new MirrorField( inp );
+            f.PropagateRay( new MirrorFieldBeam( f.Height, i, MirrorFieldBeam.BEAMDIRECTION.UP, f.Height, f.Width ) );
+            maxPropagation = Math.Max( maxPropagation, f.GetNumberOfEnergizedTiles( ) );
+         }
+         for( int i = 0; i<inp.Length; i++ )
+         {
+            MirrorField f = new MirrorField( inp );
+            f.PropagateRay( new MirrorFieldBeam( i, -1, MirrorFieldBeam.BEAMDIRECTION.RIGHT, f.Height, f.Width ) );
+            maxPropagation = Math.Max( maxPropagation, f.GetNumberOfEnergizedTiles( ) );
+         }
+         for( int i = 0; i<inp.Length; i++ )
+         {
+            MirrorField f = new MirrorField( inp );
+            f.PropagateRay( new MirrorFieldBeam( i, f.Width, MirrorFieldBeam.BEAMDIRECTION.LEFT, f.Height, f.Width ) );
+            maxPropagation = Math.Max( maxPropagation, f.GetNumberOfEnergizedTiles( ) );
+         }
+         long ans = maxPropagation;
          Console.WriteLine( ans );
          Clipboard.SetText( ans.ToString( ) );
 
