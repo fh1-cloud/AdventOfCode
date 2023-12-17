@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AdventOfCode2023.Classes;
 using AdventOfCodeLib.Classes;
+using DotNetty.Common.Utilities;
 
 namespace AdventOfCode2023
 {
@@ -138,16 +140,15 @@ namespace AdventOfCode2023
 
       public static void Dec17( )
       {
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         int[ ,] grid = new int[ inp.Length, inp[0].Length];
+         for( int i = 0; i<inp.Length; i++ )
+            for( int j = 0; j<inp[0].Length; j++ )
+               grid[i,j] = int.Parse( inp[i][j].ToString( ) );
 
-      //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
-
-         long ans = 0;
-         Console.WriteLine( ans );
-         Clipboard.SetText( ans.ToString( ) );
-
+         LavaPool p = new LavaPool( grid );
+         p.P1( );
+         p.P2( );
       }
 
 

@@ -15,7 +15,7 @@ namespace AdventOfCode2023
       static void Main( string[ ] args )
       {
       //Set the day..
-         int day = 16;
+         int day = 18;
 
       //Try to get the input if it doesnt exist already..
          GlobalMethods.GetInput( day, 2023 );
