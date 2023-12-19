@@ -107,13 +107,13 @@
     <Compile Include="Classes\LensCollection.cs" />
     <Compile Include="Classes\HotSpringGroupLine.cs" />
     <Compile Include="Classes\LongPair.cs" />
+    <Compile Include="Classes\MachinePartSorter.cs" />
     <Compile Include="Classes\MirrorBlock.cs" />
     <Compile Include="Classes\MirrorField.cs" />
     <Compile Include="Classes\MirrorFieldBeam.cs" />
     <Compile Include="Classes\NumerLiteral.cs" />
     <Compile Include="Classes\BoatRace.cs" />
     <Compile Include="Classes\OasisNumberSeries.cs" />
-    <Compile Include="Classes\MachinePartSorter.cs" />
     <Compile Include="Classes\PipePart.cs" />
     <Compile Include="Classes\PipeTraverser.cs" />
     <Compile Include="Classes\ScratchCard.cs" />

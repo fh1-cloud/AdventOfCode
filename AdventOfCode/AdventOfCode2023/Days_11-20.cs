@@ -110,25 +110,10 @@ namespace AdventOfCode2023
 
       public static void Dec19( )
       {
-
       //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
-
-         List<string[ ]> s = GlobalMethods.SplitStringArrayByEmptyLine( inp );
-         MachinePartSorter sorter = new MachinePartSorter( s[0] );
-         List<MachinePartSorter.MachinePart> parts = new List<MachinePartSorter.MachinePart>( );
-         foreach( string p in s[1] )
-         {
-            MachinePartSorter.MachinePart thisPart = new MachinePartSorter.MachinePart( p );
-            sorter.Sort( thisPart );
-         }
-
-         long ans = sorter.P1( );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         long ans = new MachinePartSorter( GlobalMethods.SplitStringArrayByEmptyLine( inp ) ).P2( );
          Console.WriteLine( ans );
-         Clipboard.SetText( ans.ToString( ) );
-
       }
 
 

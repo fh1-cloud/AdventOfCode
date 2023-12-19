@@ -52,6 +52,13 @@ namespace AdventOfCodeLib.Numerics
 
    /*STATIC METHODS*/
    #region
+
+
+      public static URange1D CreateSingleRange( long minVal, long maxVal )
+      {
+         return new URange1D( new List<URangeSingle1D>( ) { new URangeSingle1D( minVal, maxVal ) } );
+      }
+
    #endregion
 
    /*METHODS*/
@@ -91,7 +98,6 @@ namespace AdventOfCodeLib.Numerics
 
          Consolidate( );
       }
-
 
       /// <summary>
       /// Intersects a single range on the top of this collection of ranges.
