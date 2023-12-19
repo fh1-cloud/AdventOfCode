@@ -116,7 +116,16 @@ namespace AdventOfCode2023
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
-         long ans = 0;
+         List<string[ ]> s = GlobalMethods.SplitStringArrayByEmptyLine( inp );
+         MachinePartSorter sorter = new MachinePartSorter( s[0] );
+         List<MachinePartSorter.MachinePart> parts = new List<MachinePartSorter.MachinePart>( );
+         foreach( string p in s[1] )
+         {
+            MachinePartSorter.MachinePart thisPart = new MachinePartSorter.MachinePart( p );
+            sorter.Sort( thisPart );
+         }
+
+         long ans = sorter.P1( );
          Console.WriteLine( ans );
          Clipboard.SetText( ans.ToString( ) );
 

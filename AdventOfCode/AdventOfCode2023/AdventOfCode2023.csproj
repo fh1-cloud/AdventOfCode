@@ -113,6 +113,7 @@
     <Compile Include="Classes\NumerLiteral.cs" />
     <Compile Include="Classes\BoatRace.cs" />
     <Compile Include="Classes\OasisNumberSeries.cs" />
+    <Compile Include="Classes\MachinePartSorter.cs" />
     <Compile Include="Classes\PipePart.cs" />
     <Compile Include="Classes\PipeTraverser.cs" />
     <Compile Include="Classes\ScratchCard.cs" />
@@ -148,6 +149,7 @@
     <Content Include="Inputs\Dec16.txt" />
     <Content Include="Inputs\Dec17.txt" />
     <Content Include="Inputs\Dec18.txt" />
+    <Content Include="Inputs\Dec19.txt" />
     <Content Include="Inputs\Test02.txt" />
     <Content Include="Inputs\Test01.txt" />
   </ItemGroup>
