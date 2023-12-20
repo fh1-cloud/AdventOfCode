@@ -96,14 +96,26 @@ namespace AdventOfCode2023
       public static void Dec20( )
       {
 
-      //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         //Parse the text file to a string..
+         //string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
-         long ans = 0;
-         Console.WriteLine( ans );
-         Clipboard.SetText( ans.ToString( ) );
+         Dictionary<string, PulseModuleBase> modules = new Dictionary<string, PulseModuleBase>( );
+         foreach( string s in inp )
+         {
+            PulseModuleBase thisModule = PulseModuleBase.CreateModuleFromInput( s );
+            modules.Add( thisModule.Name, thisModule );
+         }
+      //Create output module..
+         PulseModuleOutput outputModule = PulseModuleOutput.CreateOutputModule( );
+         modules.Add( outputModule.Name, outputModule );
+
+         PulseModuleBase.PushButton( modules );
+
+
+         long ans = PulseModuleBase.P1( );
+         //Clipboard.SetText( ans.ToString( ) );
 
       }
 

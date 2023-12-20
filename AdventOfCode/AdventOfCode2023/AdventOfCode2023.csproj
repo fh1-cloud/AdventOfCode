@@ -116,6 +116,7 @@
     <Compile Include="Classes\OasisNumberSeries.cs" />
     <Compile Include="Classes\PipePart.cs" />
     <Compile Include="Classes\PipeTraverser.cs" />
+    <Compile Include="Classes\PulseModule.cs" />
     <Compile Include="Classes\ScratchCard.cs" />
     <Compile Include="Classes\SeedMapper.cs" />
     <Compile Include="Classes\TiltBoard.cs" />
@@ -150,6 +151,7 @@
     <Content Include="Inputs\Dec17.txt" />
     <Content Include="Inputs\Dec18.txt" />
     <Content Include="Inputs\Dec19.txt" />
+    <Content Include="Inputs\Dec20.txt" />
     <Content Include="Inputs\Test02.txt" />
     <Content Include="Inputs\Test01.txt" />
   </ItemGroup>
