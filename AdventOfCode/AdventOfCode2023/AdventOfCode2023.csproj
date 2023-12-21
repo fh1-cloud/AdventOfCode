@@ -102,6 +102,7 @@
     <Compile Include="Classes\DesertNode.cs" />
     <Compile Include="Classes\DigPlan.cs" />
     <Compile Include="Classes\Galaxy.cs" />
+    <Compile Include="Classes\Garden.cs" />
     <Compile Include="Classes\GridChecker.cs" />
     <Compile Include="Classes\LavaPool.cs" />
     <Compile Include="Classes\LensCollection.cs" />
@@ -153,6 +154,7 @@
     <Content Include="Inputs\Dec18.txt" />
     <Content Include="Inputs\Dec19.txt" />
     <Content Include="Inputs\Dec20.txt" />
+    <Content Include="Inputs\Dec21.txt" />
     <Content Include="Inputs\Test02.txt" />
     <Content Include="Inputs\Test01.txt" />
   </ItemGroup>
