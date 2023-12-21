@@ -122,6 +122,7 @@
     <Compile Include="Classes\TiltBoard.cs" />
     <Compile Include="Days_1-10.cs" />
     <Compile Include="Days_11-20.cs" />
+    <Compile Include="Days_21-25.cs" />
     <Compile Include="GlobalMethods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

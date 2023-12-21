@@ -18,105 +18,55 @@ namespace AdventOfCode2023
 
    /*STATIC METHODS*/
    #region
-      public static void Dec25( )
-      {
-
-      //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
-
-         long ans = 0;
-         Console.WriteLine( ans );
-         Clipboard.SetText( ans.ToString( ) );
-
-      }
-
-
-      public static void Dec24( )
-      {
-
-      //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
-
-         long ans = 0;
-         Console.WriteLine( ans );
-         Clipboard.SetText( ans.ToString( ) );
-
-      }
-
-
-      public static void Dec23( )
-      {
-
-      //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
-
-         long ans = 0;
-         Console.WriteLine( ans );
-         Clipboard.SetText( ans.ToString( ) );
-
-      }
-
-
-      public static void Dec22( )
-      {
-
-      //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
-
-         long ans = 0;
-         Console.WriteLine( ans );
-         Clipboard.SetText( ans.ToString( ) );
-
-      }
-
-
-      public static void Dec21( )
-      {
-
-      //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
-
-         long ans = 0;
-         Console.WriteLine( ans );
-         Clipboard.SetText( ans.ToString( ) );
-
-      }
-
 
       public static void Dec20( )
       {
 
-         //Parse the text file to a string..
-         //string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
-
+      //Parse the text file to a string..
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          Dictionary<string, PulseModuleBase> modules = new Dictionary<string, PulseModuleBase>( );
          foreach( string s in inp )
          {
             PulseModuleBase thisModule = PulseModuleBase.CreateModuleFromInput( s );
             modules.Add( thisModule.Name, thisModule );
          }
-      //Create output module..
+
+      //Create output module
          PulseModuleOutput outputModule = PulseModuleOutput.CreateOutputModule( );
          modules.Add( outputModule.Name, outputModule );
+         PulseModuleBase.PopulateConjunctionModules( modules ); //Populate all the conjunctions..
 
-         PulseModuleBase.PushButton( modules );
+      //Find the conjunction module that has rx as a child..
+         PulseModuleConjunction rxSource = null;
+         foreach( KeyValuePair<string, PulseModuleBase> kvp in modules )
+         {
+            foreach( string c in kvp.Value.DestinationModules )
+            {
+               if( c == "rx" )
+               {
+                  rxSource = kvp.Value as PulseModuleConjunction;
+                  break;
+               }
+            }
+            if( rxSource != null )
+               break;
+         }
+      //Create a dict of all the sources for the penultimate conjunction
+         List<PulseModuleBase> rxSourceInputs = modules.Values.Where( x => x.DestinationModules.Contains( rxSource.Name ) ).ToList( );
+         Dictionary<string, (long count, bool done)> rxSourceInputCounts = new Dictionary<string, (long count, bool done)>( );
+         foreach( PulseModuleBase rxSourceModule in rxSourceInputs )
+            rxSourceInputCounts[rxSourceModule.Name] = (0, false);
 
+         bool foundAllSources = false;
+         while( !foundAllSources )
+            foundAllSources = PulseModuleBase.PushButton( modules, rxSourceInputCounts );
 
-         long ans = PulseModuleBase.P1( );
-         //Clipboard.SetText( ans.ToString( ) );
+      //We exited, the number of button presses is in the source dict
+         long lcmVal = 1;
+         foreach( KeyValuePair<string, (long, bool)> rx in rxSourceInputCounts )
+            lcmVal = AdventOfCodeLib.UMath.LCM( lcmVal, rx.Value.Item1 );
 
+         Console.WriteLine( lcmVal );
       }
 
 
