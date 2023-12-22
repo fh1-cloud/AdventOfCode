@@ -121,6 +121,7 @@
     <Compile Include="Classes\ScratchCard.cs" />
     <Compile Include="Classes\SeedMapper.cs" />
     <Compile Include="Classes\TiltBoard.cs" />
+    <Compile Include="Classes\WoodBrick.cs" />
     <Compile Include="Days_1-10.cs" />
     <Compile Include="Days_11-20.cs" />
     <Compile Include="Days_21-25.cs" />
@@ -155,6 +156,7 @@
     <Content Include="Inputs\Dec19.txt" />
     <Content Include="Inputs\Dec20.txt" />
     <Content Include="Inputs\Dec21.txt" />
+    <Content Include="Inputs\Dec22.txt" />
     <Content Include="Inputs\Test02.txt" />
     <Content Include="Inputs\Test01.txt" />
   </ItemGroup>

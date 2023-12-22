@@ -66,6 +66,8 @@ namespace AdventOfCode2023
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
+         List<WoodBrick> allBricks = WoodBrick.CreateAllBricks( inp );
+
          long ans = 0;
          Console.WriteLine( ans );
          Clipboard.SetText( ans.ToString( ) );
