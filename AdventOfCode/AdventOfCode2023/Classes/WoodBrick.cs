@@ -94,6 +94,7 @@ namespace AdventOfCode2023.Classes
          m_P1 = new Position( int.Parse( startSpl[0] ), int.Parse( startSpl[1] ), int.Parse( startSpl[2] ) );
          m_P2 = new Position( int.Parse( endSpl[0] ), int.Parse( endSpl[1] ), int.Parse( endSpl[2] ) );
          m_Length = Math.Abs( m_P1.X - m_P2.X ) + Math.Abs( m_P1.Y - m_P2.Y ) + Math.Abs( m_P1.Z - m_P2.Z ) + 1;
+         m_ID = id;
 
          if( m_P1.X == m_P2.X && m_P1.Y == m_P2.Y && m_P1.Z == m_P2.Z )
             m_Dir = Direction.PosX( );
@@ -120,6 +121,17 @@ namespace AdventOfCode2023.Classes
          }
 
       }
+
+      internal WoodBrick( WoodBrick oldBrick )
+      {
+         m_P1 = oldBrick.m_P1;
+         m_P2 = oldBrick.m_P2;
+         m_Length = oldBrick.m_Length;
+         m_ID = oldBrick.m_ID;
+         m_Dir = oldBrick.m_Dir;
+      }
+
+
    #endregion
 
 
@@ -164,18 +176,13 @@ namespace AdventOfCode2023.Classes
       {
          m_P1 = new Position( m_P1.X + dir.X*length, m_P1.Y + dir.Y*length, m_P1.Z + dir.Z*length );
          m_P2 = new Position( m_P2.X + dir.X*length, m_P2.Y + dir.Y*length, m_P2.Z + dir.Z*length );
+         Console.WriteLine( $"Moved brick {m_ID} to {this.MinZ}" );
       }
 
-      protected bool IsPositionInBrick( Position pos )
+
+      protected bool IsPointOnBrick( Position point )
       {
-      //Check the max bounds..
-         if( this.MaxZ < pos.Z || this.MinZ > pos.Z || this.MaxX < pos.X || this.MinX > pos.X || this.MaxY < pos.Y || this.MinY > pos.Y )
-            return false;
-
-      //If the codre reached this point, we need to check if the position is on the line..
-
-
-
+         return IsPointOnLine( point, m_P1, m_P2 );
       }
 
 
@@ -184,19 +191,24 @@ namespace AdventOfCode2023.Classes
       //Get all horizontal plane points..
          HashSet<Position> planePoints = GetHorizontalPlanePoints( true );
 
-
          foreach( KeyValuePair<int, WoodBrick> kvp in allBricks )
          {
+         //Skip if same brick
+            if( m_ID == kvp.Key )
+               continue;
+
          //Check z coordinate first.
             if( kvp.Value.MaxZ != this.MinZ - 1)
                continue;
 
-
-
-
+         //Check if the points in the plance points is on the brick..
+            foreach( Position p in planePoints )
+               if( kvp.Value.IsPointOnBrick( p ) )
+                  return true;
          }
 
-         
+      //If the code reached this point, this brick does not have a brick under it.
+         return false;
 
       }
 
@@ -204,31 +216,95 @@ namespace AdventOfCode2023.Classes
 
    /*STATIC METHODS*/
    #region
-
-      public static List<WoodBrick> CreateAllBricksAndSettle( string[] bricks )
+      protected static bool IsPointOnLine( Position point, Position startLine, Position endLine )
       {
-         List<WoodBrick> allBricks = new List<WoodBrick>( );
+
+         double ab = Math.Sqrt( ( endLine.X - startLine.X ) * ( endLine.X - startLine.X ) + ( endLine.Y - startLine.Y ) * ( endLine.Y - startLine.Y ) + ( endLine.Z - startLine.Z ) * ( endLine.Z - startLine.Z ) );
+         double ap = Math.Sqrt( ( point.X - startLine.X ) * ( point.X - startLine.X ) + ( point.Y - startLine.Y ) * ( point.Y - startLine.Y) + ( point.Z-startLine.Z ) * ( point.Z - startLine.Z ) );
+         double pb = Math.Sqrt( ( endLine.X - point.X ) * ( endLine.X - point.X ) + ( endLine.Y - point.Y )*( endLine.Y - point.Y ) + ( endLine.Z - point.Z ) * ( endLine.Z - point.Z ) );
+         if( Math.Abs( ap + pb - ab ) < 0.01 )
+            return true;
+
+      //If the code reached here, its not on the line.
+         return false;
+      }
+
+      public static Dictionary<int,WoodBrick> CreateAllBricksAndSettle( string[] bricks )
+      {
+         Dictionary<int,WoodBrick> allBricks = new Dictionary<int, WoodBrick>( );
          for( int i = 0; i<bricks.Length; i++ )
-            allBricks.Add( new WoodBrick( bricks[i], i+1 ) );
+            allBricks.Add( i+1, new WoodBrick( bricks[i], i+1 ) );
+
+      //Settles the bricks after reading input..
+         Settle( allBricks );
+
          return allBricks;
       }
 
-      public static void Settle( Dictionary<int,WoodBrick> allBricks ) //Settles all the bricks in the dictionary..
+      public static Dictionary<int, WoodBrick> DeepCopy( Dictionary<int,WoodBrick> allBricks )
+      {
+         Dictionary<int, WoodBrick> res = new Dictionary<int, WoodBrick>( );
+         foreach( KeyValuePair<int, WoodBrick> b in allBricks  )
+            res.Add( b.Key, new WoodBrick( b.Value ) );
+         return res;
+      }
+
+      public static Dictionary<int,WoodBrick> FindBricksThatCanBeDisintegrated( Dictionary<int,WoodBrick> allBricks )
       {
 
-         bool movedSomething = true;
+         Dictionary<int,WoodBrick> canBeDeleted = new Dictionary<int, WoodBrick>( );
 
-         while( movedSomething )
+         foreach( KeyValuePair<int, WoodBrick> b in allBricks )
          {
+         //Create copy.
+            Dictionary<int,WoodBrick> copy = DeepCopy( allBricks );
 
+         //Remove brick.
+            copy.Remove( b.Key );
 
-
-
+         //Try to settle
+            bool somethingMoved = Settle( copy, true );
+            if( !somethingMoved )
+               canBeDeleted.Add( b.Key, b.Value );
          }
 
+         return canBeDeleted;
+
+      }
 
 
+      public static bool Settle( Dictionary<int,WoodBrick> allBricks, bool abortAtFirstMove = false ) //Settles all the bricks in the dictionary.. Returns a bool indicating wheter or not something was moved.
+      {
+         bool movedSomething = true;
+         Direction moveDir = Direction.NegZ( );
+         int moveCounter = 0;
+         while( movedSomething )
+         {
+            movedSomething = false;
 
+         //Outer loop over bricks..
+            foreach( KeyValuePair<int, WoodBrick> kvp in allBricks )
+            {
+               if( kvp.Value.MinZ > 1 )
+               {
+                  if( !kvp.Value.HasBrickDirectlyUnder( allBricks ) )
+                  {
+                  //If this is the checker method, return true that something moved
+                     if( abortAtFirstMove )
+                        return true;
+
+                     moveCounter++;
+                     kvp.Value.Move( moveDir, 1 );
+                     movedSomething = true;
+                     break;
+                  }
+
+               }
+            }
+         }
+
+      //Return true if all was settled.
+         return moveCounter > 0;
       }
 
 

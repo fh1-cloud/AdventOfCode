@@ -61,14 +61,15 @@ namespace AdventOfCode2023
       public static void Dec22( )
       {
 
-      //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         //Parse the text file to a string..
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test01.txt" );
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\Test02.txt" );
 
-         List<WoodBrick> allBricks = WoodBrick.CreateAllBricks( inp );
+         Dictionary<int, WoodBrick> allBricks = WoodBrick.CreateAllBricksAndSettle( inp );
+         Dictionary<int, WoodBrick> safeBricks = WoodBrick.FindBricksThatCanBeDisintegrated( allBricks );
 
-         long ans = 0;
+         long ans = safeBricks.Count;
          Console.WriteLine( ans );
          Clipboard.SetText( ans.ToString( ) );
 
