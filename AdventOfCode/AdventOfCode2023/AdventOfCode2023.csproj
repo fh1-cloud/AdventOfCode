@@ -1,139 +1,39 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E6AC0839-EB6C-4B0D-95CB-905C443A5CCD}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>AdventOfCode2023</RootNamespace>
-    <AssemblyName>AdventOfCode2023</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="AdventOfCodeLib">
-      <HintPath>..\AdventOfCodeLib\bin\Debug\AdventOfCodeLib.dll</HintPath>
-    </Reference>
-    <Reference Include="DotNetty.Common, Version=0.7.5.0, Culture=neutral, PublicKeyToken=bc13ca065fa06c29, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetty.Common.0.7.5\lib\net472\DotNetty.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.5.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.5.0.0\lib\net461\Microsoft.Extensions.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Options, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Options.5.0.0\lib\net461\Microsoft.Extensions.Options.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Primitives.5.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="PriorityQueue, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5e136dbf0437dacd, processorArchitecture=MSIL">
-      <HintPath>..\packages\OptimizedPriorityQueue.5.1.0\lib\net45\PriorityQueue.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.5.0.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <None Remove="Inputs\Dec01.txt" />
+    <None Remove="Inputs\Dec02.txt" />
+    <None Remove="Inputs\Dec03.txt" />
+    <None Remove="Inputs\Dec04.txt" />
+    <None Remove="Inputs\Dec05.txt" />
+    <None Remove="Inputs\Dec06.txt" />
+    <None Remove="Inputs\Dec07.txt" />
+    <None Remove="Inputs\Dec08.txt" />
+    <None Remove="Inputs\Dec09.txt" />
+    <None Remove="Inputs\Dec10.txt" />
+    <None Remove="Inputs\Dec11.txt" />
+    <None Remove="Inputs\Dec12.txt" />
+    <None Remove="Inputs\Dec13.txt" />
+    <None Remove="Inputs\Dec14.txt" />
+    <None Remove="Inputs\Dec15.txt" />
+    <None Remove="Inputs\Dec16.txt" />
+    <None Remove="Inputs\Dec17.txt" />
+    <None Remove="Inputs\Dec18.txt" />
+    <None Remove="Inputs\Dec19.txt" />
+    <None Remove="Inputs\Dec20.txt" />
+    <None Remove="Inputs\Dec21.txt" />
+    <None Remove="Inputs\Dec22.txt" />
+    <None Remove="Inputs\Test01.txt" />
+    <None Remove="Inputs\Test02.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Classes\CamelCard.cs" />
-    <Compile Include="Classes\CamelCardHand.cs" />
-    <Compile Include="Classes\CubeGame.cs" />
-    <Compile Include="Classes\DesertNode.cs" />
-    <Compile Include="Classes\DigPlan.cs" />
-    <Compile Include="Classes\Galaxy.cs" />
-    <Compile Include="Classes\Garden.cs" />
-    <Compile Include="Classes\GridChecker.cs" />
-    <Compile Include="Classes\LavaPool.cs" />
-    <Compile Include="Classes\LensCollection.cs" />
-    <Compile Include="Classes\HotSpringGroupLine.cs" />
-    <Compile Include="Classes\LongPair.cs" />
-    <Compile Include="Classes\MachinePartSorter.cs" />
-    <Compile Include="Classes\MirrorBlock.cs" />
-    <Compile Include="Classes\MirrorField.cs" />
-    <Compile Include="Classes\MirrorFieldBeam.cs" />
-    <Compile Include="Classes\NumerLiteral.cs" />
-    <Compile Include="Classes\BoatRace.cs" />
-    <Compile Include="Classes\OasisNumberSeries.cs" />
-    <Compile Include="Classes\PipePart.cs" />
-    <Compile Include="Classes\PipeTraverser.cs" />
-    <Compile Include="Classes\PulseModule.cs" />
-    <Compile Include="Classes\ScratchCard.cs" />
-    <Compile Include="Classes\SeedMapper.cs" />
-    <Compile Include="Classes\TiltBoard.cs" />
-    <Compile Include="Classes\WoodBrick.cs" />
-    <Compile Include="Days_1-10.cs" />
-    <Compile Include="Days_11-20.cs" />
-    <Compile Include="Days_21-25.cs" />
-    <Compile Include="GlobalMethods.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup />
+
   <ItemGroup>
     <Content Include="Inputs\Dec01.txt" />
     <Content Include="Inputs\Dec02.txt" />
@@ -157,8 +57,14 @@
     <Content Include="Inputs\Dec20.txt" />
     <Content Include="Inputs\Dec21.txt" />
     <Content Include="Inputs\Dec22.txt" />
-    <Content Include="Inputs\Test02.txt" />
     <Content Include="Inputs\Test01.txt" />
+    <Content Include="Inputs\Test02.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdventOfCodeLib\AdventOfCodeLib.csproj" />
+  </ItemGroup>
+
 </Project>

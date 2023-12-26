@@ -55,8 +55,10 @@
     <Compile Include="Extensions\EDouble.cs" />
     <Compile Include="Extensions\EString.cs" />
     <Compile Include="Classes\InputFetcher.cs" />
+    <Compile Include="GS.cs" />
     <Compile Include="Math\UMath.cs" />
-    <Compile Include="Numerics\ULineStraight.cs" />
+    <Compile Include="Numerics\U2DLineStraight.cs" />
+    <Compile Include="Numerics\U3DLineStraight.cs" />
     <Compile Include="Numerics\UMatrix2x2.cs" />
     <Compile Include="Numerics\UMatrixBase.cs" />
     <Compile Include="Numerics\URange1D.cs" />

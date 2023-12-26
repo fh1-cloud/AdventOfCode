@@ -1,6 +1,4 @@
-﻿using DotNetty.Common.Utilities;
-using Priority_Queue;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -73,7 +71,8 @@ namespace AdventOfCode2023.Classes
    #region
 
       protected int[,] m_Map = null;
-      protected SimplePriorityQueue<Path,int> m_Queue = null;
+
+      protected PriorityQueue<Path,int> m_Queue = null;
       protected HashSet<string> m_VisitedNodes = null;
 
    #endregion
@@ -92,7 +91,7 @@ namespace AdventOfCode2023.Classes
       public void P2( )
       {
       //Set up the priority queue
-         m_Queue = new SimplePriorityQueue<Path, int>( );
+         m_Queue = new PriorityQueue<Path, int>( );
 
       //Set up the set of visited nodes
          m_VisitedNodes = new HashSet<string>( );
@@ -136,7 +135,7 @@ namespace AdventOfCode2023.Classes
       public void P1( )
       {
       //Set up the priority queue
-         m_Queue = new SimplePriorityQueue<Path, int>( );
+         m_Queue = new PriorityQueue<Path, int>( );
 
       //Set up the set of visited nodes
          m_VisitedNodes = new HashSet<string>( );

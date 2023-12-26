@@ -12,7 +12,6 @@ using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace AdventOfCode2023
 {
@@ -23,7 +22,7 @@ namespace AdventOfCode2023
 #region
       public static void Dec10( )
       {
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          PipePart[ ,] grid = new PipePart[inp.Length, inp[0].Length];
          IntegerPair startLoc = null;
          for( int i = 0; i<inp.Length; i++ )
@@ -55,7 +54,7 @@ namespace AdventOfCode2023
 
       public static void Dec09( )
       {
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          long totalSum = 0;
          for( int i = 0; i < inp.Length; i++ )
             totalSum += new OasisNumberSeries( inp[i] ).AddValueToSeries( );
@@ -64,7 +63,7 @@ namespace AdventOfCode2023
 
       public static void Dec08( )
       {
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          Regex childRx = new Regex( @"\(([^()]*)\)" );
          Dictionary<string,DesertNode> nodes = new Dictionary<string, DesertNode>( );
 
@@ -92,21 +91,20 @@ namespace AdventOfCode2023
 
       public static void Dec07( )
       {
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          List<CamelCardHand> hands = new List<CamelCardHand>( );
          for( int i = 0; i<inp.Length; i++ )
             hands.Add( new CamelCardHand( inp[i], false ) );
 
          long ans = CamelCardHand.GetTotalWinnings( hands );
          Console.WriteLine( ans );
-         Clipboard.SetText( ans.ToString( ) );
       }
 
 
       public static void Dec06( )
       {
       //Parse the text file to a string..
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          string[ ] ts = inp[0].Split( new char[ ] { ' ' }, StringSplitOptions.RemoveEmptyEntries );
          string[ ] ds = inp[1].Split( new char[ ] { ' ' }, StringSplitOptions.RemoveEmptyEntries );
 
@@ -129,7 +127,7 @@ namespace AdventOfCode2023
       public static void Dec05( )
       {
       //Parse the text file to a string..
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
 
       //Part1
          List<long> seedList = null;
@@ -154,12 +152,11 @@ namespace AdventOfCode2023
          }
          long ans = completeRange.GetMinValue( );
          Console.WriteLine( ans );
-         Clipboard.SetText( ans.ToString( ) );
       }
 
       public static void Dec04( )
       {
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          List<ScratchCard> cards = new List<ScratchCard>( );
 
       //Part 1
@@ -182,7 +179,7 @@ namespace AdventOfCode2023
       public static void Dec03( )
       {
       //Parse the text file to a string..
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          object[ ,] grid = new object[inp.Length,inp[0].Length];
          for( int i = 0; i<inp.Length; i++ )
          {
@@ -201,7 +198,7 @@ namespace AdventOfCode2023
 
       public static void Dec02( )
       {
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          List<CubeGame> games = new List<CubeGame>( );
          foreach( string s in inp )
             games.Add( new CubeGame( s ) );
@@ -218,7 +215,7 @@ namespace AdventOfCode2023
       public static void Dec01( )
       {
       //Parse the text file to a string..
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          long ans = 0;
          foreach( string s in inp )
          {

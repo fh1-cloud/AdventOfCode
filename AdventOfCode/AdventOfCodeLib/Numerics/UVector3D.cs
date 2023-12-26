@@ -108,6 +108,35 @@ namespace AdventOfCodeLib.Numerics
    /*OPERATORS*/
    #region
 
+      public double this[ int idx ]
+      {
+         get
+         { 
+            if( idx == 0 )
+               return m_X;
+            else if( idx == 1 )
+               return m_Y;
+            else if( idx == 2 )
+               return m_Z;
+            else
+               throw new IndexOutOfRangeException( "Error in <UVector3D.Indexer> : Index out of range. Only <0>,<1> and <2> are allowed" );
+         }
+         set
+         {
+            if( idx == 0 )
+               m_X = value;
+            else if( idx == 1 )
+               m_Y = value;
+            else if( idx == 2 )
+               m_Z = value;
+            else
+               throw new IndexOutOfRangeException( "Error in <UVector3D.Indexer> : Index out of range. Only <0>,<1> and <2> are allowed" );
+         }
+      }
+
+
+
+
       /// <summary>
       /// Addition operator
       /// </summary>
@@ -197,12 +226,22 @@ namespace AdventOfCodeLib.Numerics
          return new UVector3D( m_X/l, m_Y/l, m_Z/l );
       }
 
+      /// <summary>
+      /// Check if a vector is parallell to this vector.
+      /// </summary>
+      /// <param name="vec"></param>
+      /// <returns></returns>
+      public bool IsParallel( UVector3D vec )
+      {
+         return Math.Abs( ( Math.Abs( this * vec ) - GetLength( ) * vec.GetLength( ) ) ) < GS.EPS;
+      }
+
 
    #endregion
 
    /*STATIC METHODS*/
    #region
-      
+
       /// <summary>
       /// Gets a unit vector in the x direction
       /// </summary>

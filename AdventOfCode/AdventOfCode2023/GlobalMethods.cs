@@ -118,7 +118,7 @@ namespace AdventOfCode2023
       {
       //Build file path for input..
          StringBuilder sb = new StringBuilder( );
-         sb.Append( "..\\..\\Inputs\\" );
+         sb.Append( "..\\..\\..\\Inputs\\" );
          sb.Append( day.ToString( ).Length <= 1 ? ( "Dec0" + day.ToString( ) ) : ( "Dec" + day.ToString( ) ) );
          sb.Append( ".txt" );
 
