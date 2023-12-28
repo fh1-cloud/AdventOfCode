@@ -42,17 +42,7 @@ namespace AdventOfCode2023
 
       public static void Dec23( )
       {
-
-      //Parse the text file to a string..
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Test02.txt" );
-
-         GardenMap garden = new GardenMap( inp );
-         long ans = garden.FindLongestPath( );
-
-         Console.WriteLine( ans );
-
+         Console.WriteLine( new GardenMap( GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" ) ).FindLongestPath( ) );
       }
 
 
