@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCodeLib.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -154,6 +155,11 @@ namespace AdventOfCodeLib.Numerics
       /// <returns></returns>
       public UMatrix2x2 GetInverse( )
       {
+
+         double det = this.Determinant( ); //Determinant is zero
+         if( det.IsZero( ) )
+            return null;
+
          double fac = 1.0/this.Determinant( );
          UMatrix2x2 ret = new UMatrix2x2( m_Values[1,1], -m_Values[0,1], -m_Values[1,0], m_Values[0,0] );
          return fac * ret;

@@ -1,7 +1,9 @@
 ﻿using AdventOfCode2023.Classes;
+using AdventOfCodeLib.Numerics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,15 +30,12 @@ namespace AdventOfCode2023
 
       public static void Dec24( )
       {
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         List<HailStone> hs = new List<HailStone>( );
+         for( int i = 0; i< inp.Length; i++ )
+            hs.Add( new HailStone( inp[i] ) );
 
-      //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Test02.txt" );
-
-         long ans = 0;
-         Console.WriteLine( ans );
-
+         Console.WriteLine( HailStone.FindMagicVector( hs ) );
       }
 
 

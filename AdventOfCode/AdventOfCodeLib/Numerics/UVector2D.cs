@@ -162,6 +162,19 @@ namespace AdventOfCodeLib.Numerics
       {
          return a * rhs;
       }
+
+
+      /// <summary>
+      /// Post multiplier with a vector
+      /// </summary>
+      /// <param name="preMult"></param>
+      /// <param name="mat"></param>
+      /// <returns></returns>
+      public static UVector2D operator * ( UMatrix2x2 mat, UVector2D vec )
+      {
+         return new UVector2D( mat[0,0]*vec.X + mat[0,1]*vec.Y, mat[1,0]*vec.X + mat[1,1]*vec.Y );
+      }
+
    #endregion
 
    /*METHODS*/

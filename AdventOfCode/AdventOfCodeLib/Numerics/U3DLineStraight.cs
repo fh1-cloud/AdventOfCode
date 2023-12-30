@@ -96,24 +96,25 @@ namespace AdventOfCodeLib.Numerics
 
       protected static List<UVector3D> IntersectStraightStraight( U3DLineStraight line1, U3DLineStraight line2 )
       {
-      /* Local variables */
+
+      //Local variables
          UVector3D dirVec1, dirVec2, xyz1, xyz2, dvec;
          bool doBreak;
          int i, j, idx1 = 0, idx2 = 0, idx3 = 0;
          double s, t, x1, x2;
          List<UVector3D> list = null;
 
-      /* Unpack */
+      //Unpack
          dirVec1 = line1.GetDirectionVector( );
          dirVec2 = line2.GetDirectionVector( );
          xyz1  = line1.m_Vertex1;
          xyz2  = line2.m_Vertex2;
          
-      /* If the two lines are parallel, an intersection is not possible, so we'll just return */
+      //If the two lines are parallel, an intersection is not possible, so we'll just return 
          if( dirVec1.IsParallel( dirVec2 ) )
             return null;
       
-      /* We need to check for intersection in a plane. Find the indices of the plane to check in */
+      //We need to check for intersection in a plane. Find the indices of the plane to check in 
          doBreak = false;
          for( i = 0 ; i < 3 ; i++ )
          {
@@ -132,14 +133,14 @@ namespace AdventOfCodeLib.Numerics
             }
             if( doBreak ) break;
          }
-      /* Get the parametric values for the intersection point */
+      //Get the parametric values for the intersection point
          dvec = xyz2 - xyz1;
          s = ( dirVec1[idx1] * dvec[idx2] - dirVec1[idx2] * dvec[idx1] )
             / ( dirVec1[idx2] * dirVec2[idx1] - dirVec1[idx1] * dirVec2[idx2] );
          t = ( dirVec2[idx1] * dvec[idx2] - dirVec2[idx2] * dvec[idx1] )
             / ( dirVec1[idx2] * dirVec2[idx1] - dirVec1[idx1] * dirVec2[idx2] );
          
-      /* Find out-of-plane coordinate for each line and compare */
+      //Find out of plane coordinate for each line and compare
          if( idx1 == 0 )
             idx3 = idx2==1?2:1;
          else if( idx1 == 1 )

@@ -9,33 +9,23 @@ namespace AdventOfCodeLib
    public static class UMath
    {
 
-   /*ENUMS*/
-   #region
-   #endregion
-
-   /*LOCAL CLASSES*/
-   #region
-   #endregion
-
    /*MEMBERS*/
    #region
    #endregion
 
-   /*CONSTRUCTORS*/
-   #region
-   #endregion
-
-   /*PROPERTIES*/
-   #region
-   #endregion
-
-   /*OPERATORS*/
-   #region
-   #endregion
-
-   /*METHODS*/
+   /*STATIC METHODS*/
    #region
 
+      /// <summary>
+      /// Gets the least common multiple between two numbers
+      /// </summary>
+      /// <param name="a"></param>
+      /// <param name="b"></param>
+      /// <returns></returns>
+      public static long LCM(long a, long b)
+      {
+         return ( a / GCD( a, b ) ) * b;
+      }
 
 
       /// <summary>
@@ -56,22 +46,46 @@ namespace AdventOfCodeLib
       }
 
 
+
       /// <summary>
-      /// Gets the least common multiple between two numbers
+      /// Performs a gauss elinimation on the input coefficients and the right hand side.
       /// </summary>
-      /// <param name="a"></param>
-      /// <param name="b"></param>
-      /// <returns></returns>
-      public static long LCM(long a, long b)
+      /// <param name="matrix"></param>
+      /// <param name="rhs"></param>
+      public static void GaussElimination( double[,] matrix, double[] rhs )
       {
-         return ( a / GCD( a, b ) ) * b;
+         int nOfVariables = matrix.GetLength( 0 );
+         for( int i = 0; i< nOfVariables; i++ )
+         {
+         //Select pivot
+            double pivot = matrix[i, i];
+
+         //Normalize row i
+            for( int j = 0; j<nOfVariables; j++ )
+               matrix[i,j] = matrix[i,j]/pivot;
+
+         //Normalize rhs
+            rhs[i] = rhs[i]/pivot;
+
+         //Sweep using row i
+            for( int k = 0; k<nOfVariables; k++ )
+            {
+               if( k != i )
+               {
+                  double factor = matrix[k,i];
+
+                  for( int j = 0; j<nOfVariables; j++ )
+                  {
+                     matrix[k,j] = matrix[k,j] - factor*matrix[i,j];
+                  }
+                  rhs[k] = rhs[k] - factor*rhs[i];
+               }
+            }
+         }
+
       }
 
 
-   #endregion
-
-   /*STATIC METHODS*/
-   #region
    #endregion
 
 
