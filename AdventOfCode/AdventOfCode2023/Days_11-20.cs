@@ -70,7 +70,6 @@ namespace AdventOfCode2023
 
       public static void Dec19( )
       {
-      //Parse the text file to a string..
          string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          long ans = new MachinePartSorter( GlobalMethods.SplitStringArrayByEmptyLine( inp ) ).P2( );
          Console.WriteLine( ans );
@@ -79,7 +78,6 @@ namespace AdventOfCode2023
 
       public static void Dec18( )
       {
-      //Parse the text file to a string..
          string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          long ans = new DigPlan( inp.ToList( ) ).GetTotalArea( );
          Console.WriteLine( ans );
@@ -133,7 +131,6 @@ namespace AdventOfCode2023
 
       }
 
-
       public static void Dec15( )
       {
          string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" )[0].Split( new char[] { ',' } );
@@ -141,14 +138,12 @@ namespace AdventOfCode2023
          Console.WriteLine( ans );
       }
 
-
       public static void Dec14( )
       {
          string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          long ans = new TiltBoard( inp ).FindState( 1000000000 );
          Console.WriteLine( ans );
       }
-
 
       public static void Dec13( )
       {
@@ -158,7 +153,6 @@ namespace AdventOfCode2023
             ans2 += new MirrorBlock( blocks[i] ).FindSubstitueMirror( );
          Console.WriteLine( ans2 );
       }
-
 
       public static void Dec12( )
       {
@@ -173,7 +167,6 @@ namespace AdventOfCode2023
          Console.WriteLine( ans1 );
          Console.WriteLine( ans2 );
       }
-
 
       public static void Dec11( )
       {

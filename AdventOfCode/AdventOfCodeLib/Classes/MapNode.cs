@@ -108,7 +108,7 @@ namespace AdventOfCodeLib.Classes
 
    /*METHODS*/
    #region
-      public void AddChild( MapNode child )
+      public void AddConnection( MapNode child )
       {
          if( !m_Connections.Contains( child ) )
             m_Connections.Add( child );

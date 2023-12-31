@@ -17,12 +17,13 @@ namespace AdventOfCode2023
       public static void Dec25( )
       {
 
-      //Parse the text file to a string..
-         string[] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Test01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Test02.txt" );
+         //Parse the text file to a string..
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
 
-         long ans = 0;
+         long ans = SnowMachinePartKargers.P1( inp );
+
+         //long test1 = SnowMachinePart2.PartOne( inp );
+
          Console.WriteLine( ans );
 
       }
