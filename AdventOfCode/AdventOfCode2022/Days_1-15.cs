@@ -5,115 +5,15 @@ using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 using AdventOfCode2022.Classes;
-using System.Windows.Forms;
 using AdventOfCodeLib.Extensions;
 using System.Security.Cryptography.X509Certificates;
 using AdventOfCodeLib.Numerics;
-using DotNetty.Common.Utilities;
 
 namespace AdventOfCode2022
 {
-   public class Days
+   public partial class Days
    {
-      /// <summary>
-      /// 
-      /// </summary>
-      public static void Dec25( )
-      {
 
-
-
-      }
-      /// <summary>
-      /// 
-      /// </summary>
-      public static void Dec24( )
-      {
-
-
-
-      }
-      /// <summary>
-      /// 
-      /// </summary>
-      public static void Dec23( )
-      {
-
-
-
-      }
-      /// <summary>
-      /// 
-      /// </summary>
-      public static void Dec22( )
-      {
-
-
-
-      }
-      /// <summary>
-      /// 
-      /// </summary>
-      public static void Dec21( )
-      {
-
-
-
-      }
-      /// <summary>
-      /// 
-      /// </summary>
-      public static void Dec20( )
-      {
-
-
-
-      }
-      /// <summary>
-      /// 
-      /// </summary>
-      public static void Dec19( )
-      {
-
-
-
-      }
-      /// <summary>
-      /// 
-      /// </summary>
-      public static void Dec18( )
-      {
-
-
-
-      }
-      /// <summary>
-      /// 
-      /// </summary>
-      public static void Dec17( )
-      {
-
-
-
-      }
-      /// <summary>
-      /// 
-      /// </summary>
-      public static void Dec16( )
-      {
-         //Read input and parse..
-         string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Dec16.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( "..\\..\\Inputs\\Temp01.txt" );
-
-
-
-      }
-
-
-
-      /// <summary>
-      /// 
-      /// </summary>
       public static void Dec15( )
       {
       //Read input and parse..
@@ -201,9 +101,6 @@ namespace AdventOfCode2022
 
 
 
-      /// <summary>
-      /// 
-      /// </summary>
       public static void Dec14( )
       {
       //Read input and parse..
@@ -225,13 +122,8 @@ namespace AdventOfCode2022
 
       //Find the answer..
          Console.WriteLine( "Ans: " + placedGrains );
-         Clipboard.SetDataObject( placedGrains );
-
       }
 
-      /// <summary>
-      /// Dec13
-      /// </summary>
       public static void Dec13( )
       {
       //Read input and parse..
@@ -328,12 +220,8 @@ namespace AdventOfCode2022
 
       //Find the answer..
          Console.WriteLine( "Ans: " + ans2 );
-         Clipboard.SetDataObject( ans2 );
       }
 
-      /// <summary>
-      /// Dec12
-      /// </summary>
       public static void Dec12( )
       {
       //Read input and parse..
@@ -444,13 +332,9 @@ namespace AdventOfCode2022
 
       //Find the answer..
          Console.WriteLine( "Ans: " + shortestPathSoFar );
-         Clipboard.SetDataObject( shortestPathSoFar );
       }
 
 
-      /// <summary>
-      /// Dec11
-      /// </summary>
       public static void Dec11( )
       {
       //Read input and parse..
@@ -495,13 +379,9 @@ namespace AdventOfCode2022
          long monkeyBusiness = inspections[0] * inspections[1];
 
          Console.WriteLine( "Ans: " + monkeyBusiness );
-         Clipboard.SetDataObject( monkeyBusiness );
       }
 
 
-      /// <summary>
-      /// Dec10
-      /// </summary>
       public static void Dec10( )
       {
       //Read input and parse..
@@ -589,12 +469,8 @@ namespace AdventOfCode2022
 
       //Print the answer
          Console.WriteLine( "Ans: " + nOfUniquePositions );
-         Clipboard.SetDataObject( nOfUniquePositions );
       }
 
-      /// <summary>
-      /// Dec08
-      /// </summary>
       public static void Dec08( )
       {
       //Read input and parse..
@@ -635,12 +511,8 @@ namespace AdventOfCode2022
          }
       //Print the answer
          Console.WriteLine( "Ans: " + maxScenicScore );
-         Clipboard.SetDataObject( maxScenicScore );
       }
 
-      /// <summary>
-      /// De07c
-      /// </summary>
       public static void Dec07( )
       {
       //Read input..
@@ -734,14 +606,10 @@ namespace AdventOfCode2022
 
       //Write answer..
          Console.WriteLine( "Ans: " + targetFolderSize );
-         Clipboard.SetDataObject( targetFolderSize );
 
 
       }
 
-      /// <summary>
-      /// De06c
-      /// </summary>
       public static void Dec06( )
       {
       //Read input..
@@ -765,12 +633,8 @@ namespace AdventOfCode2022
 
       //Write answer..
          Console.WriteLine( "Ans: " + firstIdx );
-         Clipboard.SetDataObject( firstIdx );
       }
 
-      /// <summary>
-      /// Dec05
-      /// </summary>
       public static void Dec05( )
       {
       //Read input..
@@ -848,13 +712,9 @@ namespace AdventOfCode2022
 
       //Write answer..
          Console.WriteLine( "Ans: " + sb.ToString( ) );
-         Clipboard.SetText( sb.ToString( ) );
-
       }
 
-      /// <summary>
-      /// Dec04
-      /// </summary>
+
       public static void Dec04( )
       {
       //Read input..
@@ -871,13 +731,9 @@ namespace AdventOfCode2022
                ans++;
          }
          Console.WriteLine( "Ans: " + ans.ToString( ) );
-         Clipboard.SetText( ans.ToString( ) );
 
       }
 
-      /// <summary>
-      /// Dec03
-      /// </summary>
       public static void Dec03( )
       {
       //Parse input file..
@@ -907,13 +763,9 @@ namespace AdventOfCode2022
 
       //Loop over the
          Console.WriteLine( "Ans: " + ans.ToString( ) );
-         Clipboard.SetText( ans.ToString( ) );
       }
 
 
-      /// <summary>
-      /// Dec2
-      /// </summary>
       public static void Dec02( )
       {
       //Parse input file..
@@ -927,13 +779,9 @@ namespace AdventOfCode2022
             ans += thisGame.Score;
          }
          Console.WriteLine( "Total score: " + ans.ToString( ) );
-         Clipboard.SetDataObject( ans.ToString( ) );
 
       }
 
-      /// <summary>
-      /// Dec1
-      /// </summary>
       public static void Dec01( )
       {
       //Parse input file..

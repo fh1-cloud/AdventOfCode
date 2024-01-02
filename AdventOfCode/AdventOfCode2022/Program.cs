@@ -1,19 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace AdventOfCode2022
 {
    internal class Program
    {
-
-      [STAThread]
       static void Main( string[ ] args )
       {
-         Console.Write( GlobalMethods.GetConsoleHeader( 16 ) );
-         Days.Dec16( );
+      //Set the day..
+         int day = 16;
+
+         //Try to get the input if it doesnt exist already..
+         GlobalMethods.GetInput( day, 2022 );
+
+         //Run the day
+         string methodName = day.ToString( ).Length <= 1 ? ( "Dec0" + day.ToString( ) ) : ( "Dec" + day.ToString( ) ); //Create the name of the method..
+         Console.Write( GlobalMethods.GetConsoleHeader( day ) ); //Create console header..
+         Days d = new Days( );
+         GlobalMethods.GetMethodByName( d, methodName ).Invoke( d, null );
          Console.ReadKey( );
       }
    }

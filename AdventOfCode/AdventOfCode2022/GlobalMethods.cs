@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -81,6 +82,40 @@ namespace AdventOfCode2022
          return rawData;
       }
 
+      /// <summary>
+      /// Get input for the passed day..
+      /// </summary>
+      /// <param name="day"></param>
+      public static async void GetInput( int day, int year)
+      {
+      //Build file path for input..
+         StringBuilder sb = new StringBuilder( );
+         sb.Append( "..\\..\\..\\Inputs\\" );
+         sb.Append( day.ToString( ).Length <= 1 ? ( "Dec0" + day.ToString( ) ) : ( "Dec" + day.ToString( ) ) );
+         sb.Append( ".txt" );
+
+         //Fetch the input..
+         try
+         {
+            Task task = AdventOfCodeLib.InputFetcher.GetInput( day, year, sb.ToString( ) );
+            task.Wait( );
+         }
+         catch
+         {
+
+         }
+      }
+
+      /// <summary>
+      /// Get method info from passed object. Used to run the day by reflection so we only have to change an integer to swap methods..
+      /// </summary>
+      /// <param name="obj"></param>
+      /// <param name="methodName"></param>
+      /// <returns></returns>
+      public static MethodInfo GetMethodByName( object obj, string methodName )
+      {
+         return obj.GetType( ).GetMethods( ).FirstOrDefault( m => m.Name == methodName );
+      }
 
       /// <summary>
       /// Counts the occurence of char c in string str. If positions is not null, it will count the occurences of character c in string str at positions in the array.

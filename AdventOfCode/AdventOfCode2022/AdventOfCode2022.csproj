@@ -1,157 +1,54 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9290523E-75B6-4587-94B1-777C84DED1D8}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>AdventOfCode2022</RootNamespace>
-    <AssemblyName>AdventOfCode2022</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="DotNetty.Common, Version=0.7.5.0, Culture=neutral, PublicKeyToken=bc13ca065fa06c29, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetty.Common.0.7.5\lib\net472\DotNetty.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.5.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.5.0.0\lib\net461\Microsoft.Extensions.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Options, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Options.5.0.0\lib\net461\Microsoft.Extensions.Options.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Primitives.5.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.5.0.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <None Remove="Inputs\Dec01.txt" />
+    <None Remove="Inputs\Dec02.txt" />
+    <None Remove="Inputs\Dec03.txt" />
+    <None Remove="Inputs\Dec04.txt" />
+    <None Remove="Inputs\Dec05.txt" />
+    <None Remove="Inputs\Dec06.txt" />
+    <None Remove="Inputs\Dec07.txt" />
+    <None Remove="Inputs\Dec08.txt" />
+    <None Remove="Inputs\Dec09.txt" />
+    <None Remove="Inputs\Dec10.txt" />
+    <None Remove="Inputs\Dec11.txt" />
+    <None Remove="Inputs\Dec12.txt" />
+    <None Remove="Inputs\Dec13.txt" />
+    <None Remove="Inputs\Dec14.txt" />
+    <None Remove="Inputs\Dec15.txt" />
+    <None Remove="Inputs\Temp01.txt" />
+    <None Remove="Inputs\Temp02.txt" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Classes\CathodeRayCPU.cs" />
-    <Compile Include="Classes\CleaningElf.cs" />
-    <Compile Include="Classes\CrateMoveInstruction.cs" />
-    <Compile Include="Classes\CrateStack.cs" />
-    <Compile Include="Classes\DirectoryFile.cs" />
-    <Compile Include="Classes\DirectoryFolder.cs" />
-    <Compile Include="Classes\ElfWithCalories.cs" />
-    <Compile Include="Classes\Interval.cs" />
-    <Compile Include="Classes\MapNode.cs" />
-    <Compile Include="Classes\Monkey.cs" />
-    <Compile Include="Classes\Packet.cs" />
-    <Compile Include="Classes\RockPaperScissors.cs" />
-    <Compile Include="Classes\RopeKnot.cs" />
-    <Compile Include="Classes\RopeKnotMovementPair.cs" />
-    <Compile Include="Classes\Rucksack.cs" />
-    <Compile Include="Classes\SandLabyrinth.cs" />
-    <Compile Include="Classes\Sensor.cs" />
-    <Compile Include="Classes\TreeWithPosition.cs" />
-    <Compile Include="Days.cs" />
-    <Compile Include="GlobalMethods.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="Inputs\Dec01.txt" />
     <Content Include="Inputs\Dec02.txt" />
+    <Content Include="Inputs\Dec03.txt" />
+    <Content Include="Inputs\Dec04.txt" />
+    <Content Include="Inputs\Dec05.txt" />
     <Content Include="Inputs\Dec06.txt" />
-    <Content Include="Inputs\Dec25.txt" />
-    <Content Include="Inputs\Dec24.txt" />
-    <Content Include="Inputs\Dec23.txt" />
-    <Content Include="Inputs\Dec21.txt" />
-    <Content Include="Inputs\Dec22.txt" />
-    <Content Include="Inputs\Dec20.txt" />
-    <Content Include="Inputs\Dec19.txt" />
-    <Content Include="Inputs\Dec17.txt" />
-    <Content Include="Inputs\Dec18.txt" />
-    <Content Include="Inputs\Dec16.txt" />
-    <Content Include="Inputs\Dec15.txt" />
+    <Content Include="Inputs\Dec07.txt" />
+    <Content Include="Inputs\Dec08.txt" />
+    <Content Include="Inputs\Dec09.txt" />
+    <Content Include="Inputs\Dec10.txt" />
+    <Content Include="Inputs\Dec11.txt" />
+    <Content Include="Inputs\Dec12.txt" />
     <Content Include="Inputs\Dec13.txt" />
     <Content Include="Inputs\Dec14.txt" />
-    <Content Include="Inputs\Dec12.txt" />
-    <Content Include="Inputs\Dec11.txt" />
-    <Content Include="Inputs\Dec10.txt" />
-    <Content Include="Inputs\Dec09.txt" />
-    <Content Include="Inputs\Dec08.txt" />
-    <Content Include="Inputs\Dec07.txt" />
-    <Content Include="Inputs\Dec05.txt" />
-    <Content Include="Inputs\Dec04.txt" />
-    <Content Include="Inputs\Dec03.txt" />
-    <Content Include="Inputs\Dec01.txt" />
-    <Content Include="Inputs\Temp02.txt" />
+    <Content Include="Inputs\Dec15.txt" />
     <Content Include="Inputs\Temp01.txt" />
+    <Content Include="Inputs\Temp02.txt" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\AdventOfCodeLib\AdventOfCodeLib.csproj">
-      <Project>{01114F59-07A5-4BE1-874F-C6D582CB80ED}</Project>
-      <Name>AdventOfCodeLib</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\AdventOfCodeLib\AdventOfCodeLib.csproj" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>
