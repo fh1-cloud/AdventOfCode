@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,21 +17,27 @@ namespace AdventOfCode2022.Classes
    /*LOCAL CLASSES*/
    #region
 
-      public int FlowRate { get; set; }
-      public HashSet<string> Connections { get; set; }
-      public string Name { get; set; }
    #endregion
 
    /*MEMBERS*/
    #region
+      static SortedSet<string> ValvesWithPressures { get; set; }
    #endregion
 
    /*CONSTRUCTORS*/
    #region
+      static ValveNode( )
+      {
+         ValvesWithPressures = new SortedSet<string>( );
+      }
    #endregion
 
    /*PROPERTIES*/
    #region
+      public int FlowRate { get; set; }
+      public HashSet<string> Connections { get; set; }
+      public string Name { get; set; }
+
    #endregion
 
    /*OPERATORS*/
@@ -54,38 +61,52 @@ namespace AdventOfCode2022.Classes
             allNodes.Add( name, new ValveNode{ Name = name, Connections = connections, FlowRate = flowRate } );
          }
 
+         foreach( var kvp in allNodes )
+            if( kvp.Value.FlowRate > 0 )
+               ValvesWithPressures.Add( kvp.Key );
 
       //Start the valve opening chain
          ValveNode startNode = allNodes["AA"];
          List<long> pressureReleases = new List<long>( );
          HashSet<string> openedValves = new HashSet<string>( );
-         HashSet<string> valvesWithPressureLeft = allNodes.Where( y => y.Value.FlowRate > 0 ).Select( x => x.Key ).ToHashSet( );
-
-
+         Dictionary<string,long> cache = new Dictionary<string, long>( );
       //Start walking..
-
-
-         allNodes["AA"].OpenValves( allNodes, 0, 0, openedValves, valvesWithPressureLeft, pressureReleases );
+         allNodes["AA"].OpenValves( allNodes, 0, 0, openedValves, pressureReleases, cache );
 
          long maxValue = pressureReleases.Max( );
          return maxValue;
       }
 
 
-      public void OpenValves( Dictionary<string,ValveNode> allNodes, long currentPressureRelease, long minutesSpent, HashSet<string> openedValves, HashSet<string> valvesWithPressureLeft, List<long> pressureReleases )
+      public void OpenValves( Dictionary<string,ValveNode> allNodes, long currentPressureRelease, long minutesSpent, HashSet<string> openedValves, List<long> pressureReleases, Dictionary< string,long> cache )
       {
-         if( minutesSpent >= 30 || valvesWithPressureLeft.Count == 0 )
+         if( minutesSpent >= 30 )
          {
             pressureReleases.Add( currentPressureRelease );
             return;
          }
          else //We have minutes left. Continue moving.
          {
-         //Just moving on is always an option.
+
+         //If we have reached this point before with less pressure released, dont continue;
+            string mask = GetBitMask( openedValves );
+            if( !cache.ContainsKey( mask ) )
+            {
+               cache.Add( mask, currentPressureRelease );
+            }
+            else //Cache contains mask from before
+            {
+               if( cache[mask] < currentPressureRelease )
+                  return; //We have been here before, but had less pressure released. Update the mask to the current one
+               else //We have been here before, but spent less minut
+                  cache[mask] = currentPressureRelease;
+            }
+
+
             foreach( string n in this.Connections )
             {
                long timeSpent = minutesSpent + 1;
-               allNodes[n].OpenValves( allNodes, currentPressureRelease, timeSpent, openedValves, valvesWithPressureLeft, pressureReleases );
+               allNodes[n].OpenValves( allNodes, currentPressureRelease, timeSpent, openedValves, pressureReleases, cache );
             }
 
          //If this valve isnt opened yet, we have the option to open this valve or not
@@ -101,11 +122,8 @@ namespace AdventOfCode2022.Classes
                HashSet<string> newOpenedValves = new HashSet<string>( openedValves );
                newOpenedValves.Add( this.Name );
 
-               HashSet<string> nodesWithPressureLeft = new HashSet<string>( valvesWithPressureLeft );
-               nodesWithPressureLeft.Remove( this.Name );
-
             //Exit if this made it go over.
-               if( openedMinutesSpent >= 30 || valvesWithPressureLeft.Count == 0 )
+               if( openedMinutesSpent >= 30 )
                {
                   pressureReleases.Add( newPressureReleasee );
                   return;
@@ -115,7 +133,7 @@ namespace AdventOfCode2022.Classes
                   foreach( string n in this.Connections )
                   {
                      long timeSpent = openedMinutesSpent + 1;
-                     allNodes[n].OpenValves( allNodes, newPressureReleasee, timeSpent, newOpenedValves, nodesWithPressureLeft, pressureReleases );
+                     allNodes[n].OpenValves( allNodes, newPressureReleasee, timeSpent, newOpenedValves, pressureReleases, cache );
                   }
                }
 
@@ -128,6 +146,25 @@ namespace AdventOfCode2022.Classes
 
 
       }
+
+
+      public static string GetBitMask( HashSet<string> openedValves )
+      {
+
+         StringBuilder sb = new StringBuilder( );
+         foreach( string s in ValvesWithPressures )
+         {
+            if( openedValves.Contains( s ) )
+               sb.Append( "1" );
+            else
+               sb.Append( "0" );
+         }
+         return sb.ToString( );
+
+      }
+
+
+
 
 
          //https://github.com/Bpendragon/AdventOfCodeCSharp/blob/9fd66/AdventOfCode/Solutions/Year2022/Day16-Solution.cs
