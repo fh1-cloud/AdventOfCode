@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode2022.Classes
 {
-   public class MapNode
+   public class Dec12MapNode
    {
 
    /*ENUMS*/
@@ -38,7 +38,7 @@ namespace AdventOfCode2022.Classes
       /// <param name="c"></param>
       /// <param name="rowIdx"></param>
       /// <param name="colIdx"></param>
-      public MapNode( char c, int rowIdx, int colIdx )
+      public Dec12MapNode( char c, int rowIdx, int colIdx )
       {
          m_CharValue = c;
          m_IsVisited = false;
@@ -50,7 +50,7 @@ namespace AdventOfCode2022.Classes
       /// Copy constructor..
       /// </summary>
       /// <param name="oldNode"></param>
-      public MapNode( MapNode oldNode )
+      public Dec12MapNode( Dec12MapNode oldNode )
       {
          m_IsVisited = oldNode.m_IsVisited;
          m_CharValue = oldNode.m_CharValue;
@@ -85,7 +85,7 @@ namespace AdventOfCode2022.Classes
       /// Prints the heatmap to the console..
       /// </summary>
       /// <param name="terrain"></param>
-      public static void PrintHeatmap( MapNode[,] terrain )
+      public static void PrintHeatmap( Dec12MapNode[,] terrain )
       {
          for( int i = 0; i< terrain.GetLength( 0 ); i++ )
          {
@@ -103,13 +103,13 @@ namespace AdventOfCode2022.Classes
       /// </summary>
       /// <param name="terrain"></param>
       /// <returns></returns>
-      public static List<MapNode> GetNeighbours( MapNode currNode, MapNode[,] terrain )
+      public static List<Dec12MapNode> GetNeighbours( Dec12MapNode currNode, Dec12MapNode[,] terrain )
       {
       //Declare the returning list of valid neighbours..
-         List<MapNode> validNeighbours = new List<MapNode>( );
+         List<Dec12MapNode> validNeighbours = new List<Dec12MapNode>( );
 
       //Add all the indexes that are adjacent. Then check if it is possible to go there..
-         List<MapNode> potentialNeighbours = new List<MapNode>( );
+         List<Dec12MapNode> potentialNeighbours = new List<Dec12MapNode>( );
          if( currNode.RowIdx != 0 )
             potentialNeighbours.Add( terrain[currNode.RowIdx - 1, currNode.ColIdx] );
          if( currNode.RowIdx != terrain.GetLength( 0 ) - 1 )
@@ -121,12 +121,12 @@ namespace AdventOfCode2022.Classes
 
          if( currNode.NodeValue == 'S' )
          {
-            foreach( MapNode n in potentialNeighbours )
+            foreach( Dec12MapNode n in potentialNeighbours )
                validNeighbours.Add( n );
          }
          else
          {
-            foreach( MapNode n in potentialNeighbours )
+            foreach( Dec12MapNode n in potentialNeighbours )
             {
                if( n.NodeValue == 'E' )
                   validNeighbours.Add( n );

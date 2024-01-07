@@ -230,9 +230,9 @@ namespace AdventOfCode2022
       //Translate to a char array..
          int nRows = inp.Length;
          int nCols = inp[0].Length;
-         MapNode[,] terrain = new MapNode[nRows, nCols];
-         HashSet<MapNode> unvisited = new HashSet<MapNode>( );
-         List<MapNode> potentialStarters = new List<MapNode>( );
+         Dec12MapNode[,] terrain = new Dec12MapNode[nRows, nCols];
+         HashSet<Dec12MapNode> unvisited = new HashSet<Dec12MapNode>( );
+         List<Dec12MapNode> potentialStarters = new List<Dec12MapNode>( );
          int startRowIdx = -1;
          int startColIdx = -1;
          int endRowIdx = -1;
@@ -241,7 +241,7 @@ namespace AdventOfCode2022
          {
             for( int j = 0; j<terrain.GetLength( 1 ); j++ )
             {
-               MapNode thisNode = new MapNode( inp[i][j], i, j );
+               Dec12MapNode thisNode = new Dec12MapNode( inp[i][j], i, j );
                terrain[i,j] = thisNode;
                unvisited.Add( thisNode );
                if( terrain[i,j].NodeValue == 'S' )
@@ -260,32 +260,32 @@ namespace AdventOfCode2022
             }
          }
       //Set the starting distance from the start to 0;
-         MapNode start = terrain[ startRowIdx, startColIdx];
+         Dec12MapNode start = terrain[ startRowIdx, startColIdx];
          start.NodeValue = 'a';
-         MapNode end = terrain[endRowIdx, endColIdx];
+         Dec12MapNode end = terrain[endRowIdx, endColIdx];
          end.NodeValue = 'z';
 
       //Declare the shortest path so far..
          long shortestPathSoFar = long.MaxValue;
 
       //Loop over all the potential starters..
-         foreach( MapNode startNode in potentialStarters )
+         foreach( Dec12MapNode startNode in potentialStarters )
          {
          //Create a new copy of the terrain objects first.. this is to not cause errors later..
-            MapNode[,] terrainDeepCopy = new MapNode[terrain.GetLength( 0 ), terrain.GetLength( 1 ) ];
-            HashSet<MapNode> unvisitedCopy = new HashSet<MapNode>( );
+            Dec12MapNode[,] terrainDeepCopy = new Dec12MapNode[terrain.GetLength( 0 ), terrain.GetLength( 1 ) ];
+            HashSet<Dec12MapNode> unvisitedCopy = new HashSet<Dec12MapNode>( );
             for( int i = 0; i < terrain.GetLength( 0 ); i++ )
             {
                for( int j = 0; j < terrain.GetLength( 1 ); j++ )
                {
-                  MapNode thisNode = new MapNode( terrain[i,j] );
+                  Dec12MapNode thisNode = new Dec12MapNode( terrain[i,j] );
                   terrainDeepCopy[i,j] = thisNode;
                   unvisitedCopy.Add( thisNode );
                }
             }
 
          //Declare the current node..
-            MapNode currentNode = terrainDeepCopy[startNode.RowIdx, startNode.ColIdx];
+            Dec12MapNode currentNode = terrainDeepCopy[startNode.RowIdx, startNode.ColIdx];
             currentNode.ShortestRoadTo = 0;
 
          //Start the loop..
@@ -293,10 +293,10 @@ namespace AdventOfCode2022
             {
             //Consider all the unvisited neighbours and calculate the tentative distance through the current node..
             //Collect all the neighbours..
-               List<MapNode> unvisitedNeighbours = MapNode.GetNeighbours( currentNode, terrainDeepCopy );
+               List<Dec12MapNode> unvisitedNeighbours = Dec12MapNode.GetNeighbours( currentNode, terrainDeepCopy );
 
             //Calculate the tentative distance to each of these nodes..
-               foreach( MapNode neighbour in unvisitedNeighbours )
+               foreach( Dec12MapNode neighbour in unvisitedNeighbours )
                {
                   long distance = currentNode.ShortestRoadTo + 1;
                   if( neighbour.ShortestRoadTo > distance )
@@ -322,7 +322,7 @@ namespace AdventOfCode2022
             }
 
          //We have broken the while loop, witch means that we have the path weight for the final node here..
-            MapNode endNode = terrainDeepCopy[endRowIdx, endColIdx];
+            Dec12MapNode endNode = terrainDeepCopy[endRowIdx, endColIdx];
             Console.WriteLine( "Length from node " + startNode.RowIdx + ", " + startNode.ColIdx + ": " + endNode.ShortestRoadTo );
 
          //Check for the shortest path so far..

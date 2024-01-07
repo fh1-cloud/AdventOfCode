@@ -53,6 +53,7 @@
     <Compile Include="Classes\IntegerPair.cs" />
     <Compile Include="Extensions\EChar.cs" />
     <Compile Include="Extensions\EDouble.cs" />
+    <Compile Include="Extensions\EInt.cs" />
     <Compile Include="Extensions\EString.cs" />
     <Compile Include="Classes\InputFetcher.cs" />
     <Compile Include="GS.cs" />

@@ -22,6 +22,8 @@ namespace AdventOfCode2022
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp02.txt" );
 
 
+         long ans = 0;
+         Console.WriteLine( ans );
       }
 
 
@@ -33,6 +35,8 @@ namespace AdventOfCode2022
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp02.txt" );
 
 
+         long ans = 0;
+         Console.WriteLine( ans );
       }
 
 
@@ -45,6 +49,8 @@ namespace AdventOfCode2022
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp02.txt" );
 
 
+         long ans = 0;
+         Console.WriteLine( ans );
       }
 
 
@@ -57,6 +63,8 @@ namespace AdventOfCode2022
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp02.txt" );
 
 
+         long ans = 0;
+         Console.WriteLine( ans );
       }
 
 
@@ -69,6 +77,8 @@ namespace AdventOfCode2022
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp02.txt" );
 
 
+         long ans = 0;
+         Console.WriteLine( ans );
       }
       
 
@@ -81,6 +91,8 @@ namespace AdventOfCode2022
 
 
 
+         long ans = 0;
+         Console.WriteLine( ans );
       }
 
 
@@ -93,6 +105,8 @@ namespace AdventOfCode2022
 
 
 
+         long ans = 0;
+         Console.WriteLine( ans );
       }
 
 
@@ -105,6 +119,8 @@ namespace AdventOfCode2022
 
 
 
+         long ans = 0;
+         Console.WriteLine( ans );
       }
 
 
@@ -116,24 +132,18 @@ namespace AdventOfCode2022
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp02.txt" );
 
 
-
+         long ans = 0;
+         Console.WriteLine( ans );
       }
-
 
 
 
       public static void Dec16( )
       {
-      //Parse the text file to a string..
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp02.txt" );
-
-
-         long ans = ValveNode.P1( inp );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         ValveNode.Initialize( inp );
+         long ans = ValveNode.P2( );
          Console.WriteLine( ans );
-
-
       }
 
 
