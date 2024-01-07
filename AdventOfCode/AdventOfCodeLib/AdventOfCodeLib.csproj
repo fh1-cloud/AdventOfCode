@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Cycles.cs" />
     <Compile Include="Classes\MapNode.cs" />
     <Compile Include="Classes\HashSetIndexPair.cs" />
     <Compile Include="Classes\HashSetUVector2D.cs" />
