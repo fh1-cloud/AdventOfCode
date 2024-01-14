@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Dynamic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -14,7 +15,6 @@ namespace AdventOfCode2022.Classes
 
    /*ENUMS*/
    #region
-
       public enum BRICKSHAPE
       {
          LINE,
@@ -94,8 +94,6 @@ namespace AdventOfCode2022.Classes
          public long Width { get; set; }
          public long ColIdx { get; set; }
          public HashSet<(long,long)> OccupiedIndexes { get; private set; }
-
-
          public long GetMaxHeight( )
          {
             if( this.Shape == BRICKSHAPE.LINE )
@@ -182,23 +180,6 @@ namespace AdventOfCode2022.Classes
       }
    #endregion
 
-   /*MEMBERS*/
-   #region
-   #endregion
-
-   /*CONSTRUCTORS*/
-   #region
-
-   #endregion
-
-   /*PROPERTIES*/
-   #region
-   #endregion
-
-   /*OPERATORS*/
-   #region
-   #endregion
-
    /*STATIC METHODS*/
    #region
 
@@ -261,51 +242,6 @@ namespace AdventOfCode2022.Classes
             Console.ReadKey( );
       }
 
-
-      //public static long P1( string[] inp )
-      //{
-
-      ////Parse instructionrs
-      //   List<MOVEINSTRUCTION> instructions = new List<MOVEINSTRUCTION>( );
-      //   foreach( char c in inp[0] )
-      //   {
-      //      if( c == '<' )
-      //         instructions.Add( MOVEINSTRUCTION.LEFT );
-      //      else if( c == '>' )
-      //         instructions.Add( MOVEINSTRUCTION.RIGHT );
-      //      else
-      //         throw new Exception( );
-      //   }
-
-      ////Create base bricks
-      //   List<BRICKSHAPE> shapes = new List<BRICKSHAPE>{ BRICKSHAPE.LINE, BRICKSHAPE.PLUSS, BRICKSHAPE.J, BRICKSHAPE.I, BRICKSHAPE.BLOCK };
-      //   HashSet<(long,long)> occupied = new HashSet<(long, long)> { (0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6) };
-
-      //   long nOfRocks = 2022;
-      //   long currentMaxHeight = 0;
-      //   int insIdx = 0;
-      //   int shapeIdx = 0;
-      //   for( long i = 0; i<nOfRocks; i++ )
-      //   {
-      //   //Spawn a rock
-      //      RockTetrisBrick n = new RockTetrisBrick( shapes[shapeIdx++ % 5], 2, currentMaxHeight + 4 );
-      //      bool continueFalling = true;
-      //      while( continueFalling )
-      //      {
-      //         continueFalling = n.Move( instructions[insIdx++ % instructions.Count], occupied );
-      //         continueFalling = n.Move( MOVEINSTRUCTION.DOWN, occupied );
-      //         if( !continueFalling ) //Did stop. Add its indexes to the occupied indexes. Also, update the maxheight
-      //         {
-      //            foreach( (long, long) p in n.OccupiedIndexes )
-      //               occupied.Add( p );
-      //            currentMaxHeight = Math.Max( currentMaxHeight, n.GetMaxHeight( ) );
-      //         }
-      //      }
-      //   }
-      //   return currentMaxHeight;
-      //}
-
-
       public static long P2( string[ ] inp )
       {
 
@@ -325,7 +261,7 @@ namespace AdventOfCode2022.Classes
          List<BRICKSHAPE> shapes = new List<BRICKSHAPE> { BRICKSHAPE.LINE, BRICKSHAPE.PLUSS, BRICKSHAPE.J, BRICKSHAPE.I, BRICKSHAPE.BLOCK };
          HashSet<(long, long)> occupied = new HashSet<(long, long)> { (0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6) };
 
-         long nOfRocksBeforeSteadyState = 50000;
+         long nOfRocksBeforeSteadyState = 5000;
          long currentMaxHeight = 0;
          int insIdx = 0;
          int shapeIdx = 0;
@@ -350,78 +286,103 @@ namespace AdventOfCode2022.Classes
             maxHeights.Add( currentMaxHeight );
          }
 
-
          //Create a list of differences.
-            List<long> deltas = new List<long>( );
+         List<int> deltas = new List<int>( );
          for( int i = 0; i < maxHeights.Count - 1; i++ )
-            deltas.Add( maxHeights[i + 1] - maxHeights[i] );
-
-
-         //List<long> deltas = new List<long>( ){ 2,3,1,2, 1,2,1,3,1,4,1,5,1,2,1,3,1,4,1,5 };
+            deltas.Add( (int)( maxHeights[i + 1] - maxHeights[i] ) );
 
       //Assume that it reached a steady state at 1000 cycles. Find the cycle length
+         int startSteadyState = 1000;
+         List<int> newDelta = new List<int>( );
+         for( int i = startSteadyState; i<deltas.Count; i++ )
+            newDelta.Add( deltas[i] );
+
          bool foundCycle = false;
+         int cycleLength = 0;
+         int startIdx = 0;
+         while( !foundCycle )
+         {
+            for( int thisCycleLength = 2; thisCycleLength<newDelta.Count-startIdx - 1; thisCycleLength++ )
+            {
 
+            //Create a new list of cycles
+               List<int> newCycles = new List<int>( );
+               int tempStartIdx = startIdx;
+               for( int i = 0; i<thisCycleLength; i++ )
+                  newCycles.Add( newDelta[tempStartIdx++] );
 
-         List<int> testList = new List<int>( ) { 2, 3, 1, 2, 1, 2, 1, 3, 1, 4, 1, 5, 1, 2, 1, 3, 1, 4, 1, 5 };
+            //Check if this fits the rest of the data..
+               bool thisIsCycle = true;
 
-      //Implement a cycle finding algorithm for a list of integers in the library class.
+               int checkStart = startIdx + thisCycleLength;
+               if( checkStart >= newDelta.Count )
+                  thisIsCycle = false;
+               else
+               {
+                  int cycleCheckIdx = 0;
+                  for( int i = checkStart; i < newDelta.Count; i++ )
+                  {
+                     if( newCycles[cycleCheckIdx++] != newDelta[i] )
+                     {
+                        thisIsCycle = false;
+                        break;
+                     }
+                     cycleCheckIdx = cycleCheckIdx%newCycles.Count;
+                  }
+               }
+               if( thisIsCycle )
+               {
+                  foundCycle = true;
+                  cycleLength = thisCycleLength;
+                  break;
+               }
+            }
 
-         //var test = Cycles<int>.FindCycle( 3, testList );
+            if( startIdx == newDelta.Count )
+               break;
+            if( !foundCycle )
+               startIdx++;
+         }
 
+      //Find the point where the steady state starts..
+         long incrementPerCycle = maxHeights[( int ) ( startSteadyState + cycleLength )] - maxHeights[( int ) startSteadyState ];
+         List<int> repeatIndices = new List<int>( );
+         for( int i = 0; i<maxHeights.Count-cycleLength; i++ )
+            if( maxHeights[i+cycleLength] - maxHeights[i] == incrementPerCycle )
+               repeatIndices.Add( i );
 
-         //int cycleStartIdx = 10000;
-         //int finalCycle = -1;
-         //int thisCycleLength = 2;
-         //while( !foundCycle )
-         //{
+      //CHeck that all the indices are after each other. If so add the indices to the list
+         List<int> newRepeats = new List<int>( );
+         for( int i = 0; i<repeatIndices.Count-1; i++ )
+         {
+            bool isRepeat = true;
+            for( int j = i; j<repeatIndices.Count-1; j++ )
+            {
+               if( repeatIndices[j+1]-repeatIndices[j] != 1 )
+               {
+                  isRepeat = false;
+                  break;
+               }
+            }
+            if( isRepeat )
+               newRepeats.Add( repeatIndices[i] );
+         }
+         int cyclesBeforeRepeat = newRepeats.First( );
+         long heightBeforeRepeat = maxHeights[cyclesBeforeRepeat];
 
-         ////Create this cycle.
-         //   List<long> cycle = new List<long>( );
-         //   for( int i = cycleStartIdx; i<cycleStartIdx+thisCycleLength; i++ )
-         //      cycle.Add( deltas[i] );
+      //Calculate the whole number of cycles needed from start..
+         long maxCycles = 1000000000000;
+         long nOfMacroCycles = ( maxCycles - cyclesBeforeRepeat )/cycleLength; //The whole number of cycles to add after the start point.
+         long restCycles = maxCycles - ( nOfMacroCycles*cycleLength + cyclesBeforeRepeat ); //The number of remaining blocks to set after we added the whole number of cycles
 
-         ////Checks if this cycle fits the data..
-         //   bool thisIsCycle = true;
-         //   int cycleIdx = 0;
-         //   for( int i = cycleStartIdx; i<deltas.Count; i++ )
-         //   {
-         //      long num1 = cycle[cycleIdx++%thisCycleLength];
-         //      long num2 = deltas[i];
+      //Get the remaining increment..
+         long extraAddedHeight = 0;
+         for( int i = 1; i<restCycles; i++ )
+            extraAddedHeight += maxHeights[cyclesBeforeRepeat+i] - maxHeights[cyclesBeforeRepeat+i-1];
 
-         //      if( deltas[i] != cycle[i%thisCycleLength] )
-         //      {
-         //         thisIsCycle = false;
-         //         break;
-         //      }
-         //   }
-
-         //   if( !thisIsCycle )
-         //   {
-         //      thisCycleLength++;
-         //      continue;
-         //   }
-         //   else
-         //   {
-         //      foundCycle = true;
-         //      finalCycle = thisCycleLength;
-         //   }
-         //}
-
-
-
-
-
-         return currentMaxHeight;
+         return heightBeforeRepeat + incrementPerCycle*nOfMacroCycles + extraAddedHeight;
       }
 
-
-
-
-   #endregion
-
-   /*METHODS*/
-   #region
    #endregion
 
    }
