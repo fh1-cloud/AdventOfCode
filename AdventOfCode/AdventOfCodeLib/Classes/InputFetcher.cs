@@ -13,7 +13,8 @@ namespace AdventOfCodeLib
    {
 
    //Get the session cookie..
-      public static string m_SessionCookie = "53616c7465645f5f70553a538d57be792c298688c2668baf2f56f4a5adc81cff822744455b8c26c63936effbce4fdb1c69a7f91c9341782e3842700864e5877a";
+      public static string m_SessionCookie = "53616c7465645f5f095c544346869dbc2eb86c692c4de40a97374ad0ecaf5116ced2f713d807002dbd6ae92493fa46429461f5357aadd5ec72faf0b28e461ecb";
+      //public static string m_SessionCookie = "53616c7465645f5f70553a538d57be792c298688c2668baf2f56f4a5adc81cff822744455b8c26c63936effbce4fdb1c69a7f91c9341782e3842700864e5877a";
 
       public static async Task GetInput( int day, int year, string filename )
       {
