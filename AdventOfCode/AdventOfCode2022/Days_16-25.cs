@@ -112,12 +112,7 @@ namespace AdventOfCode2022
 
       public static void Dec18( )
       {
-         //Parse the text file to a string..
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp01.txt" );
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp02.txt" );
-
-
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          long ans = LavaCube.P2( inp );
          Console.WriteLine( ans );
       }
