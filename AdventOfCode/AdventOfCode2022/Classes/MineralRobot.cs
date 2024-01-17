@@ -13,10 +13,10 @@ namespace AdventOfCode2022.Classes
    #region
       public enum ROBOTRESOURCE
       {
-         ORE = 0,
-         CLAY = 1,
-         OBSIDIAN = 2,
-         GEODE = 3
+         GEODE = 0,
+         OBSIDIAN = 1,
+         CLAY = 2,
+         ORE = 3,
       }
 
 
@@ -185,41 +185,54 @@ namespace AdventOfCode2022.Classes
 
       //Check if we reached this point before with the same amount of resources, robots and time left, with less geodes. If so, kill branch.
 
-      //Check what type of robots we can build with the available resources
-         List<ROBOTRESOURCE> possibleCreations = new List<ROBOTRESOURCE>( );
-         for( int i = 0; i<4; i++ )
-            if( bluePrint.CanCreateRobot( ( ROBOTRESOURCE ) i, resources ) )
-               possibleCreations.Add( ( ROBOTRESOURCE ) i );
-
       //Add resorces from existing robots..
          Dictionary<ROBOTRESOURCE,int> newResources = new Dictionary<ROBOTRESOURCE, int>( resources );
          foreach( KeyValuePair<ROBOTRESOURCE, int> kvpr in robots )
             newResources[kvpr.Key] += kvpr.Value;
 
+      //Check what type of robots we can build with the available resources
+         HashSet<ROBOTRESOURCE> possibleCreations = new HashSet<ROBOTRESOURCE>( );
+         if( timeLeft > 1 )
+         {
+            for( int i = 0; i<4; i++ )
+               if( bluePrint.CanCreateRobot( ( ROBOTRESOURCE ) i, resources ) )
+                  possibleCreations.Add( ( ROBOTRESOURCE ) i );
+         }
+
       //Pass time..
          timeLeft = timeLeft - 1;
+
 
       //Create a branch that doesnt create anything.
          Dictionary<ROBOTRESOURCE,int> zeroBranchResources = new Dictionary<ROBOTRESOURCE, int>( newResources );
          Dictionary<ROBOTRESOURCE,int> zeroBranchRobots = new Dictionary<ROBOTRESOURCE, int>( robots );
          PassTime( timeLeft, bluePrint, zeroBranchResources, zeroBranchRobots, geodes , cache );
 
-      //For all the potential creations, create a robot and pass time..
-         foreach( ROBOTRESOURCE r in possibleCreations )
+         if( timeLeft > 1 )// No need to create a new robot if there is only 1 minute left, it cannot produce anything
          {
+         //For all the potential creations, create a robot and pass time..
+            foreach( ROBOTRESOURCE r in possibleCreations )
+            {
 
-         //Create a copy of the resources after we created this robot
-            Dictionary<ROBOTRESOURCE,int> resourcesAterCreation = new Dictionary<ROBOTRESOURCE, int>( newResources );
+            //Create a copy of the resources after we created this robot
+               Dictionary<ROBOTRESOURCE,int> resourcesAterCreation = new Dictionary<ROBOTRESOURCE, int>( newResources );
 
-         //Create a copy of the list of robots
-            Dictionary<ROBOTRESOURCE,int> newRobots = new Dictionary<ROBOTRESOURCE, int>( robots );
+            //Create a copy of the list of robots
+               Dictionary<ROBOTRESOURCE,int> newRobots = new Dictionary<ROBOTRESOURCE, int>( robots );
 
-         //Create the new robot and add it to the new list of robots.
-            ROBOTRESOURCE newRobot = bluePrint.CreateRobot( r, resourcesAterCreation );
-            newRobots[newRobot] += 1;
+            //Create the new robot and add it to the new list of robots.
+               ROBOTRESOURCE newRobot = bluePrint.CreateRobot( r, resourcesAterCreation );
+               newRobots[newRobot] += 1;
 
-         //Pass time for this branch.
-            PassTime( timeLeft, bluePrint, resourcesAterCreation, newRobots, geodes , cache );
+            //Pass time for this branch.
+               PassTime( timeLeft, bluePrint, resourcesAterCreation, newRobots, geodes , cache );
+
+            //If we create a geode here, this is the most useful branch. Stop creating more.
+               if( r == ROBOTRESOURCE.GEODE )
+                  break;
+
+            }
+
          }
 
 
