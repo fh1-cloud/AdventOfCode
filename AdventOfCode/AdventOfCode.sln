@@ -26,6 +26,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023", "AdventO
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2022", "AdventOfCode2022\AdventOfCode2022.csproj", "{0ED12275-F3C3-416E-AA72-7D4612635AE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode2024", "AdventOfCode2024\AdventOfCode2024.csproj", "{083FF462-7C57-48FF-BADD-8158021E2EAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -116,6 +118,18 @@ Global
 		{0ED12275-F3C3-416E-AA72-7D4612635AE2}.Release|x64.Build.0 = Release|Any CPU
 		{0ED12275-F3C3-416E-AA72-7D4612635AE2}.Release|x86.ActiveCfg = Release|Any CPU
 		{0ED12275-F3C3-416E-AA72-7D4612635AE2}.Release|x86.Build.0 = Release|Any CPU
+		{083FF462-7C57-48FF-BADD-8158021E2EAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{083FF462-7C57-48FF-BADD-8158021E2EAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{083FF462-7C57-48FF-BADD-8158021E2EAF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{083FF462-7C57-48FF-BADD-8158021E2EAF}.Debug|x64.Build.0 = Debug|Any CPU
+		{083FF462-7C57-48FF-BADD-8158021E2EAF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{083FF462-7C57-48FF-BADD-8158021E2EAF}.Debug|x86.Build.0 = Debug|Any CPU
+		{083FF462-7C57-48FF-BADD-8158021E2EAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{083FF462-7C57-48FF-BADD-8158021E2EAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{083FF462-7C57-48FF-BADD-8158021E2EAF}.Release|x64.ActiveCfg = Release|Any CPU
+		{083FF462-7C57-48FF-BADD-8158021E2EAF}.Release|x64.Build.0 = Release|Any CPU
+		{083FF462-7C57-48FF-BADD-8158021E2EAF}.Release|x86.ActiveCfg = Release|Any CPU
+		{083FF462-7C57-48FF-BADD-8158021E2EAF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
