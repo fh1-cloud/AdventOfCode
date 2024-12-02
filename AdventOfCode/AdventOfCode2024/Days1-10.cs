@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,10 +71,41 @@ namespace AdventOfCode2024
 
       public static void Dec02( )
       {
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp01.txt" );
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp02.txt" );
+         List<int[ ]> inp = GlobalMethods.GetInputIntArrayList( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         int nOfSafe = 0;
+         foreach( int[ ] line in inp )
+         {
+            for( int j = 0; j < line.Length; j++ )
+            {
+            //Create new array..
+               List<int> ll = line.ToList( );
+               ll.RemoveAt( j );
+               int[ ] removedFloor = ll.ToArray( );
 
+            //Check if increasing or decreasing first, if so, this is not safe regardless..
+               if( !GlobalMethods.IsIncreasing( removedFloor ) && !GlobalMethods.IsDecreasing( removedFloor ) )
+                  continue;
+
+            //Check if safe
+               bool isSafe = true;
+               for( int i = 0; i< removedFloor.Length-1; i++ )
+               {
+                  int diff = Math.Abs( removedFloor[i] - removedFloor[i+1] );
+                  if( diff == 0 || diff > 3 )
+                  {
+                     isSafe = false;
+                     break;
+                  }
+               }
+               if( isSafe )
+               {
+                  nOfSafe++;
+                  break;
+               }
+            }
+         }
+
+         Console.WriteLine( "\n" + nOfSafe.ToString( ) );
       }
 
 

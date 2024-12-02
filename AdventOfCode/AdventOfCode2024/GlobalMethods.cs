@@ -12,6 +12,48 @@ namespace AdventOfCode2024
 
 
       /// <summary>
+      /// Checks if an array is increasing or decreasing. If two entries are similar, it returns false
+      /// </summary>
+      /// <param name="arr"></param>
+      /// <returns></returns>
+      public static bool IsIncreasing( int[] arr, bool acceptEquals = false )
+      {
+         for( int i = 0; i<arr.Length-1; i++ )
+         {
+            if( !acceptEquals )
+            {
+               if( arr[i] > arr[i+1] )
+                  return false;
+            }
+            else
+            {
+               if( arr[i] >= arr[i+1] )
+                  return false;
+            }
+         }
+         return true;
+      }
+
+      public static bool IsDecreasing( int[] arr, bool acceptEquals = false )
+      {
+         for( int i = 0; i<arr.Length-1; i++ )
+         {
+            if( !acceptEquals )
+            {
+               if( arr[i] < arr[i+1] )
+                  return false;
+            }
+            else
+            {
+               if( arr[i] <= arr[i+1] )
+                  return false;
+            }
+         }
+         return true;
+      }
+
+
+      /// <summary>
       /// A method that gets a list of integers written on the same line.
       /// </summary>
       /// <param name="fileName"></param>
