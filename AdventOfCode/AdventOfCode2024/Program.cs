@@ -5,7 +5,7 @@
       static void Main( string[ ] args )
       {
          //Set the day..
-         int day = 3;
+         int day = 4;
 
          //Try to get the input if it doesnt exist already..
          GlobalMethods.GetInput( day, 2024 );

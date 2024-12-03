@@ -11,8 +11,4 @@
     <ProjectReference Include="..\AdventOfCodeLib\AdventOfCodeLib.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Classes\" />
-  </ItemGroup>
-
 </Project>
