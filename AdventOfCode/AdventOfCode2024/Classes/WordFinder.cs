@@ -30,32 +30,22 @@ namespace AdventOfCode2024.Classes
       public WordFinder( string[] inp )
       {
       //Create array
-         m_Puzzle = new string[inp.Length];
-
-         for( int i = 0; i< inp.Length; i++ )
-            m_Puzzle[i] = inp[i];
-
+         m_Puzzle = inp;
          m_RowCount = inp.Length;
          m_ColCount = inp[0].Length;
       }
 
       public int P1( )
       {
-         char[,] puzzleCopy = new char[m_Puzzle.Length, m_Puzzle[0].Length];
-         for( int i = 0; i<m_RowCount; i++ )
-            for( int j = 0; j<m_RowCount; j++ )
-               puzzleCopy[i,j] = m_Puzzle[i][j];
          int nOfInstancesFound = 0;
-         HashSet<(int, int)> locationsWithWords = new HashSet<(int, int)>( );
 
       //Create a copy of the puzzle to work on
          for( int i = 0; i< m_RowCount; i++ )
          {
-
             for( int j = 0; j< m_ColCount; j++ )
             {
             //Check for first character, if so, extract substring..
-               if( puzzleCopy[i,j] == m_WordToFind[1] )
+               if( m_Puzzle[i][j] == m_WordToFind[0] )
                {
                   Dictionary<WORDDIRECTION, HashSet<(int,int)>> candidates = new Dictionary<WORDDIRECTION, HashSet<(int, int)>>( );
 
@@ -95,9 +85,12 @@ namespace AdventOfCode2024.Classes
                      for( int k = 0; k< m_WordToFind.Length; k++ )
                      {
                         indices.Add( ( iStart, jStart ) );
-                        if( puzzleCopy[iStart,jStart] != m_WordToFind[k] )
+                        if( m_Puzzle[iStart][jStart] != m_WordToFind[k] )
                            foundIt = false;
-                        AdjustIndices( ref iStart, ref jStart, dir );
+
+                        (int, int) idxModifNext = ModifyIdx( dir );
+                        iStart += idxModifNext.Item1;
+                        jStart += idxModifNext.Item2;
                      }
                      if( foundIt )
                         candidates.Add( dir, indices );
@@ -105,174 +98,89 @@ namespace AdventOfCode2024.Classes
 
                //Count candidates and add the locations with solution words in them to the location array for print
                   nOfInstancesFound += candidates.Count;
-                  foreach( KeyValuePair<WORDDIRECTION, HashSet<(int, int)>> kvp in candidates )
-                     foreach( (int, int) v in kvp.Value )
-                        locationsWithWords.Add( v );
                }
             }
          }
 
       //Invert the array so it looks like the solution from the site..
-         char[,] solution = Invert( locationsWithWords );
-         GlobalMethods.PrintCharArray( solution );
          return nOfInstancesFound;
 
-      }
-
-      public char[,] Invert( HashSet<(int, int)> locationsWithWords )
-      {
-         char[ , ] sol = new char[m_RowCount, m_ColCount];
-         for( int i = 0; i<m_RowCount; i++ )
-         {
-            for( int j = 0; j<m_ColCount; j++ )
-            {
-               if( locationsWithWords.Contains( ( i, j ) ) )
-                  sol[ i, j ] = m_Puzzle[i][j];
-               else
-                  sol[ i, j ] = '.';
-            }
-         }
-         return sol;
       }
 
 
       public int P2( )
       {
-         char[,] puzzleCopy = new char[m_Puzzle.Length, m_Puzzle[0].Length];
-
-         for( int i = 0; i<m_RowCount; i++ )
-            for( int j = 0; j<m_RowCount; j++ )
-               puzzleCopy[i,j] = m_Puzzle[i][j];
-         HashSet<(int, int)> locationsWithWords = new HashSet<(int, int)>( );
          int nOfInstancesFound = 0;
          for( int i = 1; i< m_RowCount-1; i++ )
          {
-
             for( int j = 1; j<m_ColCount-1; j++ )
             {
             //Check for first character, if so, extract substring..
-               if( puzzleCopy[i,j] == m_WordToFind[1] )
+               if( m_Puzzle[i][j] == m_WordToFind[1] )
                {
-                  Dictionary<WORDDIRECTION, HashSet<(int,int)>> candidates = new Dictionary<WORDDIRECTION, HashSet<(int, int)>>( );
+                  HashSet<WORDDIRECTION> candidates = new HashSet<WORDDIRECTION>( );
 
                //Collect directions to check from this index..
-                  HashSet<WORDDIRECTION> directionsToCheck = [.. Enum.GetValues<WORDDIRECTION>( )];
-                  foreach( WORDDIRECTION dir in directionsToCheck )
+                  foreach( WORDDIRECTION dir in Enum.GetValues( typeof( WORDDIRECTION ) ) )
                   {
                      bool foundIt = true;
-                     HashSet<(int,int)> indices = new HashSet<(int, int)>( );
-                     int iStart = i;
-                     int jStart = j;
-                     PreAdjustIndices( ref iStart, ref jStart, dir );
-                     for( int k = 0; k< m_WordToFind.Length; k++ )
+
+                  //Find start point of word for this direction..
+                     (int, int) idxModifier = ModifyIdx( dir );
+
+                  //Subtract to find start point
+                     int rowLetterIdx = i - idxModifier.Item1;
+                     int colLetterIdx = j - idxModifier.Item2;
+
+                  //Loop over characters in word
+                     for( int k = 0; k < m_WordToFind.Length; k++ )
                      {
-                        indices.Add( ( iStart, jStart ) );
-                        if( puzzleCopy[iStart,jStart] != m_WordToFind[k] )
+                        if( m_Puzzle[rowLetterIdx][colLetterIdx] != m_WordToFind[k] )
+                        {
                            foundIt = false;
-                        AdjustIndices( ref iStart, ref jStart, dir );
+                           break;
+                        }
+
+                     //Find next character
+                        (int, int) idxModifNext = ModifyIdx( dir );
+                        rowLetterIdx += idxModifNext.Item1;
+                        colLetterIdx += idxModifNext.Item2;
                      }
                      if( foundIt )
-                        candidates.Add( dir, indices );
+                        candidates.Add( dir );
                   }
 
-               //Check if the directions match up..
-                  bool containsRegularCross = ( candidates.ContainsKey( WORDDIRECTION.LEFT ) || candidates.ContainsKey( WORDDIRECTION.RIGHT ) ) && ( candidates.ContainsKey( WORDDIRECTION.UP ) || candidates.ContainsKey( WORDDIRECTION.DOWN ) );
-
-                  if( containsRegularCross )
-                  {
+               //Check if the candidates satisfies a cross
+                  if( ( candidates.Contains( WORDDIRECTION.DOWNLEFT ) || candidates.Contains( WORDDIRECTION.UPRIGHT ) ) && ( candidates.Contains( WORDDIRECTION.DOWNRIGHT ) || candidates.Contains( WORDDIRECTION.UPLEFT ) ) )
                      nOfInstancesFound++;
-                     locationsWithWords.Add( ( i, j ) );
-                     locationsWithWords.Add( ( i, j-1 ) );
-                     locationsWithWords.Add( ( i, j+1 ) );
-                     locationsWithWords.Add( ( i-1, j ) );
-                     locationsWithWords.Add( ( i+1, j ) );
-                  }
 
-                  bool containsSkewCross = ( candidates.ContainsKey( WORDDIRECTION.DOWNLEFT ) || candidates.ContainsKey( WORDDIRECTION.UPRIGHT ) ) && ( candidates.ContainsKey( WORDDIRECTION.DOWNRIGHT ) || candidates.ContainsKey( WORDDIRECTION.UPLEFT ) );
-                  if( containsSkewCross )
-                  {
-                     nOfInstancesFound++;
-                     locationsWithWords.Add( ( i, j ) );
-                     locationsWithWords.Add( ( i-1, j-1 ) );
-                     locationsWithWords.Add( ( i-1, j+1 ) );
-                     locationsWithWords.Add( ( i+1, j-1 ) );
-                     locationsWithWords.Add( ( i+1, j+1 ) );
-                  }
                }
             }
          }
-
-      //Invert the array so it looks like the solution from the site..
-         char[,] solution = Invert( locationsWithWords );
-         GlobalMethods.PrintCharArray( solution );
          return nOfInstancesFound;
-
       }
 
-      public static void PreAdjustIndices( ref int i, ref int j, WORDDIRECTION dir )
+
+      /// <summary>
+      /// Adjust index based on the word direction and current position
+      /// </summary>
+      /// <param name="dir"></param>
+      /// <returns></returns>
+      public static ( int rowAdj, int colAdj ) ModifyIdx( WORDDIRECTION dir )
       {
-         if( dir == WORDDIRECTION.RIGHT )
-            j--;
-         else if( dir == WORDDIRECTION.LEFT )
-            j++;
-         else if( dir == WORDDIRECTION.UP )
-            i++;
-         else if( dir == WORDDIRECTION.DOWN )
-            i--;
-         else if( dir == WORDDIRECTION.UPRIGHT )
-         {
-            j--;
-            i++;
-         }
-         else if( dir == WORDDIRECTION.DOWNRIGHT )
-         {
-            i--;
-            j--;
-         }
-         else if( dir == WORDDIRECTION.UPLEFT )
-         {
-            i++;
-            j++;
-         }
-         else if( dir == WORDDIRECTION.DOWNLEFT )
-         {
-            i--;
-            j++;
-         }
+         int i = 0;
+         int j = 0;
+         if( dir == WORDDIRECTION.RIGHT || dir == WORDDIRECTION.UPRIGHT || dir == WORDDIRECTION.DOWNRIGHT )
+            j = 1;
+         else if( dir == WORDDIRECTION.LEFT || dir == WORDDIRECTION.UPLEFT || dir == WORDDIRECTION.DOWNLEFT )
+            j = -1;
+         if( dir == WORDDIRECTION.DOWN || dir == WORDDIRECTION.DOWNRIGHT || dir == WORDDIRECTION.DOWNLEFT )
+            i = 1;
+         else if( dir == WORDDIRECTION.UP || dir == WORDDIRECTION.UPRIGHT || dir == WORDDIRECTION.UPLEFT )
+            i = -1;
+
+         return ( i, j );
       }
-
-      public static void AdjustIndices( ref int i, ref int j, WORDDIRECTION dir )
-      {
-         if( dir == WORDDIRECTION.RIGHT )
-            j++;
-         else if( dir == WORDDIRECTION.LEFT )
-            j--;
-         else if( dir == WORDDIRECTION.UP )
-            i--;
-         else if( dir == WORDDIRECTION.DOWN )
-            i++;
-         else if( dir == WORDDIRECTION.UPRIGHT )
-         {
-            i--;
-            j++;
-         }
-         else if( dir == WORDDIRECTION.DOWNRIGHT )
-         {
-            i++;
-            j++;
-         }
-         else if( dir == WORDDIRECTION.UPLEFT )
-         {
-            i--;
-            j--;
-         }
-         else if( dir == WORDDIRECTION.DOWNLEFT )
-         {
-            i++;
-            j--;
-         }
-      }
-
-
    }
+
 }
