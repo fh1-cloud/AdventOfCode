@@ -10,6 +10,22 @@ namespace AdventOfCode2024
    public class GlobalMethods
    {
 
+      /// <summary>
+      /// Prints a char arrray to the console.
+      /// </summary>
+      /// <param name="array"></param>
+      public static void PrintCharArray( char[,] array )
+      {
+         for( int i = 0; i<array.GetLength( 0 ); i++ )
+         {
+            StringBuilder line = new StringBuilder( );
+            for( int j = 0; j<array.GetLength( 1 ); j++ )
+               line.Append( array[i,j] );
+
+            Console.WriteLine( line.ToString( ) );
+         }
+      }
+
 
       /// <summary>
       /// Checks if an array is increasing or decreasing. If two entries are similar, it returns false
