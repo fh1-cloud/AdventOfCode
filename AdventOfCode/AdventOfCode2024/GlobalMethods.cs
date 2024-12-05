@@ -169,6 +169,29 @@ namespace AdventOfCode2024
          return rawData;
       }
 
+      /// <summary>
+      /// A method that converts a list of integers seperated by a number seperator, and on subsequent lines to a list of int arrays
+      /// </summary>
+      /// <param name="integerList"></param>
+      /// <param name="numSeperatorOnLine"></param>
+      /// <returns></returns>
+      public static List<int[]> GetInputIntArrayListFromStringArray( string[] integerList, char numSeperatorOnLine = ',' )
+      {
+         List<int[]> result = new List<int[ ]>( );
+         foreach( var s in integerList )
+         {
+
+         //Split by seperator
+            string[ ] splitter = s.Split( numSeperatorOnLine, StringSplitOptions.RemoveEmptyEntries );
+            int[ ] thisArr = new int[splitter.Length];
+            for( int i = 0; i< splitter.Length; i++ )
+               thisArr[i] = int.Parse( splitter[i] );
+
+            result.Add( thisArr );
+         }
+         return result;
+      }
+
 
       /// <summary>
       /// Counts the occurence of char c in string str. If positions is not null, it will count the occurences of character c in string str at positions in the array.
