@@ -44,10 +44,11 @@ namespace AdventOfCode2024
       public static void Dec06( )
       {
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
-         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp01.txt" );
+         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp01.txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp02.txt" );
 
          Labyrinth lab = new Labyrinth( inp );
-         int ans = lab.P1( );
+         int ans = lab.P2( );
          Console.WriteLine( ans.ToString( ) );
       }
 
