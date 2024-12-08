@@ -54,7 +54,7 @@ namespace AdventOfCode2024.Classes
                   newSums.Add( outcome * this.Factors[i] );
                   newSums.Add( outcome + this.Factors[i] );
                   if( concatenate )
-                     newSums.Add( BigInteger.Parse( outcome + this.Factors[i].ToString( ) );
+                     newSums.Add( BigInteger.Parse( outcome + this.Factors[i].ToString( ) ) );
                }
                possibleOutcomes = newSums;
             }
