@@ -23,9 +23,13 @@ namespace AdventOfCode2024
       }
       public static void Dec09( )
       {
-         //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
+         string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\" + System.Reflection.MethodBase.GetCurrentMethod( ).Name + ".txt" );
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp01.txt" );
          //string[ ] inp = GlobalMethods.GetInputStringArray( @"..\\..\\..\\Inputs\\Temp02.txt" );
+
+         DiskFragmenter d = new DiskFragmenter( inp[0] );
+         BigInteger ans = d.P2( );
+         Console.WriteLine( ans.ToString( ) );
 
       }
 
